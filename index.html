@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AvantStay Guest Experience — Journey Map &amp; FY Plan</title>
+<title>AvantStay Guest Experience—Journey Map &amp; FY Plan</title>
 <meta name="description" content="A guest-experience journey map and FY27 plan built from AvantStay reservation and support-ticket data: six guest personas, their stage-by-stage journey, and a four-quarter roadmap.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -122,6 +122,7 @@
 
   /* ROADMAP */
   .roadmap{background:var(--ink);color:#EAF0F4;}
+  .roadmap .section-head h2{color:#fff;}
   .roadmap .section-head p{color:#C9D6E0;}
   .roadmap .section-head .tag{color:var(--accent);}
   .quarter-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;list-style:none;margin:0;padding-left:0;}
@@ -134,6 +135,22 @@
   .init .desc{font-size:12.5px;color:#C9D6E0;margin:0 0 8px;}
   .init .tags{display:flex;gap:5px;flex-wrap:wrap;list-style:none;padding-left:0;margin:0;}
   .init .tags span{font-size:10.5px;padding:3px 8px;border-radius:10px;background:rgba(83,195,208,0.18);color:var(--accent);}
+
+  /* BRAND VOICE */
+  .voice{background:var(--ink);color:#EAF0F4;}
+  .voice .section-head h2{color:#fff;}
+  .voice .section-head p{color:#C9D6E0;}
+  .voice .section-head .tag{color:var(--accent);}
+  .mission-line{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.18);border-bottom:1px solid rgba(255,255,255,0.18);padding:20px 0;margin-bottom:32px;}
+  .mission-label{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;}
+  .mission-quote{font-family:'Fraunces',serif;font-weight:600;font-size:21px;color:#fff;}
+  .voice-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .voice-col-h{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--accent);margin:0 0 14px;}
+  .chip-list,.check-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .chip-list li{font-size:13.5px;color:#EAF0F4;line-height:1.5;}
+  .chip-list li b{color:#fff;}
+  .check-list li{font-size:13.5px;color:#EAF0F4;padding-left:26px;position:relative;line-height:1.4;}
+  .check-list li::before{content:"";position:absolute;left:0;top:1px;width:15px;height:15px;border:1.5px solid var(--accent);border-radius:3px;}
 
   /* DATA TABLES */
   .databar{background:var(--surface);}
@@ -159,6 +176,7 @@
   @media (max-width:900px){
     .stage-row{grid-template-columns:1fr 1fr;}
     .quarter-row{grid-template-columns:1fr 1fr;}
+    .voice-cols{grid-template-columns:1fr;}
     .hero h1{font-size:32px;}
     table{font-size:12px;}
   }
@@ -182,7 +200,7 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Guest Experience — FY27 Plan</div>
+    <div class="eyebrow">Guest Experience—FY27 Plan</div>
     <h1>The guest journey, mapped from real reservation data.</h1>
     <p>Six personas built from a 12-month segmentation of every reservation and linked Zendesk ticket. Each persona below carries a directional revenue share, volume, and support-ticket load, rounded here for public sharing rather than left as unsupported guesses.</p>
     <ul class="stat-row">
@@ -270,7 +288,7 @@
         <div class="role" style="color:var(--p6)">#6 by upside</div>
         <h3>The Renewals, Repeat &amp; Member Guest</h3>
         <div class="sub">Has stayed with AvantStay before, or enrolled in the membership program launched this year.</div>
-        <div class="stats">Repeat guests: <b>~14%</b> of value · Active members: <b>~2%</b> of value — the two most efficient segments in the file</div>
+        <div class="stats">Repeat guests: <b>~14%</b> of value · Active members: <b>~2%</b> of value—the two most efficient segments in the file</div>
         <dl>
           <dt>Wants</dt><dd>Recognition of history and preferences across stays.</dd>
           <dt>Risk</dt><dd>Treated like a first-time guest despite history. ~87% of the base is still first-time, so this group is small today by design, not by ceiling.</dd>
@@ -362,12 +380,57 @@
   </div>
 </section>
 
+<section class="voice" aria-labelledby="voice-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">The standard</div>
+      <h2 id="voice-h">What "on-brand" sounds like</h2>
+      <p>Pulled from the GX Brand Voice Training Guide (Feb 12, 2026). Read the comms map on the next page against these four pillars, not just against ticket volume—most of what's flagged above is a voice gap as much as a coverage gap.</p>
+    </div>
+
+    <div class="mission-line">
+      <span class="mission-label">Mission</span>
+      <span class="mission-quote">"Travel better, together."</span>
+    </div>
+
+    <div class="voice-cols">
+      <div class="voice-col">
+        <h3 class="voice-col-h">Value propositions</h3>
+        <ul class="chip-list">
+          <li><b>Connection</b>—shared experiences guests remember forever</li>
+          <li><b>Adventure</b>—room for spontaneity, not just a checklist</li>
+          <li><b>Authentic</b>—every place, and every interaction, is real</li>
+          <li><b>Effortless</b>—we take care of the rest</li>
+        </ul>
+      </div>
+      <div class="voice-col">
+        <h3 class="voice-col-h">Voice pillars</h3>
+        <ul class="chip-list">
+          <li><b>Confident &amp; clear</b>—lead with what we can do, not policy</li>
+          <li><b>Professional, not corporate</b>—no robotic phrasing</li>
+          <li><b>Human &amp; authentic</b>—conversational, personalized</li>
+          <li><b>Warm &amp; connection-focused</b>—acknowledge emotion first</li>
+        </ul>
+      </div>
+      <div class="voice-col">
+        <h3 class="voice-col-h">The GX self-check</h3>
+        <ul class="check-list">
+          <li>Does this sound human?</li>
+          <li>Does this sound confident?</li>
+          <li>Does it protect the guest experience?</li>
+          <li>Is it clear and effortless?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="databar" aria-labelledby="comms-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">The current comms map</div>
       <h2 id="comms-h">What's actually automated today</h2>
-      <p>Pulled from the product team's automated communication deck (dated Feb 2023). Given the age of the source, confirm current trigger logic before acting on any single row — the shape of the map is likely still accurate, the specifics may have shifted.</p>
+      <p>Pulled from the product team's automated communication deck (dated Feb 2023). Given the age of the source, confirm current trigger logic before acting on any single row—the shape of the map is likely still accurate, the specifics may have shifted.</p>
     </div>
     <div class="table-scroll" tabindex="0" role="region" aria-label="Automated communication map, scrollable">
       <table>
@@ -429,7 +492,7 @@
         <div class="bar" style="background:var(--p3)" aria-hidden="true"></div>
         <h3>Bailey: pair the rules with a reason to spend</h3>
         <dl>
-          <dt>Optimize</dt><dd>Risk Vetting is a pure compliance message today. Pairing it with a positive touch, like a curated local vendor list, could reduce the adversarial tone without softening the rules.</dd>
+          <dt>Optimize</dt><dd>Risk Vetting is a pure compliance message today—exactly what the Confident &amp; Clear voice pillar warns against ("avoid hiding behind policy"). Pairing it with a positive touch, like a curated local vendor list, could soften the tone without softening the rules.</dd>
           <dt>Upsell</dt><dd>GoPuff and LCO already fit a celebration trip well. The bigger opportunity is retargeting invited guests (from the Guest Invite flow) as future direct bookers in their own right, not just attendees.</dd>
         </dl>
       </li>
@@ -456,8 +519,8 @@
         <div class="bar" style="background:var(--p6)" aria-hidden="true"></div>
         <h3>The Renewals: the biggest gap in the map</h3>
         <dl>
-          <dt>Optimize</dt><dd>Nothing in the current comms map treats a repeat guest or member differently from a first-timer — not the booking confirmation, not the IDV cadence, not checkout.</dd>
-          <dt>Upsell</dt><dd>The most efficient segment in the file gets the least tailored retention push: the same blanket $200 code as everyone else. A recognition-based Next Stay email, referencing their last property or trip, is the highest-leverage single change on this list.</dd>
+          <dt>Optimize</dt><dd>Nothing in the current comms map treats a repeat guest or member differently from a first-timer—not the booking confirmation, not the IDV cadence, not checkout.</dd>
+          <dt>Upsell</dt><dd>The most efficient segment in the file gets the least tailored retention push: the same blanket $200 code as everyone else. A recognition-based Next Stay email, referencing their last property or trip, is the highest-leverage single change on this list—and a direct test of the Warm &amp; Connection-Focused pillar.</dd>
         </dl>
       </li>
 
@@ -567,7 +630,7 @@
     <div class="section-head">
       <div class="tag">The source data</div>
       <h2 id="source-h">Segment summary, last 12 months</h2>
-      <p>Every number above traces back to this table. Reservations created Sep 11, 2025 through Sep 10, 2026, non-cancelled, positive-value, across Direct, Airbnb, VRBO, Booking.com, and Expedia. Figures below are rounded for public sharing — see the internal source data for exact values.</p>
+      <p>Every number above traces back to this table. Reservations created Sep 11, 2025 through Sep 10, 2026, non-cancelled, positive-value, across Direct, Airbnb, VRBO, Booking.com, and Expedia. Figures below are rounded for public sharing—see the internal source data for exact values.</p>
     </div>
     <div class="table-scroll" tabindex="0" role="region" aria-label="Segment summary table, scrollable">
       <table>
@@ -621,7 +684,7 @@
 </div>
 
 <footer class="site-footer">
-  <div class="wrap">AvantStay Guest Experience — internal planning artifact, published for team reference.</div>
+  <div class="wrap">AvantStay Guest Experience—internal planning artifact, published for team reference.</div>
 </footer>
 
 </body>

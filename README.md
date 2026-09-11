@@ -1,17 +1,17 @@
-# AvantStay Guest Experience — Journey Map
+# AvantStay Guest Experience—Journey Map
 
 A single-page guest-experience journey map and FY27 plan: six guest personas
 built from reservation and Zendesk data, their stage-by-stage journey, the
 current automated communication map, and a four-quarter roadmap.
 
 **Live site:** published via GitHub Pages once this repo's `main` branch has
-a successful deploy — see the **Pages** section of repo Settings, or the
+a successful deploy—see the **Pages** section of repo Settings, or the
 "deploy" run under the **Actions** tab, for the URL.
 
 ## What this is
 
 Static, single-file HTML (`index.html`). No build step, no framework,
-no dependencies — open it directly in a browser or edit it in place.
+no dependencies—open it directly in a browser or edit it in place.
 
 Numbers on this page (reservation counts, dollar values, percentages,
 ticket-to-value ratios) are **rounded for public sharing**. This repo is
@@ -20,11 +20,11 @@ see the internal source data for precise values.
 
 ## Editing
 
-1. Edit `index.html` directly — content, copy, and the color/type variables
+1. Edit `index.html` directly—content, copy, and the color/type variables
    at the top of the `<style>` block (`:root`) all live in one file.
 2. Commit and push to `main`.
 3. GitHub Actions (`.github/workflows/deploy.yml`) rebuilds and republishes
-   the Pages site automatically on every push — no manual deploy step.
+   the Pages site automatically on every push—no manual deploy step.
 
 ## Brand
 
@@ -32,8 +32,8 @@ Colors and type are pulled from avantstay.com:
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--ink` | `#022B54` | Brand navy — headings, hero/roadmap background |
-| `--accent` | `#53C3D0` | Brand teal — accents on dark surfaces |
+| `--ink` | `#022B54` | Brand navy—headings, hero/roadmap background |
+| `--accent` | `#53C3D0` | Brand teal—accents on dark surfaces |
 | `--link` | `#1C5D9F` | Link color |
 | Body font | Source Sans 3 (Source Sans Pro family) | matches avantstay.com |
 | Display font | Fraunces | open-license serif standing in for AvantStay's licensed display face |
