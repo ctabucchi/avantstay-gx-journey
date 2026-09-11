@@ -98,8 +98,9 @@ Diffusion):
 ## Ready-to-use examples
 
 One per persona, matched to the moment each one is defined by in the journey
-map. Maya's is done (`assets/illustrations/maya.jpg`) — the rest are
-`placeholder`s on the live page until generated.
+map. Maya's and Daniel's are done (`assets/illustrations/maya.jpg`,
+`assets/illustrations/daniel.jpg`) — the rest are `placeholder`s on the live
+page until generated.
 
 **Maya arriving at her weekend rental** (solo/small group, budget-conscious) — done:
 
@@ -116,7 +117,7 @@ map. Maya's is done (`assets/illustrations/maya.jpg`) — the rest are
 > style, hand-drawn, not vector, not photorealistic, no text or lettering, no
 > logo, no border or frame, no gradient or airbrush effect.
 
-**Daniel, the direct-booking regular, letting himself in** (confident repeat behavior, no OTA middleman):
+**Daniel, the direct-booking regular, letting himself in** (confident repeat behavior, no OTA middleman) — done:
 
 > Black and white pen-and-ink sketch illustration of a man in his thirties
 > unlocking a front door with a smart-lock keypad, phone in his other hand
