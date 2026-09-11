@@ -1,27 +1,39 @@
 # AvantStay Guest Experience—Journey Map
 
-A single-page guest-experience journey map and FY27 plan: six guest personas
-built from reservation and Zendesk data, their stage-by-stage journey, the
-current automated communication map, and a four-quarter roadmap.
+Two guest-experience reports, cross-linked via the nav bar on each page:
+
+- **`index.html`** — Vacation rentals. Six guest personas built from
+  reservation and Zendesk data, their stage-by-stage journey, the current
+  automated communication map, a brand-voice standard pulled from the GX
+  Brand Voice Training Guide, and a four-quarter roadmap.
+- **`hotels.html`** — Hotels. All ten AvantStay hotels, segmented by
+  front-desk vs. no-front-desk/revenue-share operating model, in service of
+  a specific goal (#1 on TripAdvisor, 5 stars on Expedia/Google) rather than
+  revenue efficiency. Built from a Chef segmentation pull; explicitly lists
+  what data is still missing (review scores, comms map, etc.) instead of
+  guessing at it.
 
 **Live site:** published via GitHub Pages once this repo's `main` branch has
 a successful deploy—see the **Pages** section of repo Settings, or the
-"deploy" run under the **Actions** tab, for the URL.
+"deploy" run under the **Actions** tab, for the URL. Both pages deploy
+together from the same branch.
 
 ## What this is
 
-Static, single-file HTML (`index.html`). No build step, no framework,
-no dependencies—open it directly in a browser or edit it in place.
+Static HTML, no build step, no framework, no dependencies—open either file
+directly in a browser or edit it in place.
 
-Numbers on this page (reservation counts, dollar values, percentages,
+Numbers on both pages (reservation counts, dollar values, percentages,
 ticket-to-value ratios) are **rounded for public sharing**. This repo is
 public, so exact internal figures are intentionally not reproduced here;
 see the internal source data for precise values.
 
 ## Editing
 
-1. Edit `index.html` directly—content, copy, and the color/type variables
-   at the top of the `<style>` block (`:root`) all live in one file.
+1. Edit `index.html` or `hotels.html` directly—content, copy, and the
+   color/type variables at the top of each file's `<style>` block (`:root`)
+   live in that one file. The two pages share the same design tokens but are
+   otherwise independent; a change to one doesn't need to touch the other.
 2. Commit and push to `main`.
 3. GitHub Actions (`.github/workflows/deploy.yml`) rebuilds and republishes
    the Pages site automatically on every push—no manual deploy step.
