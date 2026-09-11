@@ -98,12 +98,13 @@ Diffusion):
 ## Ready-to-use examples
 
 One per persona, matched to the moment each one is defined by in the journey
-map. Maya's, Daniel's, and Bailey's are done (`assets/illustrations/maya.jpg`,
-`daniel.jpg`, `bailey.jpg`) — the rest are `placeholder`s on the live page
-until generated. Bailey's plate has readable text in it (a "Bailey's Bach"
-flag and an airport exit sign) — a deviation from the "never: text or
-lettering" rule below, kept because it reads well; flag this if regenerating
-plates in bulk later so it doesn't get treated as the reference standard.
+map. Maya's, Daniel's, Bailey's, and the Whitfield Family's are done
+(`assets/illustrations/maya.jpg`, `daniel.jpg`, `bailey.jpg`,
+`whitfield.jpg`) — the rest are `placeholder`s on the live page until
+generated. Bailey's plate has readable text in it (a "Bailey's Bach" flag
+and an airport exit sign) — a deviation from the "never: text or lettering"
+rule below, kept because it reads well; flag this if regenerating plates in
+bulk later so it doesn't get treated as the reference standard.
 
 **Maya arriving at her weekend rental** (solo/small group, budget-conscious) — done:
 
@@ -151,7 +152,7 @@ plates in bulk later so it doesn't get treated as the reference standard.
 > illustration style, hand-drawn, not vector, not photorealistic, no text or
 > lettering, no logo, no border or frame, no gradient or airbrush effect.
 
-**The Whitfield family reunion, coordinated arrival** (large multigenerational group):
+**The Whitfield family reunion, coordinated arrival** (large multigenerational group) — done:
 
 > Black and white pen-and-ink sketch illustration of a multigenerational
 > family — grandparents, parents, kids — unloading suitcases from a car in
