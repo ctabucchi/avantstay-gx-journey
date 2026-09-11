@@ -148,7 +148,10 @@
   .voice .section-head h2{color:#fff;}
   .voice .section-head p{color:#C9D6E0;}
   .voice .section-head .tag{color:var(--accent);}
-  .mission-line{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.18);border-bottom:1px solid rgba(255,255,255,0.18);padding:20px 0;margin-bottom:32px;}
+  .mission-band{display:flex;align-items:center;gap:28px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.18);border-bottom:1px solid rgba(255,255,255,0.18);padding:24px 0;margin-bottom:32px;}
+  .mission-photo{flex:0 0 260px;max-width:100%;}
+  .mission-photo img{width:100%;height:auto;border-radius:4px;display:block;}
+  .mission-text{display:flex;flex-direction:column;gap:8px;}
   .mission-label{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;}
   .mission-quote{font-family:'Fraunces',serif;font-weight:600;font-size:21px;color:#fff;}
   .voice-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
@@ -425,9 +428,12 @@
       <p>Pulled from the GX Brand Voice Training Guide (Feb 12, 2026). Read the comms map on the next page against these four pillars, not just against ticket volume—most of what's flagged above is a voice gap as much as a coverage gap.</p>
     </div>
 
-    <div class="mission-line">
-      <span class="mission-label">Mission</span>
-      <span class="mission-quote">"Travel better, together."</span>
+    <div class="mission-band">
+      <div class="mission-photo"><img src="assets/photos/brand-personality.jpg" alt="Friends wading into a resort pool together at golden hour, one paddling a small boat" loading="lazy"></div>
+      <div class="mission-text">
+        <span class="mission-label">Mission</span>
+        <span class="mission-quote">"Travel better, together."</span>
+      </div>
     </div>
 
     <div class="voice-cols">
