@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AvantStay Guest Experience — Journey Map &amp; FY Plan</title>
+<meta name="description" content="A guest-experience journey map and FY27 plan built from AvantStay reservation and support-ticket data: six guest personas, their stage-by-stage journey, and a four-quarter roadmap.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* AvantStay brand */
+    --ink:#022B54;       /* brand navy */
+    --accent:#53C3D0;    /* brand teal, light — for use on dark surfaces */
+    --link:#1C5D9F;      /* brand link blue */
+
+    /* Neutrals */
+    --paper:#FFFFFF;
+    --surface:#F4F7FA;
+    --line:#D9E1E8;
+    --text:#505051;
+    --muted:#6B6B6C;
+
+    /* Persona identity colors — six hues, contrast-checked for AA text use on white/paper */
+    --p1:#A34E34; /* Maya — rust */
+    --p2:#2F5E8C; /* Daniel — slate blue */
+    --p3:#7F6119; /* Bailey — olive gold */
+    --p4:#0C6270; /* Whitfield — teal */
+    --p5:#6B4A8A; /* Ashworths — plum */
+    --p6:#A24B72; /* Renewals — rose */
+    --flag:#A34E34;
+
+    --focus:#0C6270;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Source Sans 3','Source Sans Pro',-apple-system,BlinkMacSystemFont,sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,h4,.display{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  p{margin:0 0 1em;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  /* Accessibility helpers */
+  .skip-link{
+    position:absolute;left:12px;top:-48px;z-index:100;
+    background:var(--ink);color:#fff;padding:10px 16px;border-radius:2px;
+    font-weight:600;font-size:14px;text-decoration:none;
+    transition:top .15s ease;
+  }
+  .skip-link:focus{top:12px;}
+  a{color:var(--link);}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;}}
+
+  /* TOP BAR */
+  .topbar{background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.12);}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;}
+  .wordmark{font-family:'Fraunces',serif;font-weight:600;color:#fff;font-size:17px;letter-spacing:-0.01em;}
+  .wordmark span{color:var(--accent);}
+  .topbar .kicker{font-size:12.5px;color:#B9C6D1;}
+
+  /* HERO */
+  .hero{background:var(--ink);color:#EAF0F4;padding:56px 0 56px;}
+  .hero .eyebrow{color:var(--accent);font-size:14px;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.04em;}
+  .hero h1{font-size:44px;color:#fff;margin:0 0 16px;max-width:14ch;}
+  .hero p{max-width:62ch;font-size:17px;color:#C9D6E0;margin:0 0 32px;}
+  .stat-row{display:flex;gap:36px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.18);padding-top:24px;list-style:none;margin:0;padding-left:0;}
+  .stat .num{font-family:'Fraunces',serif;font-weight:600;font-size:27px;color:#fff;}
+  .stat .label{font-size:13px;color:#9FB0BD;}
+
+  /* SECTION HEADERS */
+  section{padding:64px 0;}
+  .section-head{margin-bottom:36px;max-width:66ch;}
+  .section-head .tag{font-size:13px;font-weight:700;color:var(--p1);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.03em;}
+  .section-head h2{font-size:29px;margin:0 0 10px;}
+  .section-head p{color:var(--muted);margin:0;font-size:15.5px;}
+  .callout{font-size:13.5px;color:var(--muted);border-left:3px solid var(--p1);padding-left:14px;margin-top:18px;}
+
+  /* PERSONAS */
+  .personas{background:var(--surface);}
+  .personas.alt{background:var(--paper);border-top:1px solid var(--line);}
+  .persona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;list-style:none;margin:0;padding-left:0;}
+  .persona{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:22px 22px 24px;}
+  .personas.alt .persona{background:var(--surface);}
+  .persona .bar{height:4px;width:36px;margin-bottom:16px;border-radius:2px;}
+  .persona h3{font-size:19px;margin:0 0 2px;color:var(--ink);}
+  .persona .role{font-size:12.5px;font-weight:700;margin-bottom:4px;}
+  .persona .sub{font-size:13px;color:var(--muted);margin-bottom:14px;}
+  .persona .stats{background:var(--surface);border-radius:4px;padding:10px 12px;font-size:12.5px;color:var(--ink);margin-bottom:14px;}
+  .personas.alt .persona .stats{background:var(--paper);border:1px solid var(--line);}
+  .persona .stats b{font-weight:700;}
+  .persona dl{margin:0;font-size:13.5px;}
+  .persona dt{font-weight:700;color:var(--ink);margin-top:10px;}
+  .persona dd{margin:2px 0 0;color:var(--muted);}
+
+  /* JOURNEY MAP */
+  .journey-strip{border-top:1px solid var(--line);padding:26px 0;}
+  .journey-strip:first-of-type{border-top:none;}
+  .journey-strip .who{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .journey-strip .who .dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+  .journey-strip .who h4{font-size:17px;margin:0;}
+  .journey-strip .who .stat-inline{font-size:12.5px;color:var(--muted);}
+  .stage-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;list-style:none;margin:0;padding-left:0;}
+  .stage{background:var(--surface);border-radius:4px;padding:14px 14px 16px;}
+  .stage .stage-name{font-size:11.5px;font-weight:700;color:var(--ink);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.02em;}
+  .stage .touch{font-size:13px;margin:0 0 8px;color:var(--text);}
+  .stage .risk{font-size:12px;color:var(--muted);margin:0;}
+  .stage .risk b{color:var(--ink);font-weight:700;}
+  .stage-legend{display:flex;gap:6px;font-size:12px;color:var(--muted);margin-bottom:26px;flex-wrap:wrap;list-style:none;padding-left:0;}
+  .stage-legend span{background:var(--surface);padding:5px 12px;border-radius:12px;}
+
+  /* ROADMAP */
+  .roadmap{background:var(--ink);color:#EAF0F4;}
+  .roadmap .section-head p{color:#C9D6E0;}
+  .roadmap .section-head .tag{color:var(--accent);}
+  .quarter-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;list-style:none;margin:0;padding-left:0;}
+  .quarter{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:4px;padding:18px;}
+  .quarter .qlabel{font-size:12px;color:var(--accent);font-weight:700;margin-bottom:2px;}
+  .quarter .qdate{font-size:12px;color:#9FB0BD;margin-bottom:16px;}
+  .init{border-top:1px solid rgba(255,255,255,0.14);padding:12px 0;}
+  .init:first-of-type{border-top:none;}
+  .init .name{font-size:14px;font-weight:700;color:#fff;margin:0 0 4px;}
+  .init .desc{font-size:12.5px;color:#C9D6E0;margin:0 0 8px;}
+  .init .tags{display:flex;gap:5px;flex-wrap:wrap;list-style:none;padding-left:0;margin:0;}
+  .init .tags span{font-size:10.5px;padding:3px 8px;border-radius:10px;background:rgba(83,195,208,0.18);color:var(--accent);}
+
+  /* DATA TABLES */
+  .databar{background:var(--surface);}
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px;}
+  .table-scroll:focus-visible{outline:3px solid var(--focus);}
+  table{width:100%;border-collapse:collapse;font-size:13px;background:var(--paper);min-width:640px;}
+  caption{text-align:left;font-size:12px;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--line);}
+  th{text-align:left;font-size:11.5px;font-weight:700;color:var(--ink);padding:10px 10px;border-bottom:1px solid var(--line);background:var(--surface);white-space:nowrap;}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--text);}
+  tr td:first-child{font-weight:700;color:var(--ink);}
+  .flag{color:var(--flag);font-weight:700;}
+  .note-inline{font-size:12px;color:var(--muted);margin-top:10px;}
+
+  /* NOTE */
+  .note{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(--muted);background:var(--paper);}
+  .note .wrap{max-width:82ch;}
+  .note ul{margin:10px 0 0;padding-left:18px;}
+  .note li{margin-bottom:4px;}
+
+  footer.site-footer{background:var(--ink);color:#9FB0BD;font-size:12.5px;padding:24px 0;}
+  footer.site-footer a{color:var(--accent);}
+
+  @media (max-width:900px){
+    .stage-row{grid-template-columns:1fr 1fr;}
+    .quarter-row{grid-template-columns:1fr 1fr;}
+    .hero h1{font-size:32px;}
+    table{font-size:12px;}
+  }
+  @media (max-width:560px){
+    .stage-row,.quarter-row{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+    .hero{padding:44px 0 44px;}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="wordmark">Avant<span>Stay</span></div>
+    <div class="kicker">Guest Experience</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Guest Experience — FY27 Plan</div>
+    <h1>The guest journey, mapped from real reservation data.</h1>
+    <p>Six personas built from a 12-month segmentation of every reservation and linked Zendesk ticket. Each persona below carries a directional revenue share, volume, and support-ticket load, rounded here for public sharing rather than left as unsupported guesses.</p>
+    <ul class="stat-row">
+      <li class="stat"><div class="num">115,000+</div><div class="label">Reservations analyzed</div></li>
+      <li class="stat"><div class="num">~$270M</div><div class="label">Total reservation value</div></li>
+      <li class="stat"><div class="num">495,000+</div><div class="label">Linked Zendesk tickets</div></li>
+      <li class="stat"><div class="num">~91%</div><div class="label">Reservations with a ticket</div></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="personas" aria-labelledby="who-we-serve-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Who we serve</div>
+      <h2 id="who-we-serve-h">Six personas, ranked by what the data shows</h2>
+      <p>Each one is built from the segments that actually carry the most revenue or the most volume in the last 12 months. Ranked by weight, not by how interesting the story is.</p>
+    </div>
+    <ul class="persona-grid">
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p1)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p1)">#1 by volume</div>
+        <h3>Maya, the Weekend Escape Booker</h3>
+        <div class="sub">Books a short, budget-friendly Airbnb stay for herself and 1–3 others. Usually her first AvantStay trip.</div>
+        <div class="stats">85,000+ reservations under $3K, <b>~78%</b> of all volume · Airbnb is <b>~42%</b> of total value · the highest ticket-to-value ratio in the portfolio</div>
+        <dl>
+          <dt>Wants</dt><dd>Fast, self-serve answers. Her trip budget is tight, so friction reads as bad value.</dd>
+          <dt>Risk</dt><dd>Drives roughly 69% of all support tickets despite being the lowest-value tier. She's also the least likely to already know AvantStay.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p2)">#2 by efficiency</div>
+        <h3>Daniel, the Direct-Booking Regular</h3>
+        <div class="sub">Skips the OTAs and books straight from avantstay.com. Already knows the brand.</div>
+        <div class="stats">Direct is <b>~27%</b> of total value, the most efficient of the three major channels</div>
+        <dl>
+          <dt>Wants</dt><dd>To feel like skipping the OTA was worth it. Recognition, even before he's formally a repeat guest or member.</dd>
+          <dt>Risk</dt><dd>Currently under-leveraged. Active members are only ~2% of total value, so most direct bookers aren't yet enrolled or recognized as loyal.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p3)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p3)">#3 by friction</div>
+        <h3>Bailey, the Nashville Celebration Organizer</h3>
+        <div class="sub">Books a short group trip in Nashville for a bachelorette or milestone celebration.</div>
+        <div class="stats">~22,000 reservations, nearly <b>1 in 5</b> of all bookings, but only <b>~7%</b> of value · tied for the highest ticket-to-value ratio in the portfolio</div>
+        <dl>
+          <dt>Wants</dt><dd>Fast, clear answers on party size and rules. Quick response if something goes wrong with the group.</dd>
+          <dt>Risk</dt><dd>The single highest-friction-per-dollar segment in the business. Group dynamics drive Trust &amp; Safety escalations.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p4)">#4 by value, efficient</div>
+        <h3>The Whitfield Family, Reunion Coordinator</h3>
+        <div class="sub">Books a large, multi-generational trip in one big home or across multiple units, like Isle of Palms.</div>
+        <div class="stats">9+ guest parties are <b>~38%</b> of total value, the largest value share of any single segment in the file · an efficient ticket-to-value ratio</div>
+        <dl>
+          <dt>Wants</dt><dd>One point of contact and coordinated arrival for a large group.</dd>
+          <dt>Risk</dt><dd>Falls into the general queue with no dedicated owner, despite carrying serious revenue weight.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p5)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p5)">#5 by value per stay</div>
+        <h3>The Ashworths, VIP Guest</h3>
+        <div class="sub">Books a premium property at $15K or more. Expects concierge-level service.</div>
+        <div class="stats">Just ~1,200 reservations, <b>~1%</b> of volume, generate <b>~12%</b> of total value, averaging about $25K per stay · most tickets per reservation of any tier (~7.5), but the lowest ticket-to-value ratio in the portfolio</div>
+        <dl>
+          <dt>Wants</dt><dd>White-glove service, custom requests honored, discretion.</dd>
+          <dt>Risk</dt><dd>A slow or generic response reads as a mismatch with what they paid for.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p6)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p6)">#6 by upside</div>
+        <h3>The Renewals, Repeat &amp; Member Guest</h3>
+        <div class="sub">Has stayed with AvantStay before, or enrolled in the membership program launched this year.</div>
+        <div class="stats">Repeat guests: <b>~14%</b> of value · Active members: <b>~2%</b> of value — the two most efficient segments in the file</div>
+        <dl>
+          <dt>Wants</dt><dd>Recognition of history and preferences across stays.</dd>
+          <dt>Risk</dt><dd>Treated like a first-time guest despite history. ~87% of the base is still first-time, so this group is small today by design, not by ceiling.</dd>
+        </dl>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<section class="journey" aria-labelledby="journey-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">The journey</div>
+      <h2 id="journey-h">What each guest needs, stage by stage</h2>
+      <p>Same five stages for every guest. What changes is the touchpoint that matters most, and what breaks if we miss it.</p>
+      <p class="callout">In 2012, Airbnb's Brian Chesky borrowed a technique from Walt Disney's production of <i>Snow White</i>: storyboard the handful of moments that define the experience, rather than mapping every screen. Airbnb hired an animator to sketch the guest and host journey in a small set of frames built around real emotional moments, like getting the keys or the wifi password, not app flows. Each strip below follows that same discipline: five moments per guest, chosen because they're the ones that actually make or break the stay.</p>
+    </div>
+    <ul class="stage-legend" aria-hidden="true">
+      <li><span>Discover &amp; Book</span></li><li><span>Pre-Stay</span></li><li><span>Arrival &amp; In-Stay</span></li><li><span>Departure</span></li><li><span>Post-Stay &amp; Retention</span></li>
+    </ul>
+
+    <article class="journey-strip">
+      <div class="who"><span class="dot" style="background:var(--p1)" aria-hidden="true"></span><h4>Maya, Weekend Escape Booker</h4><span class="stat-inline">~78% of all reservations</span></div>
+      <ul class="stage-row">
+        <li class="stage"><p class="stage-name">Discover &amp; Book</p><p class="touch">Books via Airbnb, gets the Welcome to AvantStay SMS once IDV clears</p><p class="risk"><b>Watch:</b> Airbnb bookings skip most of the IDV/Guest Agreement cascade, one less friction point already</p></li>
+        <li class="stage"><p class="stage-name">Pre-Stay</p><p class="touch">Same ECI, Mid-Stay Clean, and Concierge Marketing offers as every non-VIP guest</p><p class="risk"><b>Watch:</b> upsell pricing isn't tailored to a sub-$3K trip</p></li>
+        <li class="stage"><p class="stage-name">Arrival &amp; In-Stay</p><p class="touch">CI Instructions plus a GoPuff delivery offer on arrival day</p><p class="risk"><b>Watch:</b> any delay here reads as bad value on a tight budget</p></li>
+        <li class="stage"><p class="stage-name">Departure</p><p class="touch">LCO upsell, then the standard CO Reminder SMS</p><p class="risk"><b>Watch:</b> billing disputes hit harder on a tight budget</p></li>
+        <li class="stage"><p class="stage-name">Post-Stay &amp; Retention</p><p class="touch">Post-Stay Survey, then the same $200 Next Stay email as everyone else</p><p class="risk"><b>Watch:</b> unproven whether the generic offer converts this segment</p></li>
+      </ul>
+    </article>
+
+    <article class="journey-strip">
+      <div class="who"><span class="dot" style="background:var(--p2)" aria-hidden="true"></span><h4>Daniel, Direct-Booking Regular</h4><span class="stat-inline">~27% of value, most efficient channel</span></div>
+      <ul class="stage-row">
+        <li class="stage"><p class="stage-name">Discover &amp; Book</p><p class="touch">Gets the Direct-specific Booking Confirmation Email, not the OTA flow</p><p class="risk"><b>Watch:</b> treated identically to a first-time OTA guest right after that</p></li>
+        <li class="stage"><p class="stage-name">Pre-Stay</p><p class="touch">Full IDV/Guest Agreement cadence applies, since Direct isn't excluded like Airbnb</p><p class="risk"><b>Watch:</b> no visible reward yet for skipping the OTA</p></li>
+        <li class="stage"><p class="stage-name">Arrival &amp; In-Stay</p><p class="touch">Same ECI, Mid-Stay Clean, and GoPuff upsells as any non-VIP guest</p><p class="risk"><b>Watch:</b> no differentiated welcome for a direct, loyal booker</p></li>
+        <li class="stage"><p class="stage-name">Departure</p><p class="touch">Same LCO offer and CO Reminder as everyone else</p><p class="risk"><b>Watch:</b> no preferences carried into the next booking</p></li>
+        <li class="stage"><p class="stage-name">Post-Stay &amp; Retention</p><p class="touch">Same blanket $200 Next Stay offer, not a membership push</p><p class="risk"><b>Watch:</b> only ~2% of value comes from active members; this is the channel that should convert them</p></li>
+      </ul>
+    </article>
+
+    <article class="journey-strip">
+      <div class="who"><span class="dot" style="background:var(--p3)" aria-hidden="true"></span><h4>Bailey, Nashville Celebration Organizer</h4><span class="stat-inline">Highest ticket-to-value ratio in the file</span></div>
+      <ul class="stage-row">
+        <li class="stage"><p class="stage-name">Discover &amp; Book</p><p class="touch">If flagged high-risk, gets the Risk Vetting message: Good Neighbor rules, quiet hours, two backup phone numbers</p><p class="risk"><b>Watch:</b> a pure compliance message, no positive touch alongside it</p></li>
+        <li class="stage"><p class="stage-name">Pre-Stay</p><p class="touch">GoPuff and LCO upsells land well for a celebration trip</p><p class="risk"><b>Watch:</b> Concierge Marketing assumes a Standard property; a livelier group may not read it as relevant</p></li>
+        <li class="stage"><p class="stage-name">Arrival &amp; In-Stay</p><p class="touch">GOS In-Stay Triage routes noise/guest-count flags immediately</p><p class="risk"><b>Watch:</b> Trust &amp; Safety escalation risk stays highest here</p></li>
+        <li class="stage"><p class="stage-name">Departure</p><p class="touch">Damage or overage review against the signed agreement</p><p class="risk"><b>Watch:</b> disputed charges land on whichever name is on the booking</p></li>
+        <li class="stage"><p class="stage-name">Post-Stay &amp; Retention</p><p class="touch">Post-Stay Survey and Next Stay go to the main booker only</p><p class="risk"><b>Watch:</b> invited guests never get their own path to become future direct bookers</p></li>
+      </ul>
+    </article>
+
+    <article class="journey-strip">
+      <div class="who"><span class="dot" style="background:var(--p4)" aria-hidden="true"></span><h4>Whitfield Family, Reunion Coordinator</h4><span class="stat-inline">~38% of value from 9+ guest parties</span></div>
+      <ul class="stage-row">
+        <li class="stage"><p class="stage-name">Discover &amp; Book</p><p class="touch">Sales handles the multi-unit booking; each unit likely fires its own Booking Confirmation</p><p class="risk"><b>Watch:</b> no handoff to GX after the sale, plus duplicate messages across units</p></li>
+        <li class="stage"><p class="stage-name">Pre-Stay</p><p class="touch">ECI, Mid-Stay Clean, and LCO offers are evaluated per unit, not per group</p><p class="risk"><b>Watch:</b> the family gets several separate upsell touches for one trip</p></li>
+        <li class="stage"><p class="stage-name">Arrival &amp; In-Stay</p><p class="touch">Coordinated arrival across units, but CI Instructions send per property</p><p class="risk"><b>Watch:</b> access or unit-mismatch issues across a large group</p></li>
+        <li class="stage"><p class="stage-name">Departure</p><p class="touch">Checkout still likely splits by unit rather than consolidating</p><p class="risk"><b>Watch:</b> billing split across multiple parties</p></li>
+        <li class="stage"><p class="stage-name">Post-Stay &amp; Retention</p><p class="touch">Next Stay email goes out per booker, not per group</p><p class="risk"><b>Watch:</b> group defaults back to an OTA next time without a group-level invite</p></li>
+      </ul>
+    </article>
+
+    <article class="journey-strip">
+      <div class="who"><span class="dot" style="background:var(--p5)" aria-hidden="true"></span><h4>The Ashworths, VIP Guest</h4><span class="stat-inline">~1% of volume, ~12% of value</span></div>
+      <ul class="stage-row">
+        <li class="stage"><p class="stage-name">Discover &amp; Book</p><p class="touch">Concierge Intro triggers only on Estate/Premier properties</p><p class="risk"><b>Watch:</b> a $15K+ stay at a Standard property may get no concierge touch at all</p></li>
+        <li class="stage"><p class="stage-name">Pre-Stay</p><p class="touch">Explicitly excluded from the ECI, Mid-Stay Clean, LCO, and GoPuff automation</p><p class="risk"><b>Watch:</b> no confirmation concierge offers these manually instead; the gap may just be silence</p></li>
+        <li class="stage"><p class="stage-name">Arrival &amp; In-Stay</p><p class="touch">Proactive check-ins expected, not the automated flows everyone else gets</p><p class="risk"><b>Watch:</b> treated like a standard ticket if concierge coverage lapses</p></li>
+        <li class="stage"><p class="stage-name">Departure</p><p class="touch">White-glove checkout, no loose ends</p><p class="risk"><b>Watch:</b> billing friction lands harder on a high-value stay</p></li>
+        <li class="stage"><p class="stage-name">Post-Stay &amp; Retention</p><p class="touch">No VIP-specific post-stay track exists in the current comms map</p><p class="risk"><b>Watch:</b> goes quiet until the next booking, same as everyone else</p></li>
+      </ul>
+    </article>
+
+    <article class="journey-strip">
+      <div class="who"><span class="dot" style="background:var(--p6)" aria-hidden="true"></span><h4>The Renewals, Repeat &amp; Member Guest</h4><span class="stat-inline">Most efficient segment in the file</span></div>
+      <ul class="stage-row">
+        <li class="stage"><p class="stage-name">Discover &amp; Book</p><p class="touch">No distinct booking flow; treated identically to a first-time guest</p><p class="risk"><b>Watch:</b> history isn't recognized before the trip even starts</p></li>
+        <li class="stage"><p class="stage-name">Pre-Stay</p><p class="touch">Same IDV/Guest Agreement cadence, even if nothing has changed since last stay</p><p class="risk"><b>Watch:</b> re-doing paperwork that's already on file</p></li>
+        <li class="stage"><p class="stage-name">Arrival &amp; In-Stay</p><p class="touch">Same ECI/Mid-Stay Clean/LCO offers as everyone else, no nod to past stays</p><p class="risk"><b>Watch:</b> no differentiated welcome for a returning guest</p></li>
+        <li class="stage"><p class="stage-name">Departure</p><p class="touch">Same checkout as a first-timer</p><p class="risk"><b>Watch:</b> no preferences carried forward</p></li>
+        <li class="stage"><p class="stage-name">Post-Stay &amp; Retention</p><p class="touch">Same blanket $200 Next Stay email as every other guest</p><p class="risk"><b>Watch:</b> the most efficient segment in the file gets the least tailored retention push</p></li>
+      </ul>
+    </article>
+
+  </div>
+</section>
+
+<section class="databar" aria-labelledby="comms-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">The current comms map</div>
+      <h2 id="comms-h">What's actually automated today</h2>
+      <p>Pulled from the product team's automated communication deck (dated Feb 2023). Given the age of the source, confirm current trigger logic before acting on any single row — the shape of the map is likely still accurate, the specifics may have shifted.</p>
+    </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Automated communication map, scrollable">
+      <table>
+        <caption>Automated guest communications by stage, as documented Feb 2023.</caption>
+        <thead>
+          <tr><th scope="col">Stage</th><th scope="col">Touchpoint</th><th scope="col">Channel</th><th scope="col">Type</th><th scope="col">Trigger</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Booking</td><td>Risk Vetting</td><td>SMS + Email</td><td>Conditional</td><td>Guest books a high-risk property</td></tr>
+          <tr><td>Booking</td><td>Booking Confirmation</td><td>SMS + Email</td><td>Fixed</td><td>IDV (+ risk vetting if required) complete</td></tr>
+          <tr><td>Booking</td><td>Concierge Intro</td><td>SMS + Email</td><td>Upsell</td><td>Estate/Premier property (Cavallo, Paradiso, Palma, Castillo)</td></tr>
+          <tr><td>Booking</td><td>Concierge Marketing 1 &amp; 2</td><td>SMS + Email</td><td>Upsell</td><td>Standard property; Marketing 2 only if no reply to Marketing 1, 7 days before check-in</td></tr>
+          <tr><td>Pre-Stay</td><td>IDV / Guest Agreement reminders</td><td>SMS</td><td>Administrative</td><td>Missing IDV and/or signed agreement; cadence varies by OTA vs. Direct and regular vs. last-minute booking; Airbnb excluded</td></tr>
+          <tr><td>Pre-Stay</td><td>Early Check-In (ECI) offer</td><td>SMS + Email</td><td class="flag">Upsell</td><td>Not VIP, ECI available, 6 days before check-in</td></tr>
+          <tr><td>Pre-Stay</td><td>Mid-Stay Clean offer</td><td>SMS + Email</td><td class="flag">Upsell</td><td>Staying 3+ nights, not VIP, housekeeping available</td></tr>
+          <tr><td>Pre-Stay</td><td>Check-In Instructions</td><td>SMS + Email</td><td>Fixed</td><td>3 days before check-in, if paid/IDV/contract complete</td></tr>
+          <tr><td>Check-In</td><td>GoPuff offer</td><td>SMS</td><td class="flag">Upsell</td><td>Property in a GoPuff market, morning of check-in</td></tr>
+          <tr><td>Check-In</td><td>Welcome message</td><td>Call</td><td>Fixed</td><td>2 hours before check-in, via Spoke Phone/RingCentral</td></tr>
+          <tr><td>In-Stay</td><td>Post-Check-In Follow-Up</td><td>SMS</td><td>Fixed</td><td>Day after check-in at noon</td></tr>
+          <tr><td>In-Stay</td><td>VAS request confirmations</td><td>SMS</td><td>Conditional</td><td>Guest requests an add-on (pool heat, fridge stock, etc.)</td></tr>
+          <tr><td>Departure</td><td>Late Checkout (LCO) offer</td><td>SMS + Email</td><td class="flag">Upsell</td><td>Not VIP, LCO available, day before checkout</td></tr>
+          <tr><td>Departure</td><td>Checkout Reminder</td><td>SMS</td><td>Fixed</td><td>8am day of checkout, all guests</td></tr>
+          <tr><td>Post-Stay</td><td>Post-Stay Survey (NPS)</td><td>SMS, via Delighted</td><td>Fixed</td><td>Day of checkout; promoters routed to a Google review ask</td></tr>
+          <tr><td>Post-Stay</td><td>Next Stay offer</td><td>Email, via Iterable</td><td class="flag">Upsell</td><td>First of two post-checkout emails, $200 off code</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="personas alt" aria-labelledby="optimize-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Where to act</div>
+      <h2 id="optimize-h">Optimization and upsell opportunities, by persona</h2>
+      <p>The current automation is built around one guest, not six. Every upsell (ECI, Mid-Stay Clean, LCO, GoPuff) explicitly skips VIP guests, and nothing in the map treats a repeat guest, a member, or a group differently from a first-time solo booker.</p>
+    </div>
+    <ul class="persona-grid">
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p1)" aria-hidden="true"></div>
+        <h3>Maya: right-size the upsells</h3>
+        <dl>
+          <dt>Optimize</dt><dd>She gets the same ECI/Mid-Stay Clean pricing as every guest despite the lowest average spend in the portfolio. Test smaller-ticket, lower-price add-ons (GoPuff-style) against the standard concierge menu for this tier specifically.</dd>
+          <dt>Upsell</dt><dd>Her segment alone drives roughly 69% of all tickets. Route her routine pre-stay questions to Duckie before she ever needs to text in, freeing agent time for the segments below.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
+        <h3>Daniel: reward the channel choice</h3>
+        <dl>
+          <dt>Optimize</dt><dd>He gets a Direct-specific Booking Confirmation, then nothing distinguishes him from an OTA guest for the rest of the trip.</dd>
+          <dt>Upsell</dt><dd>Replace his generic $200 Next Stay email with a membership invitation. He's already shown channel loyalty; membership is the underused conversion point, at only ~2% of value today.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p3)" aria-hidden="true"></div>
+        <h3>Bailey: pair the rules with a reason to spend</h3>
+        <dl>
+          <dt>Optimize</dt><dd>Risk Vetting is a pure compliance message today. Pairing it with a positive touch, like a curated local vendor list, could reduce the adversarial tone without softening the rules.</dd>
+          <dt>Upsell</dt><dd>GoPuff and LCO already fit a celebration trip well. The bigger opportunity is retargeting invited guests (from the Guest Invite flow) as future direct bookers in their own right, not just attendees.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
+        <h3>Whitfield Family: bundle, don't fragment</h3>
+        <dl>
+          <dt>Optimize</dt><dd>Upsells and Check-In Instructions evaluate per unit, not per group. A 9-unit reunion likely gets 9 separate ECI/LCO touches for one trip.</dd>
+          <dt>Upsell</dt><dd>A single group-level Mid-Stay Clean or LCO offer, priced across the whole buyout, is an easier yes than nine individual asks, and matches the size of the segment: ~38% of total value.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p5)" aria-hidden="true"></div>
+        <h3>The Ashworths: confirm the manual path exists</h3>
+        <dl>
+          <dt>Optimize</dt><dd>They're excluded from every automated upsell, and Concierge Intro only fires on Estate/Premier properties. A VIP guest in a Standard property may get no proactive concierge touch at all. Confirm concierge coverage catches every VIP booking, not just Estate ones.</dd>
+          <dt>Upsell</dt><dd>Build the VIP equivalent of ECI/LCO/Mid-Stay Clean as a standing concierge offer rather than an absence. They generate the most tickets per stay of any tier; make sure some of that contact is proactive, not reactive.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p6)" aria-hidden="true"></div>
+        <h3>The Renewals: the biggest gap in the map</h3>
+        <dl>
+          <dt>Optimize</dt><dd>Nothing in the current comms map treats a repeat guest or member differently from a first-timer — not the booking confirmation, not the IDV cadence, not checkout.</dd>
+          <dt>Upsell</dt><dd>The most efficient segment in the file gets the least tailored retention push: the same blanket $200 code as everyone else. A recognition-based Next Stay email, referencing their last property or trip, is the highest-leverage single change on this list.</dd>
+        </dl>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<section class="roadmap" aria-labelledby="roadmap-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">The plan</div>
+      <h2 id="roadmap-h">One year, four quarters</h2>
+      <p>Each initiative is mapped to the persona it moves. Timing follows the booking calendar: holiday travel in Q4, spring booking surge in Q1, peak summer in Q2 to Q3.</p>
+    </div>
+
+    <ul class="quarter-row">
+      <li class="quarter">
+        <div class="qlabel">Q4 FY26</div>
+        <div class="qdate">Oct – Dec 2026</div>
+        <div class="init">
+          <p class="name">Launch Urgent Written Coverage rotation</p>
+          <p class="desc">Dedicated coverage for urgent written tickets ahead of holiday volume, concentrated in the highest-ticket-volume segments.</p>
+          <ul class="tags"><li><span>In-Stay</span></li><li><span>Maya</span></li><li><span>Bailey</span></li></ul>
+        </div>
+        <div class="init">
+          <p class="name">Stand up GOS In-Stay Triage</p>
+          <p class="desc">Real-time assignment of urgent in-stay tickets instead of general queue routing.</p>
+          <ul class="tags"><li><span>In-Stay</span></li><li><span>Bailey</span></li></ul>
+        </div>
+        <div class="init">
+          <p class="name">Roll out compensation authority matrix</p>
+          <p class="desc">Consistent, tiered service-recovery authority, aimed at the segment with the highest ticket-to-value ratio in the file.</p>
+          <ul class="tags"><li><span>In-Stay</span></li><li><span>Bailey</span></li></ul>
+        </div>
+      </li>
+
+      <li class="quarter">
+        <div class="qlabel">Q1 FY27</div>
+        <div class="qdate">Jan – Mar 2027</div>
+        <div class="init">
+          <p class="name">Fix one-off guest agreement process</p>
+          <p class="desc">Sustainable path for custom clause requests ahead of spring booking surge.</p>
+          <ul class="tags"><li><span>Pre-Stay</span></li><li><span>The Ashworths</span></li></ul>
+        </div>
+        <div class="init">
+          <p class="name">Formalize group/partnership handoff</p>
+          <p class="desc">Single owner for large reservations from sale through checkout.</p>
+          <ul class="tags"><li><span>Pre-Stay</span></li><li><span>Whitfield Family</span></li></ul>
+        </div>
+        <div class="init">
+          <p class="name">Expand Duckie coverage on pre-stay FAQs</p>
+          <p class="desc">Targets the segment generating the largest share of ticket volume, so self-serve answers land where they matter most.</p>
+          <ul class="tags"><li><span>Pre-Stay</span></li><li><span>Maya</span></li></ul>
+        </div>
+      </li>
+
+      <li class="quarter">
+        <div class="qlabel">Q2 FY27</div>
+        <div class="qdate">Apr – Jun 2027</div>
+        <div class="init">
+          <p class="name">Complete iLeftMyStuff rollout</p>
+          <p class="desc">Consistent lost &amp; found experience across all markets before peak summer.</p>
+          <ul class="tags"><li><span>Post-Stay</span></li><li><span>All personas</span></li></ul>
+        </div>
+        <div class="init">
+          <p class="name">Test local-team checkout messaging</p>
+          <p class="desc">Review-ask refinement for group bookings ahead of the highest-volume review season.</p>
+          <ul class="tags"><li><span>Post-Stay</span></li><li><span>Bailey</span></li></ul>
+        </div>
+        <div class="init">
+          <p class="name">Pilot direct-booker recognition</p>
+          <p class="desc">Visible perks for booking direct, closing the gap between direct booking's revenue share and today's member penetration.</p>
+          <ul class="tags"><li><span>Pre-Stay</span></li><li><span>Daniel</span></li></ul>
+        </div>
+        <div class="init">
+          <p class="name">Standardize VIP concierge touchpoints</p>
+          <p class="desc">Consistent white-glove experience for $15K+ reservations across top markets.</p>
+          <ul class="tags"><li><span>Arrival</span></li><li><span>The Ashworths</span></li></ul>
+        </div>
+      </li>
+
+      <li class="quarter">
+        <div class="qlabel">Q3 FY27</div>
+        <div class="qdate">Jul – Sep 2027</div>
+        <div class="init">
+          <p class="name">Stress-test coverage at peak volume</p>
+          <p class="desc">Confirm urgent coverage and Duckie automation hold at summer peak in 30A, Isle of Palms, and Nashville.</p>
+          <ul class="tags"><li><span>In-Stay</span></li><li><span>All personas</span></li></ul>
+        </div>
+        <div class="init">
+          <p class="name">Launch member/repeat rebooking nudge</p>
+          <p class="desc">Loyalty touchpoint that recognizes stay history and prompts the next booking, growing the most efficient segment in the file.</p>
+          <ul class="tags"><li><span>Post-Stay</span></li><li><span>The Renewals</span></li></ul>
+        </div>
+        <div class="init">
+          <p class="name">Publish FY27 recap, re-run segmentation</p>
+          <p class="desc">Refresh this map with a full new year of reservation and ticket data.</p>
+          <ul class="tags"><li><span>All stages</span></li><li><span>All personas</span></li></ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="databar" aria-labelledby="source-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">The source data</div>
+      <h2 id="source-h">Segment summary, last 12 months</h2>
+      <p>Every number above traces back to this table. Reservations created Sep 11, 2025 through Sep 10, 2026, non-cancelled, positive-value, across Direct, Airbnb, VRBO, Booking.com, and Expedia. Figures below are rounded for public sharing — see the internal source data for exact values.</p>
+    </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Segment summary table, scrollable">
+      <table>
+        <caption>Segment summary by dimension, rounded for public sharing.</caption>
+        <thead>
+          <tr><th scope="col">Dimension</th><th scope="col">Segment</th><th scope="col">Reservations</th><th scope="col">Value</th><th scope="col">Value share</th><th scope="col">Tickets/res</th><th scope="col">Ticket-to-value ratio</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Booking source</td><td>Airbnb</td><td>~50,000</td><td>~$110M</td><td>~42%</td><td>~5.2</td><td>~1.3</td></tr>
+          <tr><td>Booking source</td><td>Direct</td><td>~24,000</td><td>~$72M</td><td>~27%</td><td>~4.4</td><td>~0.8</td></tr>
+          <tr><td>Booking source</td><td>VRBO</td><td>~18,000</td><td>~$62M</td><td>~23%</td><td>~4.6</td><td>~0.7</td></tr>
+          <tr><td>Booking source</td><td>Expedia</td><td>~15,000</td><td>~$12M</td><td>~4%</td><td>~1.9</td><td>~1.3</td></tr>
+          <tr><td>Booking source</td><td>Booking.com</td><td>~9,000</td><td>~$11M</td><td>~4%</td><td>~2.6</td><td>~1.1</td></tr>
+          <tr><td>Value tier</td><td>Under $3K</td><td>~90,000</td><td>~$100M</td><td>~38%</td><td>~3.8</td><td class="flag">~1.8 HIGH</td></tr>
+          <tr><td>Value tier</td><td>$3K–$8K</td><td>~21,000</td><td>~$96M</td><td>~36%</td><td>~5.6</td><td>~0.7</td></tr>
+          <tr><td>Value tier</td><td>$8K–$15K</td><td>~3,900</td><td>~$41M</td><td>~15%</td><td>~6.9</td><td>~0.4</td></tr>
+          <tr><td>Value tier</td><td>$15K+</td><td>~1,200</td><td>~$31M</td><td>~12%</td><td>~7.6</td><td>~0.2</td></tr>
+          <tr><td>Market</td><td>Isle of Palms</td><td>~3,900</td><td>~$21M</td><td>~8%</td><td>~5.0</td><td>~0.5</td></tr>
+          <tr><td>Market</td><td>30A/PCB/Destin</td><td>~6,000</td><td>~$20M</td><td>~7%</td><td>~5.7</td><td>~0.9</td></tr>
+          <tr><td>Market</td><td>Nashville</td><td>~23,000</td><td>~$18M</td><td>~7%</td><td>~2.8</td><td class="flag">~1.8 HIGH</td></tr>
+          <tr><td>Unit count</td><td>Single unit</td><td>~110,000</td><td>~$250M</td><td>~93%</td><td>~4.3</td><td>~1.0</td></tr>
+          <tr><td>Unit count</td><td>Multi-unit / reunion-style</td><td>~3,500</td><td>~$19M</td><td>~7%</td><td>~5.6</td><td>~0.6</td></tr>
+          <tr><td>Party size</td><td>9+ guests</td><td>~22,000</td><td>~$100M</td><td>~38%</td><td>~6.1</td><td>~0.7</td></tr>
+          <tr><td>Party size</td><td>1–4 guests</td><td>~65,000</td><td>~$91M</td><td>~34%</td><td>~3.4</td><td>~1.3</td></tr>
+          <tr><td>Party size</td><td>5–8 guests</td><td>~28,000</td><td>~$77M</td><td>~29%</td><td>~5.1</td><td>~1.0</td></tr>
+          <tr><td>Membership</td><td>Non-member</td><td>~110,000</td><td>~$260M</td><td>~98%</td><td>~4.3</td><td>~1.0</td></tr>
+          <tr><td>Membership</td><td>Active member</td><td>~1,300</td><td>~$5M</td><td>~2%</td><td>~4.7</td><td>~0.6</td></tr>
+          <tr><td>Repeat status</td><td>First-time guest</td><td>~100,000</td><td>~$230M</td><td>~87%</td><td>~4.3</td><td>~1.0</td></tr>
+          <tr><td>Repeat status</td><td>Repeat guest</td><td>~12,000</td><td>~$36M</td><td>~14%</td><td>~4.2</td><td>~0.7</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-inline">Rounding is independent per row, so totals within a dimension may not sum exactly to 100%.</p>
+  </div>
+</section>
+
+</main>
+
+<div class="note">
+  <div class="wrap">
+    Source: Chef segmentation of all reservations and linked Zendesk tickets, Sep 11, 2025 to Sep 10, 2026, run Sep 10, 2026.
+    <ul>
+      <li>Chef's output is six separate single-dimension breakdowns, not a joint cross-tab. Persona names combine segments that plausibly overlap (e.g. Airbnb, under $3K, 1–4 guests), not a verified single query.</li>
+      <li>Reservation value is the tax-inclusive guest total, not canonical ex-tax GBV.</li>
+      <li>Ticket category classification covers roughly 20–28% of tickets depending on segment, since the L3 classifier launched June 2026. Top ticket categories are directional, not comprehensive.</li>
+      <li>The membership program launched during this 12-month window, so member volume is naturally small; it isn't yet a ceiling.</li>
+      <li>The automated communication map is sourced from a product team deck dated Feb 2023, over three years old. Trigger names and gating logic (VIP exclusions, property tiers, market lists) may have changed since; confirm current state with product before building against any single row.</li>
+      <li>Figures throughout this page are rounded to protect exact internal totals. Treat every stat here as directional, not precise; consult the internal source data for exact values.</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">AvantStay Guest Experience — internal planning artifact, published for team reference.</div>
+</footer>
+
+</body>
+</html>
