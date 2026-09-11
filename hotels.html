@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AvantStay Hotels—Guest Experience Journey Map</title>
+<meta name="description" content="A guest-experience journey map for AvantStay's ten hotels, built from reservation and support-ticket data, in service of a single goal: #1 on TripAdvisor and 5 stars on Expedia and Google.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* AvantStay brand */
+    --ink:#022B54;       /* brand navy */
+    --accent:#53C3D0;    /* brand teal, light—for use on dark surfaces */
+    --link:#1C5D9F;      /* brand link blue */
+
+    /* Neutrals */
+    --paper:#FFFFFF;
+    --surface:#F4F7FA;
+    --line:#D9E1E8;
+    --text:#505051;
+    --muted:#6B6B6C;
+
+    /* Identity colors—reused from the vacation-rental report's persona palette for cross-report consistency */
+    --p1:#A34E34; /* rust—used for flags/attention */
+    --p2:#2F5E8C; /* slate blue—front-desk */
+    --p4:#0C6270; /* teal—no-front-desk / revenue-share */
+    --flag:#A34E34;
+
+    --focus:#0C6270;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Source Sans 3','Source Sans Pro',-apple-system,BlinkMacSystemFont,sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,h4,.display{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  p{margin:0 0 1em;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  /* Accessibility helpers */
+  .skip-link{
+    position:absolute;left:12px;top:-48px;z-index:100;
+    background:var(--ink);color:#fff;padding:10px 16px;border-radius:2px;
+    font-weight:600;font-size:14px;text-decoration:none;
+    transition:top .15s ease;
+  }
+  .skip-link:focus{top:12px;}
+  a{color:var(--link);}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;}}
+
+  /* TOP BAR */
+  .topbar{background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.12);}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;}
+  .wordmark{font-family:'Fraunces',serif;font-weight:600;color:#fff;font-size:17px;letter-spacing:-0.01em;}
+  .wordmark span{color:var(--accent);}
+  .topnav{display:flex;gap:4px;}
+  .topnav a{font-size:12.5px;font-weight:600;color:#B9C6D1;text-decoration:none;padding:6px 12px;border-radius:12px;}
+  .topnav a:hover{color:#fff;}
+  .topnav a[aria-current="page"]{background:rgba(83,195,208,0.16);color:var(--accent);}
+
+  /* HERO */
+  .hero{background:var(--ink);color:#EAF0F4;padding:56px 0 56px;}
+  .hero .eyebrow{color:var(--accent);font-size:14px;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.04em;}
+  .hero h1{font-size:44px;color:#fff;margin:0 0 16px;max-width:16ch;}
+  .hero p{max-width:64ch;font-size:17px;color:#C9D6E0;margin:0 0 32px;}
+  .stat-row{display:flex;gap:36px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.18);padding-top:24px;list-style:none;margin:0;padding-left:0;}
+  .stat .num{font-family:'Fraunces',serif;font-weight:600;font-size:27px;color:#fff;}
+  .stat .label{font-size:13px;color:#9FB0BD;}
+
+  /* SECTION HEADERS */
+  section{padding:64px 0;}
+  .section-head{margin-bottom:36px;max-width:66ch;}
+  .section-head .tag{font-size:13px;font-weight:700;color:var(--p1);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.03em;}
+  .section-head h2{font-size:29px;margin:0 0 10px;}
+  .section-head p{color:var(--muted);margin:0;font-size:15.5px;}
+  .callout{font-size:13.5px;color:var(--muted);border-left:3px solid var(--p1);padding-left:14px;margin-top:18px;}
+
+  /* OPERATING MODEL CARDS (reuses the rental report's persona-card component) */
+  .personas{background:var(--surface);}
+  .persona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;list-style:none;margin:0;padding-left:0;}
+  .persona{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:22px 22px 24px;}
+  .persona .bar{height:4px;width:36px;margin-bottom:16px;border-radius:2px;}
+  .persona h3{font-size:19px;margin:0 0 2px;color:var(--ink);}
+  .persona .role{font-size:12.5px;font-weight:700;margin-bottom:4px;}
+  .persona .sub{font-size:13px;color:var(--muted);margin-bottom:14px;}
+  .persona .stats{background:var(--surface);border-radius:4px;padding:10px 12px;font-size:12.5px;color:var(--ink);margin-bottom:14px;}
+  .persona .stats b{font-weight:700;}
+  .persona dl{margin:0;font-size:13.5px;}
+  .persona dt{font-weight:700;color:var(--ink);margin-top:10px;}
+  .persona dd{margin:2px 0 0;color:var(--muted);}
+
+  /* DATA TABLES */
+  .databar{background:var(--surface);}
+  .databar.alt{background:var(--paper);border-top:1px solid var(--line);}
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px;}
+  .table-scroll:focus-visible{outline:3px solid var(--focus);}
+  table{width:100%;border-collapse:collapse;font-size:13px;background:var(--paper);min-width:640px;}
+  caption{text-align:left;font-size:12px;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--line);}
+  th{text-align:left;font-size:11.5px;font-weight:700;color:var(--ink);padding:10px 10px;border-bottom:1px solid var(--line);background:var(--surface);white-space:nowrap;}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--text);}
+  tr td:first-child{font-weight:700;color:var(--ink);}
+  .flag{color:var(--flag);font-weight:700;}
+  .note-inline{font-size:12px;color:var(--muted);margin-top:10px;}
+
+  /* GAPS */
+  .gaps{background:var(--ink);color:#EAF0F4;}
+  .gaps .section-head h2{color:#fff;}
+  .gaps .section-head p{color:#C9D6E0;}
+  .gaps .section-head .tag{color:var(--accent);}
+  .gap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;list-style:none;margin:0;padding-left:0;}
+  .gap-card{background:rgba(255,255,255,0.06);border:1px dashed rgba(255,255,255,0.3);border-radius:4px;padding:16px 18px;}
+  .gap-card .gap-name{font-size:14px;font-weight:700;color:#fff;margin:0 0 6px;}
+  .gap-card .gap-desc{font-size:12.5px;color:#C9D6E0;margin:0;}
+  .gap-card .gap-tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--accent);background:rgba(83,195,208,0.14);padding:3px 8px;border-radius:10px;margin-bottom:8px;}
+
+  /* NOTE */
+  .note{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(--muted);background:var(--paper);}
+  .note .wrap{max-width:82ch;}
+  .note ul{margin:10px 0 0;padding-left:18px;}
+  .note li{margin-bottom:4px;}
+
+  footer.site-footer{background:var(--ink);color:#9FB0BD;font-size:12.5px;padding:24px 0;}
+  footer.site-footer a{color:var(--accent);}
+
+  @media (max-width:900px){
+    .hero h1{font-size:32px;}
+    table{font-size:12px;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .hero{padding:44px 0 44px;}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="wordmark">Avant<span>Stay</span></div>
+    <nav class="topnav" aria-label="Reports">
+      <a href="index.html">Vacation Rentals</a>
+      <a href="hotels.html" aria-current="page">Hotels</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Hotels—Path to #1</div>
+    <h1>Ten hotels, one goal: earn the top spot.</h1>
+    <p>Baseline segmentation across all ten AvantStay hotels, split by the one thing that actually changes the guest experience here: whether the property has a front desk. Built to support a specific target—#1 on TripAdvisor, 5 stars on Expedia and Google—not just revenue efficiency.</p>
+    <ul class="stat-row">
+      <li class="stat"><div class="num">~26,500</div><div class="label">Reservations analyzed</div></li>
+      <li class="stat"><div class="num">~$12.6M</div><div class="label">Total reservation value</div></li>
+      <li class="stat"><div class="num">~22,600</div><div class="label">Guest-linked tickets*</div></li>
+      <li class="stat"><div class="num">~2.2 nights</div><div class="label">Average length of stay</div></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="personas" aria-labelledby="models-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Two operating models</div>
+      <h2 id="models-h">The same brand, two very different check-ins</h2>
+      <p>Four properties run a staffed front desk. Six run remote—a guest lets themselves in, and AvantStay shares revenue with the owner. That split, not guest type, is the primary lens for this map: it's the biggest single driver of what can go wrong before a review gets written.</p>
+    </div>
+    <ul class="persona-grid">
+      <li class="persona">
+        <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p2)">Front-desk</div>
+        <h3>Sense28 · The Gilmore · The Code · The Mara</h3>
+        <div class="sub">Staffed properties—a person hands over the room, not an app.</div>
+        <div class="stats">~24,000 reservations, <b>~89%</b> of total value · ~$11M · average stay ~2.2 nights</div>
+        <dl>
+          <dt>Wants</dt><dd>A human, in-person handoff that feels effortless—the thing a front desk is supposed to guarantee.</dd>
+          <dt>Risk</dt><dd>The Gilmore alone is <b>~45%</b> of all hotel reservation value—its front desk quality effectively sets the portfolio's review average.</dd>
+        </dl>
+      </li>
+      <li class="persona">
+        <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p4)">No front desk · revenue-share</div>
+        <h3>Blackhaus · The Wesley · The Monkey Tree · Hotel El Cid · The Rosalie · The Weekend</h3>
+        <div class="sub">Remote check-in, no staffed lobby—closer in operating model to a vacation rental than a hotel.</div>
+        <div class="stats">~2,700 reservations, <b>~11%</b> of total value · ~$1.4M · average stay ~2.2 nights</div>
+        <dl>
+          <dt>Wants</dt><dd>Clear, self-serve access instructions—there's no desk to fall back on if something's confusing.</dd>
+          <dt>Risk</dt><dd>Ticket categories here skew toward contact-info and check-in/access questions—exactly the friction a front desk would normally absorb in person.</dd>
+        </dl>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="databar" aria-labelledby="properties-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">The portfolio</div>
+      <h2 id="properties-h">All ten properties, ranked by value</h2>
+      <p>Every number below is rounded for public sharing. The Gilmore's scale means its guest experience is disproportionately what "AvantStay Hotels" means to most reviewers today.</p>
+    </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Property table, scrollable">
+      <table>
+        <caption>Reservations by property, trailing 12 months, rounded for public sharing.</caption>
+        <thead>
+          <tr><th scope="col">Property</th><th scope="col">Model</th><th scope="col">Reservations</th><th scope="col">Value</th><th scope="col">Avg LOS</th><th scope="col">Avg nightly rate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>The Gilmore</td><td>Front-desk</td><td>~13,000</td><td>~$5.6M</td><td>~2.0</td><td>~$199</td></tr>
+          <tr><td>The Code</td><td>Front-desk</td><td>~5,400</td><td>~$2.2M</td><td>~2.5</td><td>~$152</td></tr>
+          <tr><td>The Mara</td><td>Front-desk</td><td>~3,100</td><td>~$1.7M</td><td>~1.9</td><td>~$268</td></tr>
+          <tr><td>Sense28</td><td>Front-desk</td><td>~2,300</td><td>~$1.7M</td><td>~2.8</td><td>~$225</td></tr>
+          <tr><td>Blackhaus</td><td>No front desk</td><td>~990</td><td>~$580K</td><td>~2.3</td><td>~$219</td></tr>
+          <tr><td>The Wesley</td><td>No front desk</td><td>~470</td><td>~$260K</td><td>~2.6</td><td>~$166</td></tr>
+          <tr><td>Hotel El Cid</td><td>No front desk</td><td>~380</td><td>~$160K</td><td>~1.9</td><td>~$182</td></tr>
+          <tr><td>The Rosalie</td><td>No front desk</td><td>~360</td><td>~$130K</td><td>~1.9</td><td>~$173</td></tr>
+          <tr><td>The Monkey Tree</td><td>No front desk</td><td>~350</td><td>~$180K</td><td>~2.4</td><td>~$164</td></tr>
+          <tr><td>The Weekend</td><td>No front desk</td><td>~130</td><td>~$58K</td><td>~2.0</td><td>~$169</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-inline">"The Rosalie" was formerly listed as The Marley Hotel; "The Wesley" absorbed a set of records previously misfiled under The Rosalie's old address. Both are corrected above.</p>
+  </div>
+</section>
+
+<section class="databar alt" aria-labelledby="tickets-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Where the tickets are</div>
+      <h2 id="tickets-h">Booking source, after stripping out system noise</h2>
+      <p>Automated system notifications (booking-confirmation pings, etc.) were excluded at our request—the table below is the <i>guest-driven</i> signal only. The flag is a ticket-to-value index: a channel's share of tickets divided by its share of value. 1.0 means proportional; above that, a channel is generating more support load than its revenue share would predict.</p>
+    </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Booking source ticket table, scrollable">
+      <table>
+        <caption>Booking source by ticket load, portfolio-wide, system notifications excluded.</caption>
+        <thead>
+          <tr><th scope="col">Source</th><th scope="col">Reservations</th><th scope="col">Value</th><th scope="col">Value share</th><th scope="col">Tickets/res</th><th scope="col">Ticket-to-value index</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Direct</td><td>~8,800</td><td>~$5.0M</td><td>~40%</td><td>~0.7</td><td>~1.0</td></tr>
+          <tr><td>Expedia</td><td>~8,300</td><td>~$3.2M</td><td>~26%</td><td>~0.6</td><td>~0.9</td></tr>
+          <tr><td>Airbnb</td><td>~4,700</td><td>~$2.1M</td><td>~16%</td><td>~1.3</td><td class="flag">~1.6 HIGH</td></tr>
+          <tr><td>Booking.com</td><td>~3,200</td><td>~$1.7M</td><td>~13%</td><td>~1.2</td><td class="flag">~1.3 HIGH</td></tr>
+          <tr><td>VRBO</td><td>~490</td><td>~$340K</td><td>~3%</td><td>~1.8</td><td class="flag">~1.5 HIGH</td></tr>
+          <tr><td>Other</td><td>~1,200</td><td>~$310K</td><td>~2%</td><td>~0.5</td><td>~0.7</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-inline">Airbnb's top ticket categories are contact-information requests, guest name/contact details, and check-in/access—exactly the friction a staffed front desk absorbs in person and a remote check-in can't. This is the clearest early signal in the data: Airbnb-sourced bookings at no-front-desk properties are the highest-risk combination for a bad first impression.</p>
+  </div>
+</section>
+
+<section class="databar" aria-labelledby="segments-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">The source data</div>
+      <h2 id="segments-h">Segment summary, trailing 12 months</h2>
+      <p>Reservations with check-in from Sep 11, 2025 through Sep 10, 2026, non-cancelled, positive-value, across the ten properties above. Figures are rounded for public sharing.</p>
+    </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Segment summary table, scrollable">
+      <table>
+        <caption>Segment summary by dimension, system-notification tickets excluded.</caption>
+        <thead>
+          <tr><th scope="col">Dimension</th><th scope="col">Segment</th><th scope="col">Reservations</th><th scope="col">Value</th><th scope="col">Value share</th><th scope="col">Tickets/res</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Value tier</td><td>Under $3K</td><td>~26,000</td><td>~$12M</td><td>~95%</td><td>~0.8</td></tr>
+          <tr><td>Value tier</td><td>$3K–$8K</td><td>~130</td><td>~$530K</td><td>~4%</td><td>~1.7</td></tr>
+          <tr><td>Value tier</td><td>$8K–$15K</td><td>~6</td><td>~$66K</td><td>~1%</td><td>~2.5</td></tr>
+          <tr><td>Market group</td><td>Other markets*</td><td>~13,000</td><td>~$7.0M</td><td>~55%</td><td class="flag">~1.0 HIGH</td></tr>
+          <tr><td>Market group</td><td>Nashville</td><td>~13,000</td><td>~$5.6M</td><td>~45%</td><td>~0.7</td></tr>
+          <tr><td>Booking format</td><td>Single-unit</td><td>~26,500</td><td>~$12.6M</td><td>~100%</td><td>~0.8</td></tr>
+          <tr><td>Booking format</td><td>Multi-unit / reunion-style</td><td>~9</td><td>~$20K</td><td>&lt;1%</td><td>~1.0</td></tr>
+          <tr><td>Membership</td><td>Non-member</td><td>~26,000</td><td>~$13M</td><td>~99%</td><td>~0.8</td></tr>
+          <tr><td>Membership</td><td>Member</td><td>~120</td><td>~$130K</td><td>~1%</td><td>~1.0</td></tr>
+          <tr><td>Repeat status</td><td>First-time guest</td><td>~23,000</td><td>~$11M</td><td>~86%</td><td>~0.9</td></tr>
+          <tr><td>Repeat status</td><td>Repeat guest</td><td>~3,500</td><td>~$1.7M</td><td>~14%</td><td>~0.8</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-inline">*"Other markets" is primarily Palm Springs, Austin, Miami, and Laguna Beach—the current hotel portfolio has no properties in 30A/PCB/Destin or Isle of Palms, unlike the vacation rental portfolio. The $15K+ and 8K–15K tiers, and the multi-unit and member segments, are small enough (single digits to low hundreds of reservations) that their ticket ratios shouldn't be read as reliable signal yet.</p>
+  </div>
+</section>
+
+<section class="gaps" aria-labelledby="gaps-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">What this map doesn't have yet</div>
+      <h2 id="gaps-h">The goal is reviews. We don't have review data yet.</h2>
+      <p>Everything above is reservation and ticket volume—useful, but one step removed from the actual target. These are the next Chef pulls before this map can say anything about the path to #1, not just about where the tickets are.</p>
+    </div>
+    <ul class="gap-grid">
+      <li class="gap-card">
+        <span class="gap-tag">Pending</span>
+        <p class="gap-name">Review score baseline</p>
+        <p class="gap-desc">Current rating and review count per property on TripAdvisor, Google, and Expedia, plus each property's current TripAdvisor rank in its market.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Pending</span>
+        <p class="gap-name">Rating trend</p>
+        <p class="gap-desc">Monthly rating trend per property for the last 12 months—improving, flat, or declining—so we know which properties are already moving in the right direction.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Pending</span>
+        <p class="gap-name">Review-to-ticket correlation</p>
+        <p class="gap-desc">Whether an unresolved in-stay ticket actually predicts a low review—the thing that would turn the ticket data above into a real prioritization tool.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Pending</span>
+        <p class="gap-name">Competitive benchmark</p>
+        <p class="gap-desc">Top-ranked TripAdvisor competitors per market, so "#1" means a specific, known gap rather than an open-ended aspiration.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Pending</span>
+        <p class="gap-name">Current comms map</p>
+        <p class="gap-desc">What's actually automated today for hotel guests, and where the front-desk and no-front-desk flows diverge—the hotel equivalent of the rental report's stage-by-stage journey.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Pending</span>
+        <p class="gap-name">Trip purpose</p>
+        <p class="gap-desc">Business vs. leisure vs. group segmentation, if it exists for hotels—front-desk properties likely skew business/solo, no-front-desk likely skew leisure/group.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<div class="note">
+  <div class="wrap">
+    Source: Chef segmentation of hotel reservations and linked Zendesk tickets, Sep 11, 2025 through Sep 10, 2026, run Sep 11, 2026.
+    <ul>
+      <li>*"Guest-linked tickets" excludes automated system notifications (auto-sent product comms, booking-confirmation system notifications) at the team's request. Including that automated volume, the raw linked-ticket count is roughly double this figure—the system noise was concentrated on Direct and Expedia, which is why excluding it changed which channels look over-indexed.</li>
+      <li>Chef's output is single-dimension breakdowns, not a joint cross-tab—the "booking source by operating model" split (reservations/value) and the "booking source ticket load" table (tickets/index) come from two separate queries and shouldn't be read as a single merged table.</li>
+      <li>Only about half of remaining tickets (~11,600 of ~22,600) had a usable reason-for-contact category; the L3 classifier only starts June 2026 against a ticket window starting September 2025. Top-category call-outs describe the classified subset only.</li>
+      <li>Property names were corrected mid-analysis: "The Rosalie" is the current name for what Chef initially had filed as The Marley Hotel, and a block of Wesley-named reservations had been misfiled under The Rosalie's old address. Figures throughout reflect the corrected mapping.</li>
+      <li>Figures throughout this page are rounded to protect exact internal totals. Treat every stat here as directional, not precise; consult the internal source data for exact values.</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">AvantStay Hotels—internal planning artifact, published for team reference.</div>
+</footer>
+
+</body>
+</html>
