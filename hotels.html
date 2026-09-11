@@ -25,7 +25,10 @@
     /* Identity colors—reused from the vacation-rental report's persona palette for cross-report consistency */
     --p1:#A34E34; /* rust—used for flags/attention */
     --p2:#2F5E8C; /* slate blue—front-desk */
+    --p3:#7F6119; /* olive gold */
     --p4:#0C6270; /* teal—no-front-desk / revenue-share */
+    --p5:#6B4A8A; /* plum */
+    --p6:#A24B72; /* rose */
     --flag:#A34E34;
 
     --focus:#0C6270;
@@ -89,6 +92,8 @@
 
   /* OPERATING MODEL CARDS (reuses the rental report's persona-card component) */
   .personas{background:var(--surface);}
+  .personas.alt{background:var(--paper);border-top:1px solid var(--line);}
+  .personas.alt .persona .stats{background:var(--surface);border:1px solid var(--line);}
   .persona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;list-style:none;margin:0;padding-left:0;}
   .persona{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:22px 22px 24px;}
   .persona .bar{height:4px;width:36px;margin-bottom:16px;border-radius:2px;}
@@ -204,6 +209,91 @@
           <dt>Risk</dt><dd>Ticket categories here skew toward contact-info and check-in/access questions—exactly the friction a front desk would normally absorb in person.</dd>
         </dl>
       </li>
+    </ul>
+  </div>
+</section>
+
+<section class="personas alt" aria-labelledby="segments-personas-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Who we serve</div>
+      <h2 id="segments-personas-h">Six guest segments, built from channel and loyalty status</h2>
+      <p>Built the same way as the vacation rental personas—combining segments that plausibly describe one real kind of guest, not a single verified query. The difference: rental personas leaned on party size and trip value, but those barely vary at hotels (95% of reservations are under $3K, 99.8% are single-unit). Booking channel and operating model are where the actual signal is here, so that's what defines these six.</p>
+    </div>
+    <ul class="persona-grid">
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p1)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p1)">#1 by value</div>
+        <h3>The Direct Front-Desk Regular</h3>
+        <div class="sub">Books straight from avantstay.com at a staffed property. The largest single segment in the file.</div>
+        <div class="stats">~8,400 reservations, <b>~42%</b> of front-desk value · ~$4.8M · ticket-to-value index ~1.0, proportional</div>
+        <dl>
+          <dt>Wants</dt><dd>Recognition for skipping the OTA, and a staffed handoff smooth enough to make booking direct feel worth it.</dd>
+          <dt>Risk</dt><dd>Already the largest, most proportional segment—the risk here is complacency, not crisis. Front-desk quality for this guest effectively <i>is</i> the brand for nearly half of all hotel value.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p2)">#2 by efficiency</div>
+        <h3>The Expedia Front-Desk Guest</h3>
+        <div class="sub">Books via Expedia at a staffed property. The quietest segment in the portfolio.</div>
+        <div class="stats">~7,700 reservations, <b>~26%</b> of front-desk value · ~$3.0M · lowest ticket load of any channel, ~0.6 tickets/reservation</div>
+        <dl>
+          <dt>Wants</dt><dd>A smooth in-person check-in. This guest doesn't ask for much beyond that, and the data backs it up.</dd>
+          <dt>Risk</dt><dd>Low risk today, but worth understanding <i>why</i> it's the most efficient channel—that's a pattern worth replicating elsewhere, not just leaving alone.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p3)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p3)">#3 by friction</div>
+        <h3>The Airbnb No-Front-Desk Guest</h3>
+        <div class="sub">Books via Airbnb at a remote-check-in property—the highest-risk combination in the portfolio.</div>
+        <div class="stats">~1,100 reservations, <b>~43%</b> of no-front-desk value · ~$590K · ticket-to-value index ~1.6, the highest flag in the file</div>
+        <dl>
+          <dt>Wants</dt><dd>Clear, self-serve check-in instructions, and a fast way to reach someone if the lockbox code doesn't work.</dd>
+          <dt>Risk</dt><dd>Airbnb's top ticket categories are contact-info and check-in/access requests—exactly the friction a staffed desk absorbs in person, concentrated at the properties with no desk to catch it.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p4)">#4 by consistency</div>
+        <h3>The Booking.com Guest</h3>
+        <div class="sub">Books via Booking.com—shows up at roughly the same rate at both operating models.</div>
+        <div class="stats">~3,200 reservations, <b>~13%</b> of value at both front-desk and no-front-desk properties · ticket-to-value index ~1.3, high</div>
+        <dl>
+          <dt>Wants</dt><dd>Straightforward confirmation and check-in details, without needing to contact support to get them.</dd>
+          <dt>Risk</dt><dd>The over-index holds steady regardless of operating model—this reads as a channel-level pattern (message clarity, timing) rather than a property-specific one.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p5)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p5)">#5 by friction per booking</div>
+        <h3>The VRBO Guest</h3>
+        <div class="sub">Books via VRBO. The smallest channel by volume, but the highest support load per booking of any source.</div>
+        <div class="stats">~490 reservations, <b>~3%</b> of value · ~$340K · ~1.8 tickets per reservation, the highest of any channel</div>
+        <dl>
+          <dt>Wants</dt><dd>The same fast reassurance an Airbnb guest wants—VRBO skews similarly self-serve.</dd>
+          <dt>Risk</dt><dd>Too small to move portfolio averages, but the highest per-booking friction in the file. Worth a dedicated look precisely because volume won't hide the problem.</dd>
+        </dl>
+      </li>
+
+      <li class="persona">
+        <div class="bar" style="background:var(--p6)" aria-hidden="true"></div>
+        <div class="role" style="color:var(--p6)">#6 by upside</div>
+        <h3>The Repeat &amp; Member Hotel Guest</h3>
+        <div class="sub">Has stayed at an AvantStay hotel before, or is enrolled in the membership program.</div>
+        <div class="stats">~3,500 repeat reservations, <b>~14%</b> of value at ~0.75 tickets/reservation, the most efficient guest in the file · members are still just ~1% of value</div>
+        <dl>
+          <dt>Wants</dt><dd>Recognition of history across stays—the same ask as the repeat vacation-rental guest.</dd>
+          <dt>Risk</dt><dd>The most efficient guest in the portfolio, and the loyalty program still isn't capturing it: active members are only ~1% of value, barely different from the vacation rental side's ~2%.</dd>
+        </dl>
+      </li>
+
     </ul>
   </div>
 </section>
