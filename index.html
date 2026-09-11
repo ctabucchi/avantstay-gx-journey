@@ -94,6 +94,13 @@
   .persona{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:22px 22px 24px;}
   .personas.alt .persona{background:var(--surface);}
   .persona .bar{height:4px;width:36px;margin-bottom:16px;border-radius:2px;}
+  .persona-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+  .persona-head .bar{margin-bottom:8px;}
+  .portrait{width:88px;height:88px;flex-shrink:0;border-radius:4px;overflow:hidden;background:var(--surface);}
+  .portrait img{width:100%;height:100%;object-fit:cover;display:block;}
+  .portrait.placeholder{display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);background:var(--paper);}
+  .personas.alt .portrait.placeholder{background:var(--surface);}
+  .portrait.placeholder span{font-size:9px;font-weight:600;color:var(--muted);text-align:center;line-height:1.3;padding:6px;text-transform:uppercase;letter-spacing:0.03em;}
   .persona h3{font-size:19px;margin:0 0 2px;color:var(--ink);}
   .persona .role{font-size:12.5px;font-weight:700;margin-bottom:4px;}
   .persona .sub{font-size:13px;color:var(--muted);margin-bottom:14px;}
@@ -224,8 +231,13 @@
     <ul class="persona-grid">
 
       <li class="persona">
-        <div class="bar" style="background:var(--p1)" aria-hidden="true"></div>
-        <div class="role" style="color:var(--p1)">#1 by volume</div>
+        <div class="persona-head">
+          <div class="portrait"><img src="assets/illustrations/maya.jpg" alt="Maya pausing beside her suitcase to check her phone before heading in" loading="lazy" width="88" height="88"></div>
+          <div>
+            <div class="bar" style="background:var(--p1)" aria-hidden="true"></div>
+            <div class="role" style="color:var(--p1)">#1 by volume</div>
+          </div>
+        </div>
         <h3>Maya, the Weekend Escape Booker</h3>
         <div class="sub">Books a short, budget-friendly Airbnb stay for herself and 1–3 others. Usually her first AvantStay trip.</div>
         <div class="stats">85,000+ reservations under $3K, <b>~78%</b> of all volume · Airbnb is <b>~42%</b> of total value · the highest ticket-to-value ratio in the portfolio</div>
@@ -236,8 +248,13 @@
       </li>
 
       <li class="persona">
-        <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
-        <div class="role" style="color:var(--p2)">#2 by efficiency</div>
+        <div class="persona-head">
+          <div class="portrait placeholder" aria-hidden="true"><span>Artwork needed</span></div>
+          <div>
+            <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
+            <div class="role" style="color:var(--p2)">#2 by efficiency</div>
+          </div>
+        </div>
         <h3>Daniel, the Direct-Booking Regular</h3>
         <div class="sub">Skips the OTAs and books straight from avantstay.com. Already knows the brand.</div>
         <div class="stats">Direct is <b>~27%</b> of total value, the most efficient of the three major channels</div>
@@ -248,8 +265,13 @@
       </li>
 
       <li class="persona">
-        <div class="bar" style="background:var(--p3)" aria-hidden="true"></div>
-        <div class="role" style="color:var(--p3)">#3 by friction</div>
+        <div class="persona-head">
+          <div class="portrait placeholder" aria-hidden="true"><span>Artwork needed</span></div>
+          <div>
+            <div class="bar" style="background:var(--p3)" aria-hidden="true"></div>
+            <div class="role" style="color:var(--p3)">#3 by friction</div>
+          </div>
+        </div>
         <h3>Bailey, the Nashville Celebration Organizer</h3>
         <div class="sub">Books a short group trip in Nashville for a bachelorette or milestone celebration.</div>
         <div class="stats">~22,000 reservations, nearly <b>1 in 5</b> of all bookings, but only <b>~7%</b> of value · tied for the highest ticket-to-value ratio in the portfolio</div>
@@ -260,8 +282,13 @@
       </li>
 
       <li class="persona">
-        <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
-        <div class="role" style="color:var(--p4)">#4 by value, efficient</div>
+        <div class="persona-head">
+          <div class="portrait placeholder" aria-hidden="true"><span>Artwork needed</span></div>
+          <div>
+            <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
+            <div class="role" style="color:var(--p4)">#4 by value, efficient</div>
+          </div>
+        </div>
         <h3>The Whitfield Family, Reunion Coordinator</h3>
         <div class="sub">Books a large, multi-generational trip in one big home or across multiple units, like Isle of Palms.</div>
         <div class="stats">9+ guest parties are <b>~38%</b> of total value, the largest value share of any single segment in the file · an efficient ticket-to-value ratio</div>
@@ -272,8 +299,13 @@
       </li>
 
       <li class="persona">
-        <div class="bar" style="background:var(--p5)" aria-hidden="true"></div>
-        <div class="role" style="color:var(--p5)">#5 by value per stay</div>
+        <div class="persona-head">
+          <div class="portrait placeholder" aria-hidden="true"><span>Artwork needed</span></div>
+          <div>
+            <div class="bar" style="background:var(--p5)" aria-hidden="true"></div>
+            <div class="role" style="color:var(--p5)">#5 by value per stay</div>
+          </div>
+        </div>
         <h3>The Ashworths, VIP Guest</h3>
         <div class="sub">Books a premium property at $15K or more. Expects concierge-level service.</div>
         <div class="stats">Just ~1,200 reservations, <b>~1%</b> of volume, generate <b>~12%</b> of total value, averaging about $25K per stay · most tickets per reservation of any tier (~7.5), but the lowest ticket-to-value ratio in the portfolio</div>
@@ -284,8 +316,13 @@
       </li>
 
       <li class="persona">
-        <div class="bar" style="background:var(--p6)" aria-hidden="true"></div>
-        <div class="role" style="color:var(--p6)">#6 by upside</div>
+        <div class="persona-head">
+          <div class="portrait placeholder" aria-hidden="true"><span>Artwork needed</span></div>
+          <div>
+            <div class="bar" style="background:var(--p6)" aria-hidden="true"></div>
+            <div class="role" style="color:var(--p6)">#6 by upside</div>
+          </div>
+        </div>
         <h3>The Renewals, Repeat &amp; Member Guest</h3>
         <div class="sub">Has stayed with AvantStay before, or enrolled in the membership program launched this year.</div>
         <div class="stats">Repeat guests: <b>~14%</b> of value · Active members: <b>~2%</b> of value—the two most efficient segments in the file</div>

@@ -97,7 +97,11 @@ Diffusion):
 
 ## Ready-to-use examples
 
-**Maya arriving at her weekend rental** (solo/small group, budget-conscious):
+One per persona, matched to the moment each one is defined by in the journey
+map. Maya's is done (`assets/illustrations/maya.jpg`) — the rest are
+`placeholder`s on the live page until generated.
+
+**Maya arriving at her weekend rental** (solo/small group, budget-conscious) — done:
 
 > Black and white pen-and-ink sketch illustration of a young woman pulling a
 > small wheeled suitcase up to a front door, checking her phone in her other
@@ -112,7 +116,38 @@ Diffusion):
 > style, hand-drawn, not vector, not photorealistic, no text or lettering, no
 > logo, no border or frame, no gradient or airbrush effect.
 
-**The Whitfield family reunion, coordinated arrival** (large group):
+**Daniel, the direct-booking regular, letting himself in** (confident repeat behavior, no OTA middleman):
+
+> Black and white pen-and-ink sketch illustration of a man in his thirties
+> unlocking a front door with a smart-lock keypad, phone in his other hand
+> showing a booking confirmation, relaxed and unhurried, drawn with loose
+> confident linework and visible overlapping strokes. Grey marker wash
+> shading in flat streaky blocks with cross-hatching for shadow. Plain white
+> background, no frame, no border. Square 1:1 composition, subject centred
+> and cropped at the chest, background detail fading toward the edges. The
+> only colour in the image is a deep navy blue, hex `#022B54`, used
+> exclusively on the smart-lock keypad, covering less than 5% of the frame.
+> Everything else is pure black, white, and grey — no other colour anywhere.
+> Editorial illustration style, hand-drawn, not vector, not photorealistic,
+> no text or lettering, no logo, no border or frame, no gradient or airbrush
+> effect.
+
+**Bailey's Nashville celebration, group arrival** (bachelorette/milestone energy):
+
+> Black and white pen-and-ink sketch illustration of three young women
+> laughing together on a front porch, one holding up a phone to take a
+> photo, one wearing a "bride" sash, suitcases at their feet, drawn with
+> loose confident linework and visible overlapping strokes. Grey marker wash
+> shading in flat streaky blocks with cross-hatching for shadow. Plain white
+> background, no frame, no border. Square 1:1 composition, group centred and
+> cropped at the waist, background detail fading toward the edges. The only
+> colour in the image is a deep navy blue, hex `#022B54`, used exclusively
+> on the phone screen, covering less than 5% of the frame. Everything else
+> is pure black, white, and grey — no other colour anywhere. Editorial
+> illustration style, hand-drawn, not vector, not photorealistic, no text or
+> lettering, no logo, no border or frame, no gradient or airbrush effect.
+
+**The Whitfield family reunion, coordinated arrival** (large multigenerational group):
 
 > Black and white pen-and-ink sketch illustration of a multigenerational
 > family — grandparents, parents, kids — unloading suitcases from a car in
@@ -126,6 +161,56 @@ Diffusion):
 > black, white, and grey — no other colour anywhere. Editorial illustration
 > style, hand-drawn, not vector, not photorealistic, no text or lettering, no
 > logo, no border or frame, no gradient or airbrush effect.
+
+**The Ashworths, VIP concierge welcome** (premium property, white-glove service):
+
+> Black and white pen-and-ink sketch illustration of a well-dressed couple
+> in their fifties being greeted at an estate's front entrance by a
+> concierge holding a tray, their luggage already being carried in by
+> someone else, drawn with loose confident linework and visible overlapping
+> strokes. Grey marker wash shading in flat streaky blocks with
+> cross-hatching for shadow. Plain white background, no frame, no border.
+> Square 1:1 composition, group centred and cropped at the waist, background
+> detail fading toward the edges. The only colour in the image is a deep
+> navy blue, hex `#022B54`, used exclusively on the concierge's tablet,
+> covering less than 5% of the frame. Everything else is pure black, white,
+> and grey — no other colour anywhere. Editorial illustration style,
+> hand-drawn, not vector, not photorealistic, no text or lettering, no logo,
+> no border or frame, no gradient or airbrush effect.
+
+**The Renewals, a familiar welcome back** (repeat guest, recognized on arrival):
+
+> Black and white pen-and-ink sketch illustration of a woman in her
+> forties smiling as she reads a text message on her phone while standing
+> on a familiar-looking porch, keys already in her other hand, relaxed and
+> at ease, drawn with loose confident linework and visible overlapping
+> strokes. Grey marker wash shading in flat streaky blocks with
+> cross-hatching for shadow. Plain white background, no frame, no border.
+> Square 1:1 composition, subject centred and cropped at the chest,
+> background detail fading toward the edges. The only colour in the image is
+> a deep navy blue, hex `#022B54`, used exclusively on the phone screen
+> showing a "welcome back" message, covering less than 5% of the frame.
+> Everything else is pure black, white, and grey — no other colour anywhere.
+> Editorial illustration style, hand-drawn, not vector, not photorealistic,
+> no text or lettering, no logo, no border or frame, no gradient or airbrush
+> effect.
+
+## Naming and wiring
+
+Save finished plates to `assets/illustrations/`, named after the persona:
+`maya.jpg`, `daniel.jpg`, `bailey.jpg`, `whitfield.jpg`, `ashworths.jpg`,
+`renewals.jpg`. In `index.html`, each persona card in the "Who we serve"
+grid has a `.portrait` div; swap the `.portrait.placeholder` markup for:
+
+```html
+<div class="portrait"><img src="assets/illustrations/NAME.jpg" alt="DESCRIBE WHAT'S HAPPENING" loading="lazy" width="88" height="88"></div>
+```
+
+Alt text is required — describe the moment, not "an illustration of a
+person." Resize/compress before adding (`sips -s format jpeg -s
+formatOptions 82 -z 1024 1024 input.png --out assets/illustrations/name.jpg`
+on macOS) — the raw ChatGPT export runs ~2MB per image, which is too heavy
+to ship six of on one page.
 
 ## Acceptance checklist
 
