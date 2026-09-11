@@ -332,28 +332,33 @@
 <section class="databar alt" aria-labelledby="reputation-h">
   <div class="wrap">
     <div class="section-head">
-      <div class="tag">The measurement gap</div>
-      <h2 id="reputation-h">We can't see the actual goal yet</h2>
-      <p class="callout">TripAdvisor has zero properties mapped in the reputation pipeline—for any of the ten hotels, front-desk or not. That's the literal goal metric, and right now we can't see it at all. Expedia mapping exists only for three front-desk properties (Sense28, The Code, and Mara Laguna) and hasn't been pulled yet. Of the six no-front-desk properties below, only two have any external rating data at all, from Google.</p>
+      <div class="tag">The reputation scorecard</div>
+      <h2 id="reputation-h">Where the ten hotels actually stand on TripAdvisor and Google</h2>
+      <p class="callout">This corrects the earlier finding below: Chef's data warehouse has no TripAdvisor or Expedia mapping, but a separate live tracker—Brand Reputation Master—does, refreshed weekly with 14-day deltas and comp-set rank. Worth wiring into Chef directly so this doesn't require manually screenshotting a dashboard each time. The good news buried in here: AvantStay already has properties sitting at #1 in their comp set elsewhere in the portfolio (Aerie, Polo Villas, Sobro Guest House)—"#1 on TripAdvisor" is proven achievable, not just aspirational.</p>
     </div>
-    <div class="table-scroll" tabindex="0" role="region" aria-label="Reputation data table, scrollable">
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Reputation scorecard table, scrollable">
       <table>
-        <caption>External ratings and an internal-proxy trend, no-front-desk properties, as of September 11, 2026.</caption>
+        <caption>All ten hotels, sorted by TripAdvisor rank. Source: Brand Reputation Master, week of Sep 2, 2026.</caption>
         <thead>
-          <tr><th scope="col">Property</th><th scope="col">Google</th><th scope="col">12-mo trend (internal proxy)*</th><th scope="col">Under-4★ reviews (internal)*</th></tr>
+          <tr><th scope="col">Property</th><th scope="col">Model</th><th scope="col">Airbnb /5</th><th scope="col">VRBO /5</th><th scope="col">TripAdvisor /5 (rank)</th><th scope="col">Google /5</th><th scope="col">Booking.com /10</th><th scope="col">Expedia /10</th><th scope="col">NPS</th></tr>
         </thead>
         <tbody>
-          <tr><td>Blackhaus</td><td>Not mapped</td><td>Declining (4.71 → 4.61)</td><td class="flag">10 HIGH</td></tr>
-          <tr><td>The Rosalie</td><td>Not mapped</td><td>Flat to slightly declining (5.00 → 4.92)</td><td>3</td></tr>
-          <tr><td>The Wesley</td><td>Not mapped</td><td>Insufficient history (3 reviews)</td><td>0</td></tr>
-          <tr><td>The Monkey Tree</td><td>4.5/5 (148 reviews)</td><td>Flat to slightly declining (4.83 → 4.78)</td><td>0</td></tr>
-          <tr><td>Hotel El Cid</td><td>Not mapped</td><td>Slightly declining (5.00 → 4.84)</td><td>0</td></tr>
-          <tr><td>The Weekend</td><td>4.8/5 (92 reviews)</td><td>Insufficient history (18 reviews)</td><td>0</td></tr>
+          <tr><td>The Gilmore</td><td>Front-desk</td><td>4.91 (238)</td><td>4.88 (32)</td><td>5.0 (308) · #2/235</td><td>4.80 (312)</td><td>Not tracked yet</td><td>Not tracked yet</td><td>Not tracked yet</td></tr>
+          <tr><td>The Weekend</td><td>No front desk</td><td>4.89 (18)</td><td>4.50 (4)</td><td>4.9 (56) · #4/20</td><td>Not mapped</td><td>8.60 (10)</td><td>9.33 (3)</td><td>77.1 (35)</td></tr>
+          <tr><td>The Code</td><td>Front-desk</td><td>4.89 (205)</td><td>4.79 (24)</td><td>4.9 (87) · #6/246</td><td>4.70 (65)</td><td>Not tracked yet</td><td>Not tracked yet</td><td>Not tracked yet</td></tr>
+          <tr><td>The Mara</td><td>Front-desk</td><td>4.77 (98)</td><td>4.58 (12)</td><td>4.8 (98) · #6/20</td><td>4.50 (79)</td><td>Not tracked yet</td><td>Not tracked yet</td><td>Not tracked yet</td></tr>
+          <tr><td>The Wesley</td><td>No front desk</td><td>4.62 (13)</td><td>5.00 (1)</td><td>4.5 (52) · #10/20</td><td>Not mapped</td><td>9.00 (2)</td><td>Not mapped</td><td>100 (7)</td></tr>
+          <tr><td>The Monkey Tree</td><td>No front desk</td><td>4.54 (13)</td><td>Not mapped</td><td>4.7 (363) · #22/79</td><td>4.50 (148)</td><td>Not mapped</td><td>Not mapped</td><td>75.0 (12)</td></tr>
+          <tr><td>Sense28</td><td>Front-desk</td><td>4.85 (196)</td><td>4.77 (22)</td><td>4.9 (66) · #23/154</td><td>4.80 (39)</td><td>Not tracked yet</td><td>Not tracked yet</td><td>Not tracked yet</td></tr>
+          <tr><td>The Rosalie</td><td>No front desk</td><td>4.75 (8)</td><td>5.00 (1)</td><td>3.9 (18) · #58/79</td><td>4.40 (33)</td><td>6.00 (2)</td><td>Not mapped</td><td>80.0 (5)</td></tr>
+          <tr><td>Blackhaus</td><td>No front desk</td><td>4.71 (42)</td><td>Not mapped</td><td class="flag">4.1 (15) · #60/79 HIGH</td><td>3.80 (49)</td><td>4.50 (4)</td><td>7.67 (6)</td><td class="flag">51.3 (39) HIGH</td></tr>
+          <tr><td>Hotel El Cid</td><td>No front desk</td><td>4.86 (28)</td><td>Not mapped</td><td class="flag">No profile</td><td>4.50 (31)</td><td>8.00 (6)</td><td>Not mapped</td><td>77.8 (18)</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="note-inline">*The "trend" and "under-4★ reviews" columns are a directional stand-in, not the real metric: AvantStay's own Airbnb/VRBO review corpus (Sep 11, 2025–Sep 10, 2026), used only because no TripAdvisor/Google/Expedia history exists yet to measure against. Google ratings and counts are live snapshots from September 6, 2026. Front-desk properties (Sense28, The Gilmore, The Code, The Mara) haven't had a reputation pull yet.</p>
-    <p class="note-inline"><b>Blackhaus is the clear operational watch item.</b> Its 10 under-4-star reviews are dominated by cleanliness (9 mentions) and amenities/room condition (9 mentions), with service/communication (5) and check-in/access (4) secondary—every other no-front-desk property has zero or near-zero low-star reviews in the same window. This reads as a physical-property and housekeeping issue specific to one hotel, not a portfolio-wide pattern.</p>
+    <p class="note-inline">Review/response counts in parentheses. "Not mapped" means no validated profile exists for that specific property; "Not tracked yet" means the metric isn't pulled for the front-desk group at all—an asymmetry in tracking coverage between the two operating models, not just gaps in individual listings. Treat anything under ~10 reviews as directional only (The Wesley's 100 NPS is 7 responses).</p>
+    <p class="note-inline"><b>Blackhaus's grassroots recovery is already working—apply it to the Rosalie next.</b> Blackhaus moved from 3.8 to 4.1 on TripAdvisor and 3.6 to 3.8 on Google in the last 14 days alone, from a deliberate push to drive reviews. It's still last on TripAdvisor rank (#60/79) and lowest by far on NPS (51.3—next-lowest is 75), so the push needs to continue, but it's proof the playbook works. The Rosalie is the only other property this far behind (#58/79, third-lowest TripAdvisor score) and has shown zero movement in the same 14 days; it's the natural next target for the same effort.</p>
+    <p class="note-inline"><b>Hotel El Cid has no TripAdvisor profile at all.</b> Every other property in the ten has one, even where the score is bad. This is the most literal version of "can't see the goal" left on the list, and the easiest to fix: claim or verify the listing.</p>
   </div>
 </section>
 
@@ -426,13 +431,18 @@
     <ul class="gap-grid">
       <li class="gap-card">
         <span class="gap-tag">Infrastructure gap</span>
-        <p class="gap-name">TripAdvisor &amp; Expedia listing mappings</p>
-        <p class="gap-desc">Sharper than "pending": as of Sep 11, 2026, the reputation pipeline has <i>zero</i> TripAdvisor mappings for any of the ten hotels, and Expedia mapping only for three front-desk properties, not yet pulled. This is a data-infrastructure gap, not a query away—someone needs to add the listing mappings before any of the below is answerable.</p>
+        <p class="gap-name">Wire Brand Reputation Master into Chef</p>
+        <p class="gap-desc">Resolved, sort of: TripAdvisor and Google data exists and is good (see the scorecard above)—it just lives in a separate live tracker Chef can't query directly. Someone still had to manually screenshot a dashboard to get it into this map. Worth fixing so this updates itself going forward instead of needing another Slack thread each time.</p>
       </li>
       <li class="gap-card">
         <span class="gap-tag">Pending</span>
-        <p class="gap-name">Rating trend, on the real platforms</p>
-        <p class="gap-desc">Monthly TripAdvisor/Google/Expedia trend per property—what we have today is a same-property proxy built from AvantStay's own Airbnb/VRBO reviews, not the actual public rating history.</p>
+        <p class="gap-name">Hotel El Cid's TripAdvisor listing</p>
+        <p class="gap-desc">The one property with no TripAdvisor profile at all, out of ten. A claim/verify task, not a data-pull—should be one of the fastest wins on this whole page.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Pending</span>
+        <p class="gap-name">Longer-term rating trend</p>
+        <p class="gap-desc">We now have a snapshot and a 14-day delta per property—still missing a full 12-month TripAdvisor/Google history, the same window used throughout the rest of this map.</p>
       </li>
       <li class="gap-card">
         <span class="gap-tag">Pending</span>
@@ -441,8 +451,8 @@
       </li>
       <li class="gap-card">
         <span class="gap-tag">Pending</span>
-        <p class="gap-name">Competitive benchmark</p>
-        <p class="gap-desc">Top-ranked TripAdvisor competitors per market, so "#1" means a specific, known gap rather than an open-ended aspiration. Blocked by the same mapping gap above.</p>
+        <p class="gap-name">Front-desk group's Booking.com/Expedia/NPS</p>
+        <p class="gap-desc">The scorecard above only has these three metrics for the no-front-desk group. Sense28, The Gilmore, The Code, and The Mara are missing them entirely—an asymmetry in tracking coverage, not just a data gap for one property.</p>
       </li>
       <li class="gap-card">
         <span class="gap-tag">Pending</span>
