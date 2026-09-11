@@ -98,13 +98,14 @@ Diffusion):
 ## Ready-to-use examples
 
 One per persona, matched to the moment each one is defined by in the journey
-map. Maya's, Daniel's, Bailey's, and the Whitfield Family's are done
-(`assets/illustrations/maya.jpg`, `daniel.jpg`, `bailey.jpg`,
-`whitfield.jpg`) — the rest are `placeholder`s on the live page until
-generated. Bailey's plate has readable text in it (a "Bailey's Bach" flag
-and an airport exit sign) — a deviation from the "never: text or lettering"
-rule below, kept because it reads well; flag this if regenerating plates in
-bulk later so it doesn't get treated as the reference standard.
+map. Maya's, Daniel's, Bailey's, the Whitfield Family's, and the Ashworths'
+are done (`assets/illustrations/maya.jpg`, `daniel.jpg`, `bailey.jpg`,
+`whitfield.jpg`, `ashworths.jpg`) — only the Renewals is left as a
+`placeholder` on the live page. Bailey's plate has readable text in it (a
+"Bailey's Bach" flag and an airport exit sign) — a deviation from the
+"never: text or lettering" rule below, kept because it reads well; flag
+this if regenerating plates in bulk later so it doesn't get treated as the
+reference standard.
 
 **Maya arriving at her weekend rental** (solo/small group, budget-conscious) — done:
 
@@ -167,11 +168,18 @@ bulk later so it doesn't get treated as the reference standard.
 > style, hand-drawn, not vector, not photorealistic, no text or lettering, no
 > logo, no border or frame, no gradient or airbrush effect.
 
-**The Ashworths, VIP concierge welcome** (premium property, white-glove service):
+**The Ashworths, VIP concierge welcome** (premium property, white-glove service) — done:
+
+Persona note (Sep 2026): updated from an older-money framing to reflect
+guest feedback — the Ashworths skew tech-wealthy or LA-adjacent, 30s-40s,
+hip rather than old-money. The prompt below hasn't been re-run against that
+framing yet; the plate in use was generated before the update but still
+reads as a plausible couple in that range. Re-run this prompt with an
+explicit "late thirties" age note if a closer match is wanted later.
 
 > Black and white pen-and-ink sketch illustration of a well-dressed couple
-> in their fifties being greeted at an estate's front entrance by a
-> concierge holding a tray, their luggage already being carried in by
+> in their thirties or forties being greeted at a property's front entrance
+> by a concierge holding a tablet, their luggage already being carried in by
 > someone else, drawn with loose confident linework and visible overlapping
 > strokes. Grey marker wash shading in flat streaky blocks with
 > cross-hatching for shadow. Plain white background, no frame, no border.
