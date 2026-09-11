@@ -98,9 +98,12 @@ Diffusion):
 ## Ready-to-use examples
 
 One per persona, matched to the moment each one is defined by in the journey
-map. Maya's and Daniel's are done (`assets/illustrations/maya.jpg`,
-`assets/illustrations/daniel.jpg`) — the rest are `placeholder`s on the live
-page until generated.
+map. Maya's, Daniel's, and Bailey's are done (`assets/illustrations/maya.jpg`,
+`daniel.jpg`, `bailey.jpg`) — the rest are `placeholder`s on the live page
+until generated. Bailey's plate has readable text in it (a "Bailey's Bach"
+flag and an airport exit sign) — a deviation from the "never: text or
+lettering" rule below, kept because it reads well; flag this if regenerating
+plates in bulk later so it doesn't get treated as the reference standard.
 
 **Maya arriving at her weekend rental** (solo/small group, budget-conscious) — done:
 
@@ -133,7 +136,7 @@ page until generated.
 > no text or lettering, no logo, no border or frame, no gradient or airbrush
 > effect.
 
-**Bailey's Nashville celebration, group arrival** (bachelorette/milestone energy):
+**Bailey's Nashville celebration, group arrival** (bachelorette/milestone energy) — done:
 
 > Black and white pen-and-ink sketch illustration of three young women
 > laughing together on a front porch, one holding up a phone to take a
