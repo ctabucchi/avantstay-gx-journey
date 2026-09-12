@@ -98,14 +98,14 @@ Diffusion):
 ## Ready-to-use examples
 
 One per persona, matched to the moment each one is defined by in the journey
-map. Maya's, Daniel's, Bailey's, the Whitfield Family's, and the Ashworths'
-are done (`assets/illustrations/maya.jpg`, `daniel.jpg`, `bailey.jpg`,
-`whitfield.jpg`, `ashworths.jpg`) — only the Renewals is left as a
-`placeholder` on the live page. Bailey's plate has readable text in it (a
-"Bailey's Bach" flag and an airport exit sign) — a deviation from the
-"never: text or lettering" rule below, kept because it reads well; flag
-this if regenerating plates in bulk later so it doesn't get treated as the
-reference standard.
+map. All six are done: `assets/illustrations/maya.jpg`, `daniel.jpg`,
+`bailey.jpg`, `whitfield.jpg`, `ashworths.jpg`, `renewals.jpg`. No
+placeholders left on the live page. Two plates have readable text in them —
+Bailey's ("Bailey's Bach" flag, an airport exit sign) and the Renewals'
+("Welcome back" on the phone screen, which the prompt itself asked for) —
+both deviations from the "never: text or lettering" rule below, kept
+because they read well. Flag this if regenerating plates in bulk later so
+neither gets treated as the reference standard.
 
 **Maya arriving at her weekend rental** (solo/small group, budget-conscious) — done:
 
@@ -191,7 +191,7 @@ explicit "late thirties" age note if a closer match is wanted later.
 > hand-drawn, not vector, not photorealistic, no text or lettering, no logo,
 > no border or frame, no gradient or airbrush effect.
 
-**The Renewals, a familiar welcome back** (repeat guest, recognized on arrival):
+**The Renewals, a familiar welcome back** (repeat guest, recognized on arrival) — done:
 
 > Black and white pen-and-ink sketch illustration of a woman in her
 > forties smiling as she reads a text message on her phone while standing
