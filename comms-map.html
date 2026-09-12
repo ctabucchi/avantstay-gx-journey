@@ -165,17 +165,17 @@
     <div class="section-head">
       <div class="tag">Before arrival</div>
       <h2 id="prearrival-h">Two paths to the Booking Hub</h2>
-      <p>Every guest eventually gets access to the Booking Hub—check-in info, entry codes, the house manual, upgrades. How and when they get there splits into two paths, and the split is entirely about which channel they booked on.</p>
+      <p>Every guest eventually gets access to the Booking Hub—check-in info, entry codes, the house manual, upgrades. When they first get there depends on channel; the check-in instructions message three days out goes to everyone the same way, once identity verification and the guest agreement are done.</p>
     </div>
     <ul class="path-grid">
       <li class="path">
         <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
         <div class="trigger" style="color:var(--p2)">Direct, VRBO, Expedia, other OTAs</div>
         <h3>Gated on IDV + signed guest agreement</h3>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">These channels don't verify identity or collect a signed agreement at booking, so AvantStay does—and the message pointing them to the Booking Hub only goes out once both are complete.</p>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">These channels don't verify identity or collect a signed agreement at booking, so AvantStay does—and there's no early Booking Hub link the way Airbnb guests get one. First contact is the same check-in instructions message every guest gets, three days out.</p>
         <ul>
           <li>Guest books, then completes ID verification and signs the guest agreement</li>
-          <li>Once both clear, an automated message sends with check-in instructions and a link into the Booking Hub</li>
+          <li>Once both clear and it's within a few days of check-in, the check-in instructions message sends with a link into the Booking Hub</li>
           <li>From there: the house manual, upgrades &amp; experiences, and entry codes are all self-serve in the Hub</li>
         </ul>
       </li>
@@ -183,7 +183,7 @@
         <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
         <div class="trigger" style="color:var(--p4)">Airbnb</div>
         <h3>ID + agreement happen inside Airbnb's own flow</h3>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">Airbnb verifies identity and collects agreement as part of its own booking flow, so there's no separate AvantStay gate to wait on—the confirmation sends right at booking instead.</p>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">Airbnb verifies identity and collects agreement as part of its own booking flow, so there's no separate AvantStay gate to wait on—an automated confirmation sends right at booking with an early Booking Hub link, then the same check-in instructions message every guest gets follows three days out.</p>
         <ul>
           <li>An automated confirmation sends right at booking, not gated on a separate verification step</li>
           <li>It asks the guest to confirm contact info and points them into the Booking Hub for check-in instructions, upgrades, and the house manual</li>
@@ -207,7 +207,7 @@ AvantStay Customer Experience Team</div>
     </div>
 
     <div class="msg-card">
-      <div class="msg-meta"><span>Direct / VRBO / Expedia / other OTA</span><span>Sent 3 days before check-in, once IDV + agreement are complete</span></div>
+      <div class="msg-meta"><span>All guests, every channel</span><span>Sent 3 days before check-in, once IDV + agreement are complete</span></div>
       <div class="msg-body">Hi <i>[Guest Name]</i> - Your stay with us is just around the corner. Here's what you need to know:
 
 Check-In Instructions: <i>[link]</i>
