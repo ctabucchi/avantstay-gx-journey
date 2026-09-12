@@ -103,6 +103,8 @@
 
   .note-inline{font-size:12px;color:var(--muted);margin-top:10px;}
   .callout{font-size:13.5px;color:var(--muted);border-left:3px solid var(--p1);padding-left:14px;margin:0 0 20px;}
+  .exception{background:rgba(163,78,52,0.07);border:1px solid rgba(163,78,52,0.25);border-left:3px solid var(--flag);border-radius:4px;padding:14px 16px;font-size:13.5px;color:var(--text);margin-top:20px;max-width:70ch;}
+  .exception b{color:var(--flag);}
 
   /* Gaps (reused from hotels.html) */
   .gaps{background:var(--ink);color:#EAF0F4;}
@@ -251,22 +253,49 @@ We hope you have a wonderful stay!</div>
       <li>
         <p class="flow-name">Guest reaches out during the stay</p>
         <p class="flow-desc">Channel depends on how they booked.</p>
-        <p class="flow-branch">Airbnb → the Airbnb message thread, which only GX (not the local team) has access to.</p>
+        <p class="flow-branch">Airbnb → the Airbnb message thread, which only GX (not the field team) has access to.</p>
         <p class="flow-branch">Any other OTA → that platform's own guest portal (the VRBO portal, the Booking.com portal, etc.).</p>
       </li>
       <li>
-        <p class="flow-name">Guest reports an issue</p>
-        <p class="flow-desc">Say, through the VRBO portal. GX creates an ISGI (In-Stay Guest Issue)—an internal ticket that routes the issue to the local team for follow-up.</p>
+        <p class="flow-name">Guest reports an issue → GX creates the ISGI</p>
+        <p class="flow-desc">An ISGI is specifically an issue from a guest who is currently checked in—anything a guest shares after checkout is tracked as feedback, not an ISGI.</p>
       </li>
       <li>
-        <p class="flow-name">Local team takes over</p>
-        <p class="flow-desc">Once the ISGI is created, the local team is notified and takes over direct communication with the guest via SpokePhone—the same "local team" number from the check-in day welcome text.</p>
+        <p class="flow-name">Field takes ownership</p>
+        <p class="flow-desc">Field acknowledges in the case comments and owns all guest communication via Spoke through resolution. "Field" is the internal name for the same team the check-in day welcome text calls "the local team."</p>
       </li>
       <li>
-        <p class="flow-name">If the guest goes quiet on SpokePhone</p>
-        <p class="flow-desc">The local team asks GX for help communicating status—GX has the OTA-thread access the local team doesn't, so it can close the loop back through whichever channel the guest actually responds on.</p>
+        <p class="flow-name">GX closes the loop</p>
+        <p class="flow-desc">GX tells the guest field has it. Once handed off, GX monitors to confirm field has actually taken over the conversation, rather than assuming the handoff worked.</p>
+      </li>
+      <li>
+        <p class="flow-name">If the guest goes quiet on Spoke</p>
+        <p class="flow-desc">Field asks GX for help communicating status—GX has the OTA-thread access field doesn't, so it can close the loop back through whichever channel the guest actually responds on.</p>
       </li>
     </ol>
+
+    <p style="font-weight:700;color:var(--ink);font-size:15px;margin:32px 0 16px;">Who owns what, once an ISGI is open</p>
+    <ul class="path-grid">
+      <li class="path">
+        <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
+        <h3>GX owns</h3>
+        <ul>
+          <li>Creating and triaging the ISGI case</li>
+          <li>All compensation conversations with the guest</li>
+          <li>Backup point of contact when Spoke isn't viable (international numbers, Airbnb-only guests)</li>
+        </ul>
+      </li>
+      <li class="path">
+        <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
+        <h3>Field owns</h3>
+        <ul>
+          <li>Guest communication via Spoke, acknowledgment through resolution</li>
+          <li>Keeping the case updated with resolution details</li>
+          <li>Flagging context back to GX in the case when compensation may be needed</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="exception"><b>Exception:</b> compensation conversations always route back to GX, no matter who's been handling the day-to-day conversation. Field logs what happened in the case comments so GX can decide fairly.</div>
   </div>
 </section>
 
