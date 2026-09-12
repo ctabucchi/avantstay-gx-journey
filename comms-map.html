@@ -152,6 +152,7 @@
     <div class="eyebrow">In-Stay Communication—First Draft</div>
     <h1>What actually happens, message by message.</h1>
     <p>A first-draft map of the real guest communication flow, from booking confirmation through the post-stay review ask—which channel a guest is on, what message they get and when, and who's actually on the other end. Built from real examples, with guest names, phone numbers, and addresses replaced by placeholders since this is a public page.</p>
+    <p style="font-size:14px;color:#9FB0BD;margin-top:16px;">Applies to vacation rentals and front-desk hotels alike—wherever "the local team" appears below, read it as front desk staff at a front-desk hotel. No-front-desk hotels don't have that on-site equivalent, so that half of the hotel picture is still unmapped.</p>
   </div>
 </header>
 
@@ -190,7 +191,7 @@
     </ul>
 
     <div class="msg-card">
-      <div class="msg-meta"><span>Direct / VRBO / Expedia / other OTA</span><span>Sent once IDV + agreement complete</span></div>
+      <div class="msg-meta"><span>Direct / VRBO / Expedia / other OTA</span><span>Sent 3 days before check-in, once IDV + agreement are complete</span></div>
       <div class="msg-body">Hi <i>[Guest Name]</i>,
 
 Thank you so much for choosing AvantStay to host your upcoming visit! To ensure seamless communication, please confirm your best contact email and phone number.
@@ -216,6 +217,7 @@ Our local team will reach out on check-in day. Need help before then? Our Guest 
 - AvantStay</div>
     </div>
     <p class="note-inline">The Booking Hub itself (not shown) covers: Things to Know, Upgrades &amp; Experiences, Arrival &amp; Departure (home address with map/directions, per-unit entry codes and instructions), Technology &amp; Amenities, Manage Booking, and Get Help—plus an option to invite other guests on the reservation.</p>
+    <p class="note-inline">This 3-days-out timing matches the "Check-In Instructions" row in the <a href="index.html#comms-h">vacation rental report's current comms map</a> exactly ("3 days before check-in, if paid/IDV/contract complete")—same touchpoint, just with the real message copy and Booking Hub detail attached here.</p>
   </div>
 </section>
 
@@ -254,7 +256,7 @@ We hope you have a wonderful stay!</div>
       </li>
       <li>
         <p class="flow-name">Guest reports an issue</p>
-        <p class="flow-desc">Say, through the VRBO portal. GX creates an ISGI—an internal ticket that routes the issue to the local team for follow-up.</p>
+        <p class="flow-desc">Say, through the VRBO portal. GX creates an ISGI (In-Stay Guest Issue)—an internal ticket that routes the issue to the local team for follow-up.</p>
       </li>
       <li>
         <p class="flow-name">Local team takes over</p>
@@ -282,7 +284,7 @@ We hope you have a wonderful stay!</div>
         <ul>
           <li>A checkout message asking the guest to leave a review</li>
           <li>A separate message asking for an NPS score</li>
-          <li>Further follow-up SMS/messages asking for a review, if confidence in the stay being a good one is high enough to keep asking</li>
+          <li>Further follow-up SMS/messages asking for a review, if the stay scores as neutral-to-good (see below)</li>
         </ul>
       </li>
       <li class="path">
@@ -293,7 +295,7 @@ We hope you have a wonderful stay!</div>
         </ul>
       </li>
     </ul>
-    <p class="callout">The detailed logic for when and how many times to follow up—based on stay-quality confidence—lives in a separate <a href="https://www.figma.com/board/ZJ2qW7Wz7FaoZbJWmOAZsl/Review-Solicitation-Journey-Mapping" target="_blank" rel="noopener">Review Solicitation Journey Mapping board in Figma</a>. Worth pulling the key decision points from that board into this page directly in a future pass, rather than just linking out.</p>
+    <p class="callout"><b>How the "neutral-to-good" call gets made:</b> the stay is scanned for any negative sentiment during the guest's time on property. If none is found, it's scored at 50% confidence as a neutral-to-good stay, and that clears the bar to solicit a review. The full logic for cadence and message variants beyond that single threshold lives in a separate <a href="https://www.figma.com/board/ZJ2qW7Wz7FaoZbJWmOAZsl/Review-Solicitation-Journey-Mapping" target="_blank" rel="noopener">Review Solicitation Journey Mapping board in Figma</a>. Worth pulling the key decision points from that board into this page directly in a future pass, rather than just linking out.</p>
   </div>
 </section>
 
@@ -306,29 +308,14 @@ We hope you have a wonderful stay!</div>
     </div>
     <ul class="gap-grid">
       <li class="gap-card">
-        <span class="gap-tag">Undefined</span>
-        <p class="gap-name">What "ISGI" stands for</p>
-        <p class="gap-desc">Used as-is from the original outline. Worth spelling out here once confirmed, for anyone reading this who isn't already fluent in the acronym.</p>
-      </li>
-      <li class="gap-card">
-        <span class="gap-tag">Undefined</span>
-        <p class="gap-name">What sets "confidence in a good stay"</p>
-        <p class="gap-desc">The checkout review-ask cadence depends on it, but the actual trigger (ticket history? NPS? something else?) isn't specified yet.</p>
-      </li>
-      <li class="gap-card">
         <span class="gap-tag">Open question</span>
-        <p class="gap-name">Does this apply to hotels?</p>
-        <p class="gap-desc">This outline describes the vacation-rental flow (Booking Hub, SpokePhone local team, per-unit entry codes). Front-desk and no-front-desk hotels likely diverge from this and from each other—not yet mapped.</p>
+        <p class="gap-name">No-front-desk hotels</p>
+        <p class="gap-desc">Confirmed: front-desk hotels follow this same flow, with front desk staff playing the "local team" role. No-front-desk hotels don't have an on-site equivalent, so their version of this map is still open.</p>
       </li>
       <li class="gap-card">
         <span class="gap-tag">Open question</span>
         <p class="gap-name">Response-time SLAs</p>
         <p class="gap-desc">How long before "the guest isn't answering back on SpokePhone" triggers the local-team-to-GX escalation? Not specified in the outline.</p>
-      </li>
-      <li class="gap-card">
-        <span class="gap-tag">Open question</span>
-        <p class="gap-name">Timing detail for pre-arrival</p>
-        <p class="gap-desc">The Booking Hub link goes out once IDV/agreement clear—how many days before check-in does that typically land, and how does it compare to the 3-day Check-In Instructions send documented in the vacation rental report's comms map?</p>
       </li>
     </ul>
   </div>
