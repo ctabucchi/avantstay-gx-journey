@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AvantStay CX Routing—From Contact to Closed Loop</title>
+<meta name="description" content="How a guest contact becomes a routed, resolved ticket—Zendesk routing, what the Duckie AI agent can and can't do, the full guest email layer, SpokePhone's role, and the recovery loop for an at-risk stay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#022B54;
+    --accent:#53C3D0;
+    --link:#1C5D9F;
+    --paper:#FFFFFF;
+    --surface:#F4F7FA;
+    --line:#D9E1E8;
+    --text:#505051;
+    --muted:#6B6B6C;
+    --p1:#A34E34;
+    --p2:#2F5E8C;
+    --p3:#7F6119;
+    --p4:#0C6270;
+    --p5:#6B4A8A;
+    --flag:#A34E34;
+    --focus:#0C6270;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Source Sans 3','Source Sans Pro',-apple-system,BlinkMacSystemFont,sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,h4,.display{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  p{margin:0 0 1em;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  .skip-link{
+    position:absolute;left:12px;top:-48px;z-index:100;
+    background:var(--ink);color:#fff;padding:10px 16px;border-radius:2px;
+    font-weight:600;font-size:14px;text-decoration:none;
+    transition:top .15s ease;
+  }
+  .skip-link:focus{top:12px;}
+  a{color:var(--link);}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;}}
+
+  .topbar{background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.12);}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;}
+  .wordmark{font-family:'Fraunces',serif;font-weight:600;color:#fff;font-size:17px;letter-spacing:-0.01em;}
+  .wordmark span{color:var(--accent);}
+  .topnav{display:flex;gap:4px;flex-wrap:wrap;}
+  .topnav a{font-size:12.5px;font-weight:600;color:#B9C6D1;text-decoration:none;padding:6px 12px;border-radius:12px;}
+  .topnav a:hover{color:#fff;}
+  .topnav a[aria-current="page"]{background:rgba(83,195,208,0.16);color:var(--accent);}
+
+  .hero{background:var(--ink);color:#EAF0F4;padding:56px 0 56px;}
+  .hero .eyebrow{color:var(--accent);font-size:14px;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.04em;}
+  .hero h1{font-size:40px;color:#fff;margin:0 0 16px;max-width:20ch;}
+  .hero p{max-width:70ch;font-size:17px;color:#C9D6E0;margin:0 0 0;}
+
+  section{padding:56px 0;}
+  .section-head{margin-bottom:32px;max-width:74ch;}
+  .section-head .tag{font-size:13px;font-weight:700;color:var(--p1);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.03em;}
+  .section-head h2{font-size:27px;margin:0 0 10px;}
+  .section-head p{color:var(--muted);margin:0;font-size:15.5px;}
+
+  .databar{background:var(--surface);}
+  .databar.alt{background:var(--paper);border-top:1px solid var(--line);}
+
+  /* Cards reused from other reports */
+  .path-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;list-style:none;margin:0;padding-left:0;}
+  .path{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:22px 22px 24px;}
+  .path .bar{height:4px;width:36px;margin-bottom:16px;border-radius:2px;}
+  .path h3{font-size:18px;margin:0 0 8px;color:var(--ink);}
+  .path .trigger{font-size:12.5px;font-weight:700;margin-bottom:10px;}
+  .path ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--text);}
+  .path li{margin-bottom:6px;}
+
+  .msg-card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px 18px;max-width:560px;margin:0 0 20px;}
+  .msg-card .msg-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.03em;margin-bottom:10px;}
+  .msg-card .msg-meta span{background:var(--surface);padding:3px 9px;border-radius:10px;}
+  .msg-card .msg-body{font-size:13.5px;line-height:1.65;color:var(--text);white-space:pre-line;}
+  .msg-card .msg-body i{color:var(--muted);font-style:italic;}
+
+  .flow-list{list-style:none;margin:0;padding:0;counter-reset:flow;max-width:74ch;}
+  .flow-list li{position:relative;padding:0 0 22px 40px;border-left:2px solid var(--line);margin-left:14px;}
+  .flow-list li:last-child{border-left-color:transparent;padding-bottom:0;}
+  .flow-list li::before{counter-increment:flow;content:counter(flow);position:absolute;left:-15px;top:-2px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .flow-list .flow-name{font-weight:700;color:var(--ink);margin:0 0 4px;font-size:14.5px;}
+  .flow-list .flow-desc{margin:0;font-size:13.5px;color:var(--muted);}
+
+  .note-inline{font-size:12px;color:var(--muted);margin-top:10px;}
+  .callout{font-size:13.5px;color:var(--muted);border-left:3px solid var(--p1);padding-left:14px;margin:0 0 20px;}
+  .exception{background:rgba(163,78,52,0.07);border:1px solid rgba(163,78,52,0.25);border-left:3px solid var(--flag);border-radius:4px;padding:14px 16px;font-size:13.5px;color:var(--text);margin-top:20px;max-width:74ch;}
+  .exception b{color:var(--flag);}
+
+  /* Tables */
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px;}
+  .table-scroll:focus-visible{outline:3px solid var(--focus);}
+  table{width:100%;border-collapse:collapse;font-size:13px;background:var(--paper);min-width:640px;}
+  caption{text-align:left;font-size:12px;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--line);}
+  th{text-align:left;font-size:11.5px;font-weight:700;color:var(--ink);padding:10px 10px;border-bottom:1px solid var(--line);background:var(--surface);}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--text);vertical-align:top;}
+  tr td:first-child{font-weight:700;color:var(--ink);white-space:nowrap;}
+
+  /* Opportunity cards */
+  .idea-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;list-style:none;margin:0;padding-left:0;}
+  .idea-card{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px;padding:18px 20px;}
+  .idea-card .idea-tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:#fff;background:var(--p4);padding:3px 8px;border-radius:10px;margin-bottom:9px;}
+  .idea-card .idea-name{font-size:15px;font-weight:700;color:var(--ink);margin:0 0 6px;}
+  .idea-card .idea-desc{font-size:13px;color:var(--muted);margin:0;}
+
+  /* Gaps */
+  .gaps{background:var(--ink);color:#EAF0F4;}
+  .gaps .section-head h2{color:#fff;}
+  .gaps .section-head p{color:#C9D6E0;}
+  .gaps .section-head .tag{color:var(--accent);}
+  .gap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;list-style:none;margin:0;padding-left:0;}
+  .gap-card{background:rgba(255,255,255,0.06);border:1px dashed rgba(255,255,255,0.3);border-radius:4px;padding:16px 18px;}
+  .gap-card .gap-name{font-size:14px;font-weight:700;color:#fff;margin:0 0 6px;}
+  .gap-card .gap-desc{font-size:12.5px;color:#C9D6E0;margin:0;}
+  .gap-card .gap-tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--accent);background:rgba(83,195,208,0.14);padding:3px 8px;border-radius:10px;margin-bottom:8px;}
+
+  .note{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(--muted);background:var(--paper);}
+  .note .wrap{max-width:82ch;}
+  .note ul{margin:10px 0 0;padding-left:18px;}
+  .note li{margin-bottom:4px;}
+
+  footer.site-footer{background:var(--ink);color:#9FB0BD;font-size:12.5px;padding:24px 0;}
+  footer.site-footer a{color:var(--accent);}
+
+  @media (max-width:900px){
+    .hero h1{font-size:30px;}
+    table{font-size:12px;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .hero{padding:44px 0 44px;}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="wordmark">Avant<span>Stay</span></div>
+    <nav class="topnav" aria-label="Reports">
+      <a href="index.html">Vacation Rentals</a>
+      <a href="hotels.html">Hotels</a>
+      <a href="comms-map.html">Comms Map</a>
+      <a href="cx-routing.html" aria-current="page">CX Routing</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CX Operating Model</div>
+    <h1>How a guest message becomes a closed ticket.</h1>
+    <p>The <a href="comms-map.html" style="color:#fff;">comms map</a> shows what a guest actually sees, message by message. This page is the layer underneath it—how a contact from any channel gets classified, routed, and either answered by the Duckie AI agent or handed to a human team, plus the full guest email calendar, SpokePhone's role, and the recovery loop for a stay that's at risk of a bad review.</p>
+    <p style="font-size:14px;color:#9FB0BD;margin-top:16px;">Built from an internal CX Workflow Routing reference the GX team commissioned on Sep 13&ndash;14, 2026, covering Zendesk, the Duckie AI agent, SpokePhone, and guest email. Internal system identifiers (database tables, exact tag names, per-market figures) are described in plain terms rather than reproduced verbatim, since this repo is public.</p>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="databar" aria-labelledby="model-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">The big picture</div>
+      <h2 id="model-h">Six steps, from first contact to a resolved need</h2>
+      <p>Every guest contact—OTA message, direct email or text, SpokePhone, a phone call, or an automated system event—moves through the same basic pipeline before it lands with the right team.</p>
+    </div>
+    <ol class="flow-list">
+      <li>
+        <p class="flow-name">A contact comes in</p>
+        <p class="flow-desc">Through an OTA message thread, direct email or SMS, SpokePhone, a phone call or IVR, the website, or an automated system event.</p>
+      </li>
+      <li>
+        <p class="flow-name">Zendesk classifies it</p>
+        <p class="flow-desc">It links whatever reservation context is available, tags the stay stage (booked, upcoming, check-in day, in-stay, checkout day, checked out) and the reason for contact, and routes the ticket toward a team.</p>
+      </li>
+      <li>
+        <p class="flow-name">The reason for contact decides whether Duckie may answer</p>
+        <p class="flow-desc">A classification taxonomy sets, per topic, whether the AI agent is eligible to respond at all—separately from whether it actually can, for this specific ticket.</p>
+      </li>
+      <li>
+        <p class="flow-name">Duckie reads the ticket and reservation context, then acts</p>
+        <p class="flow-desc">It answers and resolves, answers and hands off, hands off silently with no guest-facing reply, routes to GX, Reservations, VIP, or Concierge, opens an operations case, or fails and requires a human.</p>
+      </li>
+      <li>
+        <p class="flow-name">A human team owns whatever Duckie can't finish</p>
+        <p class="flow-desc">The receiving team needs a specific, unresolved task to act on—not a generic handoff with nothing attached to it.</p>
+      </li>
+      <li>
+        <p class="flow-name">SpokePhone carries the local, human thread</p>
+        <p class="flow-desc">System automation stays authoritative for transactions, compliance, the Booking Hub, check-in instructions, access codes, parking, and wifi. SpokePhone is where a named local team talks to the guest directly.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="databar alt" aria-labelledby="routing-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Step 2</div>
+      <h2 id="routing-h">Where a message goes first</h2>
+      <p>Destination is decided by precedence, most specific first: an immediate safety issue or a guest locked out always wins, then VIP or member status, then a hotel-specific queue, then a functional specialist, and only then general Guest Experience. A contact with no real guest request behind it—an automated notification ping, say—gets closed rather than dropped into a live queue.</p>
+    </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Routing table, scrollable">
+      <table>
+        <caption>Condensed from the full source-to-queue routing matrix. "Owns the next step" is who has to act, not just who received the ticket.</caption>
+        <thead>
+          <tr><th scope="col">Contact type</th><th scope="col">Typical destination</th><th scope="col">Owns the next step</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Airbnb guest message</td><td>Guest Experience, or an Airbnb-specific specialist for platform policy questions</td><td>GX for the guest's need; the Airbnb/Reservations specialist for anything policy- or alteration-related</td></tr>
+          <tr><td>VRBO or another OTA message</td><td>GX for in-stay needs, Reservations for booking changes</td><td>Whichever specialist owns the specific ask—never left in general GX with nothing to do</td></tr>
+          <tr><td>Direct or website contact</td><td>GX, Reservations, Payments, or Concierge, based on intent</td><td>The destination team owns the next action</td></tr>
+          <tr><td>In-stay issue (maintenance, safety, wifi, HVAC, pests, pool)</td><td>GX, with an operations case opened when needed</td><td>GX owns the guest conversation through closure, even when Field Ops owns the physical repair</td></tr>
+          <tr><td>Check-in-day or access issue</td><td>GX, or a hotel-specific queue for hotel guests</td><td>A human takes over the moment a code fails, identity is uncertain, or relocation becomes possible</td></tr>
+          <tr><td>VIP or member guest</td><td>VIP Team</td><td>VIP Team owns service recovery and higher-touch follow-through</td></tr>
+          <tr><td>Hotel guest</td><td>The property's front-desk or hotel queue</td><td>Front desk owns physical arrival and room readiness; GX owns after-hours and escalations</td></tr>
+          <tr><td>Concierge request</td><td>Concierge or Concierge Estates</td><td>Concierge owns vendor and service fulfillment plus guest follow-up</td></tr>
+          <tr><td>Reservation change, extension, cancellation, or pricing</td><td>Reservations</td><td>Reservations owns approval, price, inventory, and any OTA-side action</td></tr>
+          <tr><td>Payment or refund request</td><td>Payments, Reservations, or GX, depending on the cause</td><td>A human owner must confirm the amount, the authority to act, and that it's actually done</td></tr>
+          <tr><td>Relocation need</td><td>Relocations</td><td>Relocations owns placement; GX owns the guest conversation until the handoff is accepted</td></tr>
+          <tr><td>Phone call</td><td>Whichever voice queue is staffed for that call type, including VIP and Reservations lines</td><td>The team that answers owns the interaction and any follow-up it creates</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="databar" aria-labelledby="duckie-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Step 3&ndash;4</div>
+      <h2 id="duckie-h">What Duckie can, and can't, do</h2>
+      <p>Duckie is AvantStay's AI agent inside Zendesk. Eligibility to answer is set per topic, not guest by guest—so "eligible" only means the ticket is allowed to reach Duckie, not that Duckie will resolve it.</p>
+    </div>
+    <ul class="path-grid">
+      <li class="path">
+        <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
+        <h3>Duckie may answer when</h3>
+        <ul>
+          <li>The ticket is explicitly eligible under the current topic taxonomy</li>
+          <li>Guest, booking, property, and stay context are all sufficiently matched</li>
+          <li>The answer is backed by an approved source or tool result, not invented</li>
+          <li>No conflicting prior answer already exists on the thread</li>
+          <li>The action doesn't require an unsupported promise, an exception, or a financial or legal judgment call</li>
+        </ul>
+      </li>
+      <li class="path">
+        <div class="bar" style="background:var(--p1)" aria-hidden="true"></div>
+        <h3>Duckie must hand off to a human for</h3>
+        <ul>
+          <li>Emergencies, safety threats, injury, fire, flooding, gas, or a guest unable to get into the home</li>
+          <li>Relocation decisions</li>
+          <li>Refunds, compensation, negotiated rates, or any financial commitment</li>
+          <li>Legal, fair-housing, assistance-animal, privacy, fraud, or policy-exception questions</li>
+          <li>Reservation changes that require action on the OTA side or in inventory</li>
+          <li>Conflicting facts, uncertain guest matching, or a stay that's visibly deteriorating</li>
+          <li>Sensitive service recovery, where judgment and discretion matter more than a fast reply</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="exception"><b>What counts as "done":</b> a Duckie handoff is not completion by itself. If Duckie says an action happened, the system state has to actually confirm it—an agent claiming a task is finished isn't the same as it being finished.</div>
+  </div>
+</section>
+
+<section class="databar alt" aria-labelledby="email-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Before, during, and after the stay</div>
+      <h2 id="email-h">The guest email layer</h2>
+      <p>Email runs on the same booking-level journey as Zendesk, OTA messages, voice, and SpokePhone—it isn't a separate system with its own ownership rules. A guest reply to any of these routes the same way a text or OTA message would: matched to the booking, classified by intent, and sent to the most specific team, not left in general GX.</p>
+    </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Guest email table, scrollable">
+      <table>
+        <caption>Condensed from the full email inventory. Timing and eligibility for each is configurable and can vary by property, channel, and booking window.</caption>
+        <thead>
+          <tr><th scope="col">Stage</th><th scope="col">Email</th><th scope="col">Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Booking</td><td>Booking confirmation</td><td>Confirm the reservation, introduce the Booking Hub, surface payment or policy requirements</td></tr>
+          <tr><td>Booking</td><td>Guest invite</td><td>Give an invited traveler access to the trip and the Booking Hub</td></tr>
+          <tr><td>Booking management</td><td>Modified reservation / cancellation confirmation</td><td>Confirm what changed, or that a cancellation is complete</td></tr>
+          <tr><td>Compliance</td><td>ID verification &amp; guest agreement reminders</td><td>Explain the outstanding requirement and link to completion</td></tr>
+          <tr><td>Pre-arrival</td><td>Check-in pending steps</td><td>Tell the guest exactly what's still blocking their check-in instructions</td></tr>
+          <tr><td>Pre-arrival / arrival</td><td>Check-in instructions</td><td>The authoritative arrival, access, parking, and wifi details, once payment, IDV, and agreement clear</td></tr>
+          <tr><td>Hotel arrival</td><td>Get-ready / room-ready email</td><td>Set arrival expectations for hotel guests, release room detail only once actually ready</td></tr>
+          <tr><td>Concierge</td><td>Intro, then two marketing follow-ups</td><td>Introduce Concierge, then offer eligible services—chefs, experiences, transportation, provisioning, wellness</td></tr>
+          <tr><td>Optional offers</td><td>Early check-in, late checkout, mid-stay clean, extension</td><td>Purchasable, inventory-dependent add-ons surfaced when eligible</td></tr>
+          <tr><td>Post-stay</td><td>NPS / review survey</td><td>Solicit feedback once the stay is complete</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-inline">Collision rules worth calling out: a stale offer should suppress itself after a cancellation or inventory loss, a declined or opted-out guest shouldn't get a repeat Concierge campaign, and the post-stay survey shouldn't go out while an active, unresolved service-recovery issue is still open—the human recovery owner reaches the guest first.</p>
+  </div>
+</section>
+
+<section class="databar" aria-labelledby="spoke-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">The human layer</div>
+      <h2 id="spoke-h">SpokePhone: the local team, not the system</h2>
+      <p>The line between what's automated and what's a real person texting the guest is deliberate. System automation owns anything transactional or compliance-related; SpokePhone owns everything that's supposed to feel like a person on the ground.</p>
+    </div>
+    <ul class="path-grid">
+      <li class="path">
+        <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
+        <h3>System automation owns</h3>
+        <ul>
+          <li>Booking confirmation, payment, IDV, and agreement requirements</li>
+          <li>The Booking Hub, check-in instructions, access codes, parking, and wifi</li>
+          <li>Eligibility-based offers, room-readiness release, and post-stay surveys</li>
+        </ul>
+      </li>
+      <li class="path">
+        <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
+        <h3>SpokePhone owns</h3>
+        <ul>
+          <li>Local-team introduction and staffed hours</li>
+          <li>Local recommendations and quiet-hours reminders</li>
+          <li>Proactive, situational human support—not restating credentials the system already sent</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="msg-card">
+      <div class="msg-meta"><span>Recommended welcome template</span><span>Sent by the local team, check-in day or the day before</span></div>
+      <div class="msg-body">Hi <i>[Guest]</i>! Welcome to <i>[Property]</i>. We're your local AvantStay team and we're excited to host you. For access, parking, wifi, and check-in details, please use your Booking Hub: <i>[link]</i>. You can text us here from <i>[local hours]</i>. For an after-hours emergency, call <i>[GX phone]</i>. If anything is not as expected, please let us know right away so we can help.</div>
+    </div>
+    <p class="note-inline">This lines up closely with the real message shown on the <a href="comms-map.html#checkin-h">comms map's check-in-day page</a>—same structure, same local-team framing, same after-hours fallback to Guest Experience.</p>
+  </div>
+</section>
+
+<section class="databar alt" aria-labelledby="recovery-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Catching problems early</div>
+      <h2 id="recovery-h">When a stay is at risk: the recovery loop</h2>
+      <p>Beyond the standard first-morning wellness check, a second, triggered layer is meant to catch a stay before it turns into a bad review. As of this writing it's a proposed control, not yet live with a named owner or response-time target.</p>
+    </div>
+    <p style="font-weight:700;color:var(--ink);font-size:15px;margin:0 0 16px;">What should trigger proactive outreach</p>
+    <ul class="path-grid">
+      <li class="path">
+        <div class="bar" style="background:var(--p1)" aria-hidden="true"></div>
+        <h3>Signal-based</h3>
+        <ul>
+          <li>Sentiment scanning points to a likely one- or two-star stay</li>
+          <li>Repeated unresolved contact, or the guest asking again for the same fix</li>
+          <li>An unresolved safety, cleanliness, access, HVAC, wifi, or maintenance issue</li>
+        </ul>
+      </li>
+      <li class="path">
+        <div class="bar" style="background:var(--p5)" aria-hidden="true"></div>
+        <h3>Process-based</h3>
+        <ul>
+          <li>A Duckie handoff has sat without clear human ownership</li>
+          <li>A promised follow-up, repair, or callback is overdue</li>
+          <li>The guest expresses real dissatisfaction, threatens a review or chargeback, or stops responding after a material failure</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="exception"><b>How the call gets made once triggered:</b> confirm the unresolved facts and who's empowered to act, call the guest when it's material rather than defaulting to text, don't lead with a generic refund, and document the commitment, owner, and deadline directly in the case. A separate Sunday/Monday review specifically covers weekend stays, since their risk often surfaces right at checkout when the usual weekday coverage isn't watching.</div>
+  </div>
+</section>
+
+<section class="databar" aria-labelledby="done-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Closing the loop</div>
+      <h2 id="done-h">What "done" actually means</h2>
+      <p>A workflow isn't finished when a reply goes out—it's finished when the guest has a correct, current answer, the task has a named owner, and anything promised is confirmed, not just requested.</p>
+    </div>
+    <ul class="path-grid">
+      <li class="path">
+        <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
+        <h3>GX / VIP / hotel team</h3>
+        <ul><li>Owns the guest relationship and keeps them updated as it moves</li></ul>
+      </li>
+      <li class="path">
+        <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
+        <h3>Field Ops, vendor, or specialist team</h3>
+        <ul><li>Owns the functional execution—the repair, the refund, the reservation action</li></ul>
+      </li>
+      <li class="path">
+        <div class="bar" style="background:var(--p1)" aria-hidden="true"></div>
+        <h3>CX leadership</h3>
+        <ul><li>Owns urgent coordination and escalation when normal ownership stalls</li></ul>
+      </li>
+      <li class="path">
+        <div class="bar" style="background:var(--p5)" aria-hidden="true"></div>
+        <h3>Recovery caller</h3>
+        <ul><li>Owns the proactive check-in itself, not the underlying fix unless explicitly assigned</li></ul>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="databar alt" aria-labelledby="ideas-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Where this opens the door</div>
+      <h2 id="ideas-h">Optimize, upsell, and build a better experience</h2>
+      <p>Reading the routing model against what's already built on the rest of this site—the personas, the hotels reputation scorecard, the earlier brand-voice feedback—surfaces a few concrete places to act.</p>
+    </div>
+    <ul class="idea-grid">
+      <li class="idea-card">
+        <span class="idea-tag">Risk reduction</span>
+        <p class="idea-name">Fix the wellness-check double-send first</p>
+        <p class="idea-desc">Both system automation and SpokePhone can independently send a "how's everything going?" message the morning after check-in. That's flagged as a required control, not yet solved. Two identical check-ins from two different senders reads as impersonal—the opposite of the local-team promise this whole map is built around.</p>
+      </li>
+      <li class="idea-card">
+        <span class="idea-tag">Reviews &amp; revenue</span>
+        <p class="idea-name">Make the high-risk wellness check live, not proposed</p>
+        <p class="idea-desc">This is the single highest-leverage step for the <a href="hotels.html">hotels page's</a> actual goal: catching a likely one- or two-star stay while there's still time to recover it protects the review and the rebooking at once. Give it an owner and a response-time SLA, and feed it from the reputation scorecard so lower-scoring properties get priority coverage.</p>
+      </li>
+      <li class="idea-card">
+        <span class="idea-tag">Upsell</span>
+        <p class="idea-name">Personalize Concierge marketing by persona</p>
+        <p class="idea-desc">The two-email Concierge follow-up sequence looks like one generic offer for every eligible guest today. The personas already built on <a href="index.html#who-we-serve-h">the vacation rental page</a>—hot-air-balloon-level concierge for the Ashworths, group packages for a Bailey-style celebration, family bundles for the Whitfields—are ready-made hooks for raising attach rate on a touchpoint that already exists.</p>
+      </li>
+      <li class="idea-card">
+        <span class="idea-tag">Brand voice</span>
+        <p class="idea-name">Bring "the local team" forward from check-in day</p>
+        <p class="idea-desc">The SpokePhone welcome text is the first point a guest hears from a named local team instead of a centralized system—exactly the local-identity feedback noted on the <a href="comms-map.html#checkin-h">comms map</a>. The Concierge intro and check-in-instructions emails are still centralized voice; introducing local-team language there would make the handoff to SpokePhone feel less abrupt.</p>
+      </li>
+      <li class="idea-card">
+        <span class="idea-tag">Upsell</span>
+        <p class="idea-name">Give recovery a middle option between apology and refund</p>
+        <p class="idea-desc">The recovery workflow is explicit that a generic refund shouldn't be the opening move. That's the right instinct, but it leaves a gap: there's no defined lightweight resolution—an on-property credit, a late-checkout comp, a discount on the next stay—for lower-severity saves. A defined middle tier turns a real recovery into a soft rebooking play instead of a pure cost.</p>
+      </li>
+      <li class="idea-card">
+        <span class="idea-tag">Reviews &amp; revenue</span>
+        <p class="idea-name">Join the review-watch list to the reputation scorecard</p>
+        <p class="idea-desc">This routing model flags review risk from sentiment and handoff signals; the <a href="hotels.html#reputation-h">hotels page</a> flags it from actual TripAdvisor, Google, and Booking.com scores. The two aren't connected yet. Starting the Sunday/Monday executive review from confirmed low scores, not just inferred sentiment, tightens a loop this doc itself still calls proposed.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="gaps" aria-labelledby="gaps-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">What's still open</div>
+      <h2 id="gaps-h">Before this is the operating source of truth</h2>
+      <p>The source document is explicit about separating confirmed behavior from observed patterns and proposed controls. These are the pieces it flags as still needing an owner, a sign-off, or a live export.</p>
+    </div>
+    <ul class="gap-grid">
+      <li class="gap-card">
+        <span class="gap-tag">Pending</span>
+        <p class="gap-name">High-risk wellness check owner &amp; SLA</p>
+        <p class="gap-desc">The triggered recovery workflow is a proposed control based on current leadership direction—it still needs a final owner and a response-time target before it's a real process.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Pending</span>
+        <p class="gap-name">Executive &amp; VRBO outreach ownership</p>
+        <p class="gap-desc">Splitting the high-risk review-watch list among CX leaders and executives, with explicit Sunday/Monday coverage, is proposed but not yet assigned.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Infrastructure gap</span>
+        <p class="gap-name">Zendesk Admin export</p>
+        <p class="gap-desc">Exact trigger and automation order, group IDs, business hours, overflow rules, SLAs, and the live IVR tree all live in Zendesk Admin configuration and aren't reflected in this document yet.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Infrastructure gap</span>
+        <p class="gap-name">Per-market SpokePhone template audit</p>
+        <p class="gap-desc">Welcome-message coverage is strong across active markets but not universal, and exact send times, wording, and opt-outs vary by market—a full audit is still needed to confirm no market collides with the system-owned messages.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Open question</span>
+        <p class="gap-name">The sample guest journey</p>
+        <p class="gap-desc">A fictional end-to-end walkthrough (booking confirmation through post-stay survey, with real message and SMS mockups) exists in a private, time-limited review build. It hasn't been folded into this public page yet.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<div class="note">
+  <div class="wrap">
+    Source: an internal CX Workflow Routing reference commissioned by the GX team via the team's Chef AI assistant, Sep 13&ndash;14, 2026, covering Zendesk, the Duckie AI agent, SpokePhone, and guest email.
+    <ul>
+      <li>Internal system identifiers—database table names, exact classification tag names, per-market coverage figures—are described in plain language rather than reproduced verbatim, since this repo is public. The routing logic, ownership rules, and message templates above are directionally accurate to that source.</li>
+      <li>Guest-facing message templates use generic bracketed placeholders, consistent with the rest of this site; no guest names, phone numbers, or booking details from any real example are reproduced.</li>
+      <li>The (833) 442-8268 number is AvantStay's published Guest Experience line, not guest-specific, so it's shown as-is.</li>
+      <li>The "optimize, upsell, and build a better experience" section is analysis built for this site, connecting this routing model to the personas and reputation data already published on the vacation rental and hotels pages—not part of the original source document.</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">AvantStay Guest Experience—internal planning artifact, published for team reference.</div>
+</footer>
+
+</body>
+</html>

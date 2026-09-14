@@ -1,6 +1,6 @@
 # AvantStay Guest Experience—Journey Map
 
-Two guest-experience reports, cross-linked via the nav bar on each page:
+Four guest-experience reports, cross-linked via the nav bar on each page:
 
 - **`index.html`** — Vacation rentals. Six guest personas built from
   reservation and Zendesk data, their stage-by-stage journey, the current
@@ -8,10 +8,19 @@ Two guest-experience reports, cross-linked via the nav bar on each page:
   Brand Voice Training Guide, and a four-quarter roadmap.
 - **`hotels.html`** — Hotels. All ten AvantStay hotels, segmented by
   front-desk vs. no-front-desk/revenue-share operating model, in service of
-  a specific goal (#1 on TripAdvisor, 5 stars on Expedia/Google) rather than
-  revenue efficiency. Built from a Chef segmentation pull; explicitly lists
-  what data is still missing (review scores, comms map, etc.) instead of
-  guessing at it.
+  a specific goal (good reviews and revenue growth together) rather than
+  revenue efficiency alone. Built from a Chef segmentation pull plus real
+  TripAdvisor/Google/Booking.com/Expedia reputation data.
+- **`comms-map.html`** — Comms map. A first-draft, message-by-message map
+  of the real guest communication flow from booking confirmation through
+  the post-stay review ask, built from real Booking Hub, Zendesk, Airbnb,
+  and SMS examples with guest-identifying details replaced by placeholders.
+- **`cx-routing.html`** — CX routing. The operating layer underneath the
+  comms map: how a guest contact gets classified and routed, what the
+  Duckie AI agent can and can't resolve on its own, the full guest email
+  calendar, SpokePhone's role, and the recovery loop for an at-risk stay,
+  plus a set of optimization/upsell ideas that connect this routing model
+  back to the personas and reputation data on the other pages.
 
 **Live site:** published via GitHub Pages once this repo's `main` branch has
 a successful deploy—see the **Pages** section of repo Settings, or the
