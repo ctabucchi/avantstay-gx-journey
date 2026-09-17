@@ -102,6 +102,28 @@
   tr td:first-child{font-weight:700;color:var(--ink);white-space:nowrap;}
   td.flag{color:var(--flag);font-style:italic;}
 
+  /* Full touchpoint timeline (pre-stay through post-stay) */
+  .tl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:4px;padding:24px 18px 18px;background:var(--paper);}
+  .tl-wrap:focus-visible{outline:3px solid var(--focus);}
+  .timeline{display:flex;align-items:stretch;gap:0;min-width:920px;}
+  .tl-zone{display:flex;flex-direction:column;padding:0 12px;border-right:1px dashed var(--line);}
+  .tl-zone:last-child{border-right:none;}
+  .tl-above{min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;}
+  .tl-below{min-height:64px;display:flex;flex-direction:column;justify-content:flex-start;gap:8px;}
+  .tl-divider{border-top:2px solid var(--ink);position:relative;margin:12px 0;}
+  .tl-divider span{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--paper);padding:0 10px;font-size:10px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:0.03em;white-space:nowrap;}
+  .tl-card{background:var(--surface);border-left:3px solid var(--p2);border-radius:4px;padding:8px 10px;font-size:11.5px;}
+  .tl-card.tl-upsell{border-left-color:var(--p1);}
+  .tl-card.tl-human{border-left-color:var(--p4);}
+  .tl-card.tl-new{border-style:dashed;border:1px dashed var(--line);border-left:3px dashed var(--flag);}
+  .tl-card-time{font-size:9.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.02em;margin-bottom:2px;}
+  .tl-card-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+  .tl-card-trigger{font-size:10.5px;color:var(--text);margin-bottom:3px;line-height:1.3;}
+  .tl-card-channel{font-size:9.5px;font-weight:700;color:var(--muted);text-decoration:underline;text-underline-offset:2px;}
+  .tl-legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin:14px 0 0;flex-wrap:wrap;list-style:none;padding-left:0;}
+  .tl-legend li{display:flex;align-items:center;gap:6px;}
+  .tl-legend .sw{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+
   /* Flow list (numbered escalation steps) */
   .flow-list{list-style:none;margin:0;padding:0;counter-reset:flow;max-width:70ch;}
   .flow-list li{position:relative;padding:0 0 22px 40px;border-left:2px solid var(--line);margin-left:14px;}
@@ -198,7 +220,133 @@
   </div>
 </section>
 
-<section class="databar alt" aria-labelledby="prearrival-h">
+<section class="databar alt" aria-labelledby="fulltimeline-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">The full touchpoint set</div>
+      <h2 id="fulltimeline-h">Every scheduled message, pre-stay through post-stay</h2>
+      <p>This is the fuller picture behind the table above: every fixed message and conditional upsell offer, positioned by timing rather than channel. Per everything documented on this site so far, this exact timeline runs the same way for Airbnb, VRBO, Direct, Expedia, and Booking.com—see "Where channels actually diverge" below the diagram for the specific places that's not true.</p>
+    </div>
+    <div class="tl-wrap" tabindex="0" role="region" aria-label="Full touchpoint timeline, pre-stay through post-stay, scrollable">
+      <div class="timeline">
+
+        <div class="tl-zone" style="flex:2.1;">
+          <div class="tl-above">
+            <div class="tl-card tl-upsell">
+              <div class="tl-card-time">~6 days before check-in</div>
+              <div class="tl-card-name">ECI Offer</div>
+              <div class="tl-card-trigger">Trigger: not VIP, early check-in available</div>
+              <div class="tl-card-channel">SMS</div>
+            </div>
+            <div class="tl-card">
+              <div class="tl-card-time">~3 days before check-in</div>
+              <div class="tl-card-name">Check-In Instructions</div>
+              <div class="tl-card-trigger">Trigger: paid, IDV, and agreement complete</div>
+              <div class="tl-card-channel">Email + SMS</div>
+            </div>
+          </div>
+          <div class="tl-divider"><span>Pre-stay</span></div>
+          <div class="tl-below">
+            <div class="tl-card tl-upsell">
+              <div class="tl-card-time">Pre-stay</div>
+              <div class="tl-card-name">Mid-Stay Clean Offer</div>
+              <div class="tl-card-trigger">Trigger: staying 3+ nights, not VIP, housekeeping available</div>
+              <div class="tl-card-channel">SMS</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-zone" style="flex:1.6;">
+          <div class="tl-above">
+            <div class="tl-card tl-new">
+              <div class="tl-card-time">Morning of check-in</div>
+              <div class="tl-card-name">Check-In Instructions (reminder)</div>
+              <div class="tl-card-trigger">Second send of the same instructions</div>
+              <div class="tl-card-channel">SMS</div>
+            </div>
+            <div class="tl-card tl-human tl-new">
+              <div class="tl-card-time">Check-in day, ~2 hrs before</div>
+              <div class="tl-card-name">Local-Team Welcome</div>
+              <div class="tl-card-trigger">Via SpokePhone (or RingCentral)</div>
+              <div class="tl-card-channel">Call / SMS</div>
+            </div>
+          </div>
+          <div class="tl-divider"><span>Check-in</span></div>
+          <div class="tl-below">
+            <div class="tl-card tl-upsell">
+              <div class="tl-card-time">Day of check-in</div>
+              <div class="tl-card-name">GoPuff Offer</div>
+              <div class="tl-card-trigger">Trigger: property in a GoPuff market</div>
+              <div class="tl-card-channel">SMS</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-zone" style="flex:1.5;">
+          <div class="tl-above"></div>
+          <div class="tl-divider"><span>In-stay</span></div>
+          <div class="tl-below">
+            <div class="tl-card tl-human">
+              <div class="tl-card-time">A few hours after check-in</div>
+              <div class="tl-card-name">Wellness Check</div>
+              <div class="tl-card-trigger">Via SpokePhone, thumbs-up/thumbs-down</div>
+              <div class="tl-card-channel">SMS</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-zone" style="flex:1.4;">
+          <div class="tl-above">
+            <div class="tl-card tl-new">
+              <div class="tl-card-time">Day of checkout, 8am</div>
+              <div class="tl-card-name">Checkout Reminder</div>
+              <div class="tl-card-trigger">Trigger: same-day turnover</div>
+              <div class="tl-card-channel">SMS</div>
+            </div>
+          </div>
+          <div class="tl-divider"><span>Checkout</span></div>
+          <div class="tl-below">
+            <div class="tl-card tl-upsell tl-new">
+              <div class="tl-card-time">Day before checkout, 11am</div>
+              <div class="tl-card-name">LCO Offer</div>
+              <div class="tl-card-trigger">Trigger: not VIP, late checkout available</div>
+              <div class="tl-card-channel">SMS</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-zone" style="flex:1;">
+          <div class="tl-above"></div>
+          <div class="tl-divider"><span>Post-stay</span></div>
+          <div class="tl-below">
+            <div class="tl-card">
+              <div class="tl-card-time">Day of checkout</div>
+              <div class="tl-card-name">Post-Stay Survey</div>
+              <div class="tl-card-trigger">NPS + review ask</div>
+              <div class="tl-card-channel">SMS</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <ul class="tl-legend" aria-hidden="true">
+      <li><span class="sw" style="background:var(--p2)"></span>Fixed / informational</li>
+      <li><span class="sw" style="background:var(--p1)"></span>Conditional upsell offer</li>
+      <li><span class="sw" style="background:var(--p4)"></span>Human / local-team touch</li>
+      <li><span class="sw" style="background:var(--flag);border-radius:1px;transform:rotate(45deg);"></span>New or unconfirmed detail, dashed border</li>
+    </ul>
+    <p style="font-weight:700;color:var(--ink);font-size:15px;margin:32px 0 12px;">Where channels actually diverge</p>
+    <p style="font-size:13.5px;color:var(--text);max-width:74ch;">Based on everything documented across this site, only two things in this timeline actually change by channel:</p>
+    <ul style="font-size:13.5px;color:var(--text);max-width:74ch;padding-left:20px;">
+      <li>Airbnb replaces the IDV/agreement reminder cascade with its own at-booking confirmation message, since Airbnb handles identity verification inside its own flow—every other card above still applies to an Airbnb guest the same way.</li>
+      <li>At checkout, every OTA except Direct also sends its own separate review request outside AvantStay's control (see the table above)—the Post-Stay Survey card here is the AvantStay-side ask only.</li>
+    </ul>
+    <p class="note-inline">New or unconfirmed in this diagram, marked with a dashed border above: the second "morning of check-in" send of Check-In Instructions, the specific 2-hour-before-check-in timing and RingCentral fallback on the local-team welcome, and the "same-day turnover" trigger on the Checkout Reminder—this page previously documented the welcome text as sent generally "check-in day" via SpokePhone only, and the Checkout Reminder as going to "all guests," not just same-day-turnover stays. Worth confirming which version is current.</p>
+  </div>
+</section>
+
+<section class="databar" aria-labelledby="prearrival-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">Before arrival</div>
@@ -261,7 +409,7 @@ Our local team will reach out on check-in day. Need help before then? Our Guest 
   </div>
 </section>
 
-<section class="databar" aria-labelledby="checkin-h">
+<section class="databar alt" aria-labelledby="checkin-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">Check-in day</div>
@@ -281,7 +429,7 @@ We hope you have a wonderful stay!</div>
   </div>
 </section>
 
-<section class="databar alt" aria-labelledby="wellness-h">
+<section class="databar" aria-labelledby="wellness-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">A few hours after check-in</div>
@@ -298,7 +446,7 @@ We hope you have a wonderful stay!</div>
   </div>
 </section>
 
-<section class="databar" aria-labelledby="instay-h">
+<section class="databar alt" aria-labelledby="instay-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">In-stay</div>
@@ -356,7 +504,7 @@ We hope you have a wonderful stay!</div>
   </div>
 </section>
 
-<section class="databar alt" aria-labelledby="checkout-h">
+<section class="databar" aria-labelledby="checkout-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">Check-out day</div>
