@@ -177,7 +177,49 @@
 
 <main id="main">
 
-<section class="databar" aria-labelledby="model-h">
+<section class="databar" aria-labelledby="direction-h">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Where this is headed</div>
+      <h2 id="direction-h">Current guest-experience priorities</h2>
+      <p>Recent internal direction on brand voice and guest experience is reflected in the sections that follow.</p>
+    </div>
+    <ul class="idea-grid">
+      <li class="idea-card">
+        <span class="idea-tag">Speed</span>
+        <p class="idea-name">GX reply time is now the core accountability metric</p>
+        <p class="idea-desc">Fast beats verbose—a broken HVAC unit needs action, not a long acknowledgment. The CSAT bar for a premium brand is well above where the team sits today.</p>
+      </li>
+      <li class="idea-card">
+        <span class="idea-tag">Unified messaging</span>
+        <p class="idea-name">One thread, any channel</p>
+        <p class="idea-desc">The top priority solve: the local team should be able to reach a guest on whatever channel they're actually on, from one place—not have the channel decide who can even see the message. See the routing and SpokePhone sections below for where that split lives today.</p>
+      </li>
+      <li class="idea-card">
+        <span class="idea-tag">Proactive check-ins</span>
+        <p class="idea-name">Wellness check moving earlier</p>
+        <p class="idea-desc">Moving to a few hours post-check-in, with a simple thumbs-up/thumbs-down reply. The open piece is routing a thumbs-down straight to an immediate human response, not just logging it.</p>
+      </li>
+      <li class="idea-card">
+        <span class="idea-tag">Stay-risk score</span>
+        <p class="idea-name">A real-time, weighted risk score is being explored</p>
+        <p class="idea-desc">Combining signals like recent home reviews, in-stay issues, and messaging sentiment, updated regularly with visible and adjustable weighting. More on the concept in the recovery-loop section below.</p>
+      </li>
+      <li class="idea-card">
+        <span class="idea-tag">Resolution speed</span>
+        <p class="idea-name">Refunds should be fast to execute, not just fast to approve</p>
+        <p class="idea-desc">If a guest has a real issue, the instinct should be to make it right—the open question is execution, not whether to do it at all.</p>
+      </li>
+      <li class="idea-card">
+        <span class="idea-tag">Concierge &amp; VAS</span>
+        <p class="idea-name">Push value-added offers earlier, into more markets</p>
+        <p class="idea-desc">Concierge and VAS offers moving earlier in the booking window, not just at check-in, with an eye on markets that have almost no concierge presence today.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="databar alt" aria-labelledby="model-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">The big picture</div>
@@ -213,7 +255,7 @@
   </div>
 </section>
 
-<section class="databar alt" aria-labelledby="routing-h">
+<section class="databar" aria-labelledby="routing-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">Step 2</div>
@@ -245,7 +287,7 @@
   </div>
 </section>
 
-<section class="databar" aria-labelledby="duckie-h">
+<section class="databar alt" aria-labelledby="duckie-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">Step 3&ndash;4</div>
@@ -282,7 +324,7 @@
   </div>
 </section>
 
-<section class="databar alt" aria-labelledby="email-h">
+<section class="databar" aria-labelledby="email-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">Before, during, and after the stay</div>
@@ -313,7 +355,7 @@
   </div>
 </section>
 
-<section class="databar" aria-labelledby="spoke-h">
+<section class="databar alt" aria-labelledby="spoke-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">The human layer</div>
@@ -348,14 +390,39 @@
   </div>
 </section>
 
-<section class="databar alt" aria-labelledby="recovery-h">
+<section class="databar" aria-labelledby="recovery-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">Catching problems early</div>
       <h2 id="recovery-h">When a stay is at risk: the recovery loop</h2>
-      <p>Beyond the standard first-morning wellness check, a second, triggered layer is meant to catch a stay before it turns into a bad review. As of this writing it's a proposed control, not yet live with a named owner or response-time target.</p>
+      <p>A real-time, weighted stay-risk score is one concept being explored to formalize this—replacing a looser, proposed set of triggers with a single, continuously updating signal.</p>
     </div>
-    <p style="font-weight:700;color:var(--ink);font-size:15px;margin:0 0 16px;">What should trigger proactive outreach</p>
+
+    <p style="font-weight:700;color:var(--ink);font-size:15px;margin:0 0 16px;">A stay-risk score, as one possible design</p>
+    <ul class="path-grid">
+      <li class="path">
+        <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
+        <h3>What could feed the score</h3>
+        <ul>
+          <li>Recent reviews on the home</li>
+          <li>Open or recent in-stay issues</li>
+          <li>Messaging and ticket sentiment across channels</li>
+        </ul>
+      </li>
+      <li class="path">
+        <div class="bar" style="background:var(--p5)" aria-hidden="true"></div>
+        <h3>How it's meant to behave</h3>
+        <ul>
+          <li>Updates regularly, from check-in through checkout</li>
+          <li>Weighting and inputs are visible and adjustable, not a black box</li>
+          <li>A proactive GX outreach during the stay can itself move the score back up</li>
+          <li>Comes with a visual breakdown of <i>why</i> a stay is flagged, not just one number</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="exception"><b>Process and outcome are different things:</b> a stay can score low because of a rocky start or a lot of back-and-forth, and still end in a five-star review. The score is meant to keep capturing that the stay was rocky either way—it's tracking how the stay was managed, not just how it turned out. The model needs to be a source of truth for both: the health of the stay itself, and how the communication around it was handled.</div>
+
+    <p style="font-weight:700;color:var(--ink);font-size:15px;margin:32px 0 16px;">What should trigger proactive outreach today</p>
     <ul class="path-grid">
       <li class="path">
         <div class="bar" style="background:var(--p1)" aria-hidden="true"></div>
@@ -367,7 +434,7 @@
         </ul>
       </li>
       <li class="path">
-        <div class="bar" style="background:var(--p5)" aria-hidden="true"></div>
+        <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
         <h3>Process-based</h3>
         <ul>
           <li>A Duckie handoff has sat without clear human ownership</li>
@@ -377,10 +444,11 @@
       </li>
     </ul>
     <div class="exception"><b>How the call gets made once triggered:</b> confirm the unresolved facts and who's empowered to act, call the guest when it's material rather than defaulting to text, don't lead with a generic refund, and document the commitment, owner, and deadline directly in the case. A separate Sunday/Monday review specifically covers weekend stays, since their risk often surfaces right at checkout when the usual weekday coverage isn't watching.</div>
+    <p class="note-inline" style="margin-top:20px;">Where this actually stands: an idea under exploration, not a built system. It would need real data validation and leadership sign-off before becoming a formal, adopted process.</p>
   </div>
 </section>
 
-<section class="databar" aria-labelledby="done-h">
+<section class="databar alt" aria-labelledby="done-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">Closing the loop</div>
@@ -412,7 +480,7 @@
   </div>
 </section>
 
-<section class="databar alt" aria-labelledby="ideas-h">
+<section class="databar" aria-labelledby="ideas-h">
   <div class="wrap">
     <div class="section-head">
       <div class="tag">Where this opens the door</div>
@@ -423,11 +491,11 @@
       <li class="idea-card">
         <span class="idea-tag">Risk reduction</span>
         <p class="idea-name">Fix the wellness-check double-send first</p>
-        <p class="idea-desc">Both system automation and SpokePhone can independently send a "how's everything going?" message the morning after check-in. That's flagged as a required control, not yet solved. Two identical check-ins from two different senders reads as impersonal—the opposite of the local-team promise this whole map is built around.</p>
+        <p class="idea-desc">Both system automation and SpokePhone can independently send a "how's everything going?" message a few hours after check-in. That's flagged as a required control, not yet solved. Two identical check-ins from two different senders reads as impersonal—the opposite of the local-team promise this whole map is built around.</p>
       </li>
       <li class="idea-card">
         <span class="idea-tag">Reviews &amp; revenue</span>
-        <p class="idea-name">Make the high-risk wellness check live, not proposed</p>
+        <p class="idea-name">Get a real-time stay-risk score built, not just discussed</p>
         <p class="idea-desc">This is the single highest-leverage step for the <a href="hotels.html">hotels page's</a> actual goal: catching a likely one- or two-star stay while there's still time to recover it protects the review and the rebooking at once. Give it an owner and a response-time SLA, and feed it from the reputation scorecard so lower-scoring properties get priority coverage.</p>
       </li>
       <li class="idea-card">
@@ -443,7 +511,7 @@
       <li class="idea-card">
         <span class="idea-tag">Upsell</span>
         <p class="idea-name">Give recovery a middle option between apology and refund</p>
-        <p class="idea-desc">The recovery workflow is explicit that a generic refund shouldn't be the opening move. That's the right instinct, but it leaves a gap: there's no defined lightweight resolution—an on-property credit, a late-checkout comp, a discount on the next stay—for lower-severity saves. A defined middle tier turns a real recovery into a soft rebooking play instead of a pure cost.</p>
+        <p class="idea-desc">The recovery workflow is explicit that a generic refund shouldn't be the opening move—and leadership separately wants refunds to actually be fast to execute once they're warranted. Both are true at once if there's a defined lightweight resolution—an on-property credit, a late-checkout comp, a discount on the next stay—for lower-severity saves, with the full refund path reserved for when it's genuinely warranted. A defined middle tier turns a real recovery into a soft rebooking play instead of a pure cost.</p>
       </li>
       <li class="idea-card">
         <span class="idea-tag">Reviews &amp; revenue</span>
@@ -464,8 +532,8 @@
     <ul class="gap-grid">
       <li class="gap-card">
         <span class="gap-tag">Pending</span>
-        <p class="gap-name">High-risk wellness check owner &amp; SLA</p>
-        <p class="gap-desc">The triggered recovery workflow is a proposed control based on current leadership direction—it still needs a final owner and a response-time target before it's a real process.</p>
+        <p class="gap-name">Stay-risk score: owner &amp; SLA</p>
+        <p class="gap-desc">An idea, not a built system. The weighting and inputs still need to be worked out and validated before this is a real, adopted model with a named owner and a response-time target.</p>
       </li>
       <li class="gap-card">
         <span class="gap-tag">Pending</span>
@@ -495,12 +563,13 @@
 
 <div class="note">
   <div class="wrap">
-    Source: an internal CX Workflow Routing reference commissioned by the GX team via the team's Chef AI assistant, Sep 13&ndash;14, 2026, covering Zendesk, the Duckie AI agent, SpokePhone, and guest email.
+    Sources: an internal CX Workflow Routing reference commissioned by the GX team via the team's Chef AI assistant, Sep 13&ndash;14, 2026, covering Zendesk, the Duckie AI agent, SpokePhone, and guest email; and recent internal direction on guest-experience priorities.
     <ul>
       <li>Internal system identifiers—database table names, exact classification tag names, per-market coverage figures—are described in plain language rather than reproduced verbatim, since this repo is public. The routing logic, ownership rules, and message templates above are directionally accurate to that source.</li>
+      <li>The "where this is headed" section, the stay-risk score, and "where this actually stands" language throughout reflect current internal direction, not a shipped system—treat those as direction, not as documentation of something already live. Specific targets and figures are described directionally rather than exactly, consistent with how this site handles other internal numbers.</li>
       <li>Guest-facing message templates use generic bracketed placeholders, consistent with the rest of this site; no guest names, phone numbers, or booking details from any real example are reproduced.</li>
       <li>The (833) 442-8268 number is AvantStay's published Guest Experience line, not guest-specific, so it's shown as-is.</li>
-      <li>The "optimize, upsell, and build a better experience" section is analysis built for this site, connecting this routing model to the personas and reputation data already published on the vacation rental and hotels pages—not part of the original source document.</li>
+      <li>The "optimize, upsell, and build a better experience" section is analysis built for this site, connecting this routing model to the personas and reputation data already published on the vacation rental and hotels pages—not part of either source document.</li>
     </ul>
   </div>
 </div>
