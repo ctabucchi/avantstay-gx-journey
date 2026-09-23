@@ -20,7 +20,9 @@
     --muted:#6B6B6C;
     --p1:#A34E34;
     --p2:#2F5E8C;
+    --p3:#7A5A12;
     --p4:#0C6270;
+    --gate:#8A95A0;
     --flag:#A34E34;
     --focus:#0C6270;
   }
@@ -124,6 +126,53 @@
   .tl-legend li{display:flex;align-items:center;gap:6px;}
   .tl-legend .sw{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
 
+  /* Direct-booking journey (vertical timeline) */
+  .dj-types{display:flex;gap:8px 18px;flex-wrap:wrap;list-style:none;margin:0 0 28px;padding:0;font-size:12.5px;color:var(--muted);}
+  .dj-types li{display:flex;align-items:center;gap:7px;}
+  .dj-types .sw{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+  .dj{list-style:none;margin:0;padding:0;max-width:980px;}
+  .dj-phase{display:grid;grid-template-columns:150px 1fr;gap:0 28px;margin:0;}
+  .dj-phase-head{grid-column:1 / -1;display:flex;align-items:baseline;gap:12px;padding:26px 0 14px;border-bottom:2px solid var(--ink);margin-bottom:18px;}
+  .dj-phase:first-child .dj-phase-head{padding-top:0;}
+  .dj-phase-num{font-size:11px;font-weight:700;color:var(--accent);background:var(--ink);border-radius:10px;padding:3px 9px;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;}
+  .dj-phase-head h3{font-size:20px;margin:0;}
+  .dj-phase-head p{margin:0 0 0 auto;font-size:12.5px;color:var(--muted);text-align:right;}
+  .dj-row{display:contents;}
+  .dj-when{padding:4px 0 22px;text-align:right;}
+  .dj-when b{display:block;font-size:13.5px;color:var(--ink);line-height:1.25;}
+  .dj-when span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .dj-stack{position:relative;padding:0 0 22px 26px;border-left:2px solid var(--line);display:grid;gap:10px;}
+  .dj-stack::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--ink);}
+  .dj-card{background:var(--surface);border-left:4px solid var(--p2);border-radius:4px;padding:11px 14px 12px;}
+  .dj-card.concierge{border-left-color:var(--p3);}
+  .dj-card.upsell{border-left-color:var(--p1);}
+  .dj-card.human{border-left-color:var(--p4);}
+  .dj-card.gate{border-left-color:var(--gate);background:var(--paper);border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .dj-card-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:4px;}
+  .dj-card-name{font-size:14.5px;font-weight:700;color:var(--ink);margin-right:auto;}
+  .dj-chip{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:2px 8px;white-space:nowrap;}
+  .dj-card.gate .dj-chip{background:var(--surface);}
+  .dj-card-trigger{font-size:12.5px;color:var(--muted);margin:0 0 3px;}
+  .dj-card-trigger b{color:var(--text);}
+  .dj-card-desc{font-size:13.5px;color:var(--text);margin:0;}
+  .dj-branch{font-size:12.5px;color:var(--text);margin:8px 0 0;padding:7px 10px;background:var(--paper);border-radius:3px;border:1px dashed var(--line);}
+  .dj-branch b{color:var(--p3);}
+  .dj-flag{font-size:12px;color:var(--flag);font-style:italic;margin:6px 0 0;}
+  .dj-tracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;list-style:none;margin:0;padding:0;}
+  .dj-track{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--p3);border-radius:4px;padding:14px 16px;}
+  .dj-track h4{font-size:15px;margin:0 0 6px;}
+  .dj-track .dj-card-trigger{margin-bottom:6px;}
+  .dj-track p{font-size:13px;margin:0;}
+  @media (max-width:700px){
+    .dj-phase{grid-template-columns:1fr;}
+    .dj-phase-head{flex-wrap:wrap;}
+    .dj-phase-head p{margin:0;text-align:left;width:100%;}
+    .dj-when{text-align:left;padding:0 0 8px 26px;border-left:2px solid var(--line);}
+    .dj-when b,.dj-when span{display:inline;}
+    .dj-when span::before{content:" · ";}
+    .dj-stack::before{top:-20px;}
+  }
+
   /* Flow list (numbered escalation steps) */
   .flow-list{list-style:none;margin:0;padding:0;counter-reset:flow;max-width:70ch;}
   .flow-list li{position:relative;padding:0 0 22px 40px;border-left:2px solid var(--line);margin-left:14px;}
@@ -192,6 +241,254 @@
 </header>
 
 <main id="main">
+
+<section class="databar alt" aria-labelledby="direct-h" id="direct-journey">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Direct booking, start to finish</div>
+      <h2 id="direct-h">The full guest journey for a direct booking</h2>
+      <p>Every message a guest who books directly with AvantStay can receive, in order, from the moment they book to the post-stay survey. It combines the operational touchpoints documented on this page with the concierge marketing track. Conditional messages show their trigger, so not every guest gets every card.</p>
+    </div>
+
+    <ul class="dj-types" aria-label="Legend">
+      <li><span class="sw" style="background:var(--p2)"></span>Fixed / informational</li>
+      <li><span class="sw" style="background:var(--p3)"></span>Concierge marketing</li>
+      <li><span class="sw" style="background:var(--p1)"></span>Conditional upsell offer</li>
+      <li><span class="sw" style="background:var(--p4)"></span>Human / local-team touch</li>
+      <li><span class="sw" style="background:var(--gate)"></span>Verification step, not a message</li>
+    </ul>
+
+    <ol class="dj">
+
+      <li class="dj-phase">
+        <div class="dj-phase-head"><span class="dj-phase-num">Phase 1</span><h3>Booking &amp; confirmation</h3><p>Gets the guest verified and confirmed</p></div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>At booking</b><span>Immediately</span></div>
+          <div class="dj-stack">
+            <div class="dj-card gate">
+              <div class="dj-card-top"><span class="dj-card-name">ID verification + guest agreement</span><span class="dj-chip">Email</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> every direct booking</p>
+              <p class="dj-card-desc">Direct has no OTA doing this upstream, so AvantStay collects ID and a signed guest agreement itself. High-risk bookings get IDV started right away, followed by a risk review once IDV is done.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Once paid + verified</b><span>Usually same day</span></div>
+          <div class="dj-stack">
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Booking confirmation</span><span class="dj-chip">Email</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> payment and IDV complete</p>
+              <p class="dj-card-desc">Confirms the stay and links to the House Manual and Experiences.</p>
+            </div>
+            <div class="dj-card upsell">
+              <div class="dj-card-top"><span class="dj-card-name">Early check-in offer</span><span class="dj-chip">In confirmation</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> not VIP, early check-in available</p>
+              <p class="dj-card-desc">Included with the confirmation.</p>
+              <p class="dj-flag">Conflict: the timeline further down shows the ECI offer as a separate SMS about 6 days before check-in. The concierge deck puts it in the confirmation. Confirm which is current, or whether both happen.</p>
+            </div>
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Guest invites</span><span class="dj-chip">Email</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> main booker adds guests to the reservation</p>
+              <p class="dj-card-desc">Invites go out to the rest of the group right after IDV is complete.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="dj-phase">
+        <div class="dj-phase-head"><span class="dj-phase-num">Phase 2</span><h3>Pre-stay</h3><p>Concierge outreach, then arrival prep</p></div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Day after booking</b><span>Noon</span></div>
+          <div class="dj-stack">
+            <div class="dj-card concierge">
+              <div class="dj-card-top"><span class="dj-card-name">Concierge 1</span><span class="dj-chip">Email</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> standard booking</p>
+              <p class="dj-card-desc">Introduces concierge services and offers to help plan the trip.</p>
+              <p class="dj-branch"><b>Estates bookings:</b> get the Estates concierge email and a personal intro SMS instead (sample below).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>14 days before check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card concierge">
+              <div class="dj-card-top"><span class="dj-card-name">Concierge 1 reminder</span><span class="dj-chip">Email</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> standard booking</p>
+              <p class="dj-card-desc">A second nudge about concierge services.</p>
+              <p class="dj-flag">Unconfirmed: what happens for bookings made less than 2 weeks out, and whether the reminder uses both channels.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>7 days before check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card concierge">
+              <div class="dj-card-top"><span class="dj-card-name">Concierge 2</span><span class="dj-chip">Email</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> guest hasn't replied to Concierge 1</p>
+              <p class="dj-card-desc">Last concierge message before arrival prep begins.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>6 days before check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Check-in form goes live</span><span class="dj-chip">Booking Hub</span></div>
+              <p class="dj-card-desc">The check-in form becomes available to the guest.</p>
+            </div>
+            <div class="dj-card upsell">
+              <div class="dj-card-top"><span class="dj-card-name">Mid-stay clean offer</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> 3+ nights, not VIP, housekeeping available</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>3 days before check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Check-in instructions</span><span class="dj-chip">Email</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> paid, IDV and guest agreement complete</p>
+              <p class="dj-card-desc">Links to the Booking Hub for entry codes, directions, the house manual and upgrades. For a direct guest this is the first link into the Hub (copy in "Two paths to the Booking Hub" below).</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="dj-phase">
+        <div class="dj-phase-head"><span class="dj-phase-num">Phase 3</span><h3>Check-in &amp; in-stay</h3><p>Handoff to the local team</p></div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Morning of check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Detailed check-in instructions</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-desc">The instructions again, on arrival day.</p>
+            </div>
+            <div class="dj-card upsell">
+              <div class="dj-card-top"><span class="dj-card-name">GoPuff offer</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> property is in a GoPuff market</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>2 hours before check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card human">
+              <div class="dj-card-top"><span class="dj-card-name">Local-team welcome</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-desc">Automated welcome sent from the local team's number via SpokePhone (or RingCentral). It shows up as a new text thread, and it's the number the guest uses for the rest of the stay.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>A few hours after check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card human">
+              <div class="dj-card-top"><span class="dj-card-name">Wellness check</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-desc">"How's everything going?" with a thumbs-up / thumbs-down reply, via SpokePhone.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Anytime during the stay</b></div>
+          <div class="dj-stack">
+            <div class="dj-card upsell">
+              <div class="dj-card-top"><span class="dj-card-name">Service payment link</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> a value-added service or concierge booking is added to the stay</p>
+            </div>
+            <div class="dj-card human">
+              <div class="dj-card-top"><span class="dj-card-name">Guest-initiated contact</span><span class="dj-chip">SMS</span><span class="dj-chip">Email</span><span class="dj-chip">Phone</span></div>
+              <p class="dj-card-desc">Direct guests have no OTA portal, so they reach AvantStay directly: the local team on SpokePhone, or GX 24/7 at (833) 442-8268.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="dj-phase">
+        <div class="dj-phase-head"><span class="dj-phase-num">Phase 4</span><h3>Checkout &amp; post-stay</h3><p>Departure, then feedback</p></div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Day before checkout</b><span>11:00 AM</span></div>
+          <div class="dj-stack">
+            <div class="dj-card upsell">
+              <div class="dj-card-top"><span class="dj-card-name">Late checkout offer</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> not VIP, late checkout available</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Checkout day</b><span>8:00 AM</span></div>
+          <div class="dj-stack">
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Checkout reminder</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> same-day turnover scheduled</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>After checkout</b></div>
+          <div class="dj-stack">
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Post-stay survey</span><span class="dj-chip">SMS</span></div>
+              <p class="dj-card-desc">NPS plus a review ask. If the stay had no negative sentiment, it counts as neutral-to-good and further review follow-ups go out. Direct guests don't get an OTA review request, so this is the only one they see.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ol>
+
+    <p style="font-weight:700;color:var(--ink);font-size:15px;margin:40px 0 6px;">Specialized tracks that run alongside</p>
+    <p style="font-size:13.5px;color:var(--muted);max-width:74ch;margin-bottom:16px;">These are sent by hand by the concierge team for specific guests, instead of or on top of the automated concierge messages above.</p>
+    <ul class="dj-tracks">
+      <li class="dj-track">
+        <h4>VIP guests</h4>
+        <p class="dj-card-trigger"><b>Trigger:</b> $15k+ or Voyage booking, flagged by a Salesforce report</p>
+        <p>Manual email to set up a discovery call with a concierge agent, then a custom proposal. Focus is on re-booking.</p>
+      </li>
+      <li class="dj-track">
+        <h4>Estates guests</h4>
+        <p class="dj-card-trigger"><b>Trigger:</b> booking tagged as Estates in Tapechart</p>
+        <p>Manual email and SMS from a dedicated Estates concierge: service list, upgrades, an in-person greeting and full coordination.</p>
+      </li>
+      <li class="dj-track">
+        <h4>Corporate offsites</h4>
+        <p class="dj-card-trigger"><b>Trigger:</b> Sales introduces the booking to a dedicated concierge agent</p>
+        <p>Discovery call, custom proposal, then upgrades and the stay coordinated with a retention focus.</p>
+      </li>
+      <li class="dj-track">
+        <h4>Members</h4>
+        <p class="dj-card-trigger"><b>Trigger:</b> membership sign-up</p>
+        <p>Introduction email to a VIP-team concierge agent.</p>
+      </li>
+      <li class="dj-track">
+        <h4>Short-term campaigns</h4>
+        <p class="dj-card-trigger"><b>Trigger:</b> a brief in Iterable for target dates or regions</p>
+        <p>Supervisor or manager approves the brief, then the campaign goes out manually to each matching guest.</p>
+      </li>
+    </ul>
+
+    <div class="msg-card" style="margin-top:28px;">
+      <div class="msg-meta"><span>Estates</span><span>Intro SMS, day after booking</span></div>
+      <div class="msg-body">Hi <i>[Guest Name]</i> - We're so excited to host you at <i>[Property Name]</i>.
+I'd love to assist you with anything you need prior to and throughout your AvantStay experience. Check out our list of concierge services that we can provide at your request. We can also create a personalized itinerary so every minute of your trip is unforgettable.
+I look forward to connecting!
+- AvantStay Concierge</div>
+    </div>
+    <p class="note-inline">The Concierge 1 and Concierge 2 email and SMS templates, and the member introduction email, exist in the concierge team's timeline deck as screenshots. Their copy isn't reproduced here yet.</p>
+  </div>
+</section>
 
 <section class="databar" aria-labelledby="timeline-h">
   <div class="wrap">
@@ -559,7 +856,7 @@ We hope you have a wonderful stay!</div>
 
 <div class="note">
   <div class="wrap">
-    Source: outlined directly by the AvantStay GX team, Sep 11, 2026, from real Booking Hub, Zendesk, Airbnb, and SMS examples.
+    Source: outlined directly by the AvantStay GX team, Sep 11, 2026, from real Booking Hub, Zendesk, Airbnb, and SMS examples. The direct-booking journey also draws on the concierge team's "Guest Journey Flow &amp; Lifecycle Marketing" timeline deck, added Sep 23, 2026.
     <ul>
       <li>Guest names, phone numbers, property addresses, entry codes, and booking/reservation codes shown in the original examples are not reproduced here—every message template above uses generic placeholders in place of that real information, since this repo is public.</li>
       <li>The (833) 442-8268 number is AvantStay's published Guest Experience line, not guest-specific, so it's shown as-is.</li>
