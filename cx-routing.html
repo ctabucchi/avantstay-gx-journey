@@ -63,6 +63,13 @@
   .topnav a{font-size:12.5px;font-weight:600;color:#B9C6D1;text-decoration:none;padding:6px 12px;border-radius:12px;}
   .topnav a:hover{color:#fff;}
   .topnav a[aria-current="page"]{background:rgba(83,195,208,0.16);color:var(--accent);}
+  .topnav .wip{display:inline-block;margin-left:5px;padding:1px 6px;font-size:9.5px;font-weight:700;letter-spacing:0.05em;color:#022B54;background:#F2C14E;border-radius:8px;vertical-align:1px;}
+
+  .wip-banner{background:#FDF3D9;border-bottom:1px solid #EBD9A6;padding:16px 0;}
+  .wip-banner .wrap{display:flex;gap:14px;align-items:flex-start;}
+  .wip-badge{flex-shrink:0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink);background:#F2C14E;border-radius:10px;padding:3px 10px;margin-top:2px;}
+  .wip-banner p{margin:0;font-size:14.5px;color:var(--ink);max-width:90ch;}
+  @media (max-width:560px){.wip-banner .wrap{flex-direction:column;gap:8px;}}
 
   .hero{background:var(--ink);color:#EAF0F4;padding:56px 0 56px;}
   .hero .eyebrow{color:var(--accent);font-size:14px;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.04em;}
@@ -161,14 +168,14 @@
       <a href="index.html">Vacation Rentals</a>
       <a href="hotels.html">Hotels</a>
       <a href="comms-map.html">Comms Map</a>
-      <a href="cx-routing.html" aria-current="page">CX Routing</a>
+      <a href="cx-routing.html" aria-current="page">CX Routing<span class="wip" title="Work in progress">WIP</span></a>
     </nav>
   </div>
 </div>
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CX Operating Model</div>
+    <div class="eyebrow">Work in progress · CX Operating Model</div>
     <h1>How a guest message becomes a closed ticket.</h1>
     <p>The <a href="comms-map.html" style="color:#fff;">comms map</a> shows what a guest actually sees, message by message. This page is the layer underneath it—how a contact from any channel gets classified, routed, and either answered by the Duckie AI agent or handed to a human team, plus the full guest email calendar, SpokePhone's role, and the recovery loop for a stay that's at risk of a bad review.</p>
     <p style="font-size:14px;color:#9FB0BD;margin-top:16px;">Built from an internal CX Workflow Routing reference the GX team commissioned on Sep 13&ndash;14, 2026, covering Zendesk, the Duckie AI agent, SpokePhone, and guest email. Internal system identifiers (database tables, exact tag names, per-market figures) are described in plain terms rather than reproduced verbatim, since this repo is public.</p>
@@ -176,6 +183,13 @@
 </header>
 
 <main id="main">
+
+<div class="wip-banner" role="note">
+  <div class="wrap">
+    <span class="wip-badge">Work in progress</span>
+    <p><b>These are working notes, not a finished operating model.</b> They're kept here so nothing gets lost, but the routing, ownership and ideas below still need to be thought through with the team and built out. Don't treat this page as the source of truth yet.</p>
+  </div>
+</div>
 
 <section class="databar" aria-labelledby="direction-h">
   <div class="wrap">

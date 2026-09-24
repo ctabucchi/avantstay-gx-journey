@@ -15,7 +15,8 @@ Four guest-experience reports, cross-linked via the nav bar on each page:
   of the real guest communication flow from booking confirmation through
   the post-stay review ask, built from real Booking Hub, Zendesk, Airbnb,
   and SMS examples with guest-identifying details replaced by placeholders.
-- **`cx-routing.html`** — CX routing. The operating layer underneath the
+- **`cx-routing.html`** — CX routing (work in progress: working notes still
+  being thought through and built out, not yet a source of truth). The operating layer underneath the
   comms map: how a guest contact gets classified and routed, what the
   Duckie AI agent can and can't resolve on its own, the full guest email
   calendar, SpokePhone's role, and the recovery loop for an at-risk stay,
