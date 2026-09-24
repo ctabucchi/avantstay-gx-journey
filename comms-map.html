@@ -104,28 +104,6 @@
   tr td:first-child{font-weight:700;color:var(--ink);white-space:nowrap;}
   td.flag{color:var(--flag);font-style:italic;}
 
-  /* Full touchpoint timeline (pre-stay through post-stay) */
-  .tl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:4px;padding:24px 18px 18px;background:var(--paper);}
-  .tl-wrap:focus-visible{outline:3px solid var(--focus);}
-  .timeline{display:flex;align-items:stretch;gap:0;min-width:920px;}
-  .tl-zone{display:flex;flex-direction:column;padding:0 12px;border-right:1px dashed var(--line);}
-  .tl-zone:last-child{border-right:none;}
-  .tl-above{min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;}
-  .tl-below{min-height:64px;display:flex;flex-direction:column;justify-content:flex-start;gap:8px;}
-  .tl-divider{border-top:2px solid var(--ink);position:relative;margin:12px 0;}
-  .tl-divider span{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--paper);padding:0 10px;font-size:10px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:0.03em;white-space:nowrap;}
-  .tl-card{background:var(--surface);border-left:3px solid var(--p2);border-radius:4px;padding:8px 10px;font-size:11.5px;}
-  .tl-card.tl-upsell{border-left-color:var(--p1);}
-  .tl-card.tl-human{border-left-color:var(--p4);}
-  .tl-card.tl-new{border-style:dashed;border:1px dashed var(--line);border-left:3px dashed var(--flag);}
-  .tl-card-time{font-size:9.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.02em;margin-bottom:2px;}
-  .tl-card-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:3px;}
-  .tl-card-trigger{font-size:10.5px;color:var(--text);margin-bottom:3px;line-height:1.3;}
-  .tl-card-channel{font-size:9.5px;font-weight:700;color:var(--muted);text-decoration:underline;text-underline-offset:2px;}
-  .tl-legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin:14px 0 0;flex-wrap:wrap;list-style:none;padding-left:0;}
-  .tl-legend li{display:flex;align-items:center;gap:6px;}
-  .tl-legend .sw{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
-
   /* Direct-booking journey (vertical timeline) */
   .dj-types{display:flex;gap:8px 18px;flex-wrap:wrap;list-style:none;margin:0 0 28px;padding:0;font-size:12.5px;color:var(--muted);}
   .dj-types li{display:flex;align-items:center;gap:7px;}
@@ -285,12 +263,6 @@
               <p class="dj-card-trigger"><b>Trigger:</b> payment and IDV complete</p>
               <p class="dj-card-desc">Confirms the stay and links to the House Manual and Experiences.</p>
             </div>
-            <div class="dj-card upsell">
-              <div class="dj-card-top"><span class="dj-card-name">Early check-in offer</span><span class="dj-chip">In confirmation</span></div>
-              <p class="dj-card-trigger"><b>Trigger:</b> not VIP, early check-in available</p>
-              <p class="dj-card-desc">Included with the confirmation.</p>
-              <p class="dj-flag">Conflict: the timeline further down shows the ECI offer as a separate SMS about 6 days before check-in. The concierge deck puts it in the confirmation. Confirm which is current, or whether both happen.</p>
-            </div>
             <div class="dj-card">
               <div class="dj-card-top"><span class="dj-card-name">Guest invites</span><span class="dj-chip">Email</span></div>
               <p class="dj-card-trigger"><b>Trigger:</b> main booker adds guests to the reservation</p>
@@ -359,7 +331,8 @@
             <div class="dj-card">
               <div class="dj-card-top"><span class="dj-card-name">Check-in instructions</span><span class="dj-chip">Email</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-trigger"><b>Trigger:</b> paid, IDV and guest agreement complete</p>
-              <p class="dj-card-desc">Links to the Booking Hub for entry codes, directions, the house manual and upgrades. For a direct guest this is the first link into the Hub (copy in "Two paths to the Booking Hub" below).</p>
+              <p class="dj-card-desc">Links to the Booking Hub for entry codes, directions, the house manual and upgrades. For a direct guest this is the first link into the Hub.</p>
+              <p class="dj-flag">Copy to check: this message tells guests the local team "will reach out on check-in day," but the welcome text now sends 24 hours before check-in. The live template still says check-in day.</p>
             </div>
           </div>
         </div>
@@ -495,7 +468,7 @@ I look forward to connecting!
     </div>
     <div class="table-scroll" tabindex="0" role="region" aria-label="Touchpoint timeline by channel, scrollable">
       <table>
-        <caption>Check-in-instructions timing is confirmed against a real message example (see "Two paths to the Booking Hub" below). Other cells are directionally accurate but not independently re-verified per channel.</caption>
+        <caption>Check-in-instructions timing is confirmed against a real message example. Other cells are directionally accurate but not independently re-verified per channel.</caption>
         <thead>
           <tr><th scope="col">Channel</th><th scope="col">At booking</th><th scope="col">~3 days before check-in</th><th scope="col">24 hrs before check-in</th><th scope="col">A few hours after check-in</th><th scope="col">Checkout</th><th scope="col">In-stay contact channel</th></tr>
         </thead>
@@ -510,189 +483,6 @@ I look forward to connecting!
     </div>
     <p class="note-inline">Updated Sep 23, 2026: the local-team welcome text now sends 24 hours before check-in, and the wellness check a few hours after check-in.</p>
     <p class="note-inline">Booking.com and Expedia are grouped with VRBO and Direct throughout this page as "other OTA," following the same IDV/agreement gating—that grouping hasn't been independently verified against a Booking.com- or Expedia-specific real example the way Airbnb and the general OTA pattern have been.</p>
-  </div>
-</section>
-
-<section class="databar alt" aria-labelledby="fulltimeline-h">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag">The full touchpoint set</div>
-      <h2 id="fulltimeline-h">Every scheduled message, pre-stay through post-stay</h2>
-      <p>This is the fuller picture behind the table above: every fixed message and conditional upsell offer, positioned by timing rather than channel. Per everything documented on this site so far, this exact timeline runs the same way for Airbnb, VRBO, Direct, Expedia, and Booking.com—see "Where channels actually diverge" below the diagram for the specific places that's not true.</p>
-    </div>
-    <div class="tl-wrap" tabindex="0" role="region" aria-label="Full touchpoint timeline, pre-stay through post-stay, scrollable">
-      <div class="timeline">
-
-        <div class="tl-zone" style="flex:2.1;">
-          <div class="tl-above">
-            <div class="tl-card tl-upsell">
-              <div class="tl-card-time">~6 days before check-in</div>
-              <div class="tl-card-name">ECI Offer</div>
-              <div class="tl-card-trigger">Trigger: not VIP, early check-in available</div>
-              <div class="tl-card-channel">SMS</div>
-            </div>
-            <div class="tl-card">
-              <div class="tl-card-time">~3 days before check-in</div>
-              <div class="tl-card-name">Check-In Instructions</div>
-              <div class="tl-card-trigger">Trigger: paid, IDV, and agreement complete</div>
-              <div class="tl-card-channel">Email + SMS</div>
-            </div>
-          </div>
-          <div class="tl-divider"><span>Pre-stay</span></div>
-          <div class="tl-below">
-            <div class="tl-card tl-upsell">
-              <div class="tl-card-time">Pre-stay</div>
-              <div class="tl-card-name">Mid-Stay Clean Offer</div>
-              <div class="tl-card-trigger">Trigger: staying 3+ nights, not VIP, housekeeping available</div>
-              <div class="tl-card-channel">SMS</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tl-zone" style="flex:1.6;">
-          <div class="tl-above">
-            <div class="tl-card tl-human">
-              <div class="tl-card-time">24 hrs before check-in</div>
-              <div class="tl-card-name">Local-Team Welcome</div>
-              <div class="tl-card-trigger">From the local team's number</div>
-              <div class="tl-card-channel">SpokePhone SMS</div>
-            </div>
-            <div class="tl-card tl-new">
-              <div class="tl-card-time">Morning of check-in</div>
-              <div class="tl-card-name">Check-In Instructions (reminder)</div>
-              <div class="tl-card-trigger">Second send of the same instructions</div>
-              <div class="tl-card-channel">SMS</div>
-            </div>
-          </div>
-          <div class="tl-divider"><span>Check-in</span></div>
-          <div class="tl-below"></div>
-        </div>
-
-        <div class="tl-zone" style="flex:1.5;">
-          <div class="tl-above"></div>
-          <div class="tl-divider"><span>In-stay</span></div>
-          <div class="tl-below">
-            <div class="tl-card tl-human">
-              <div class="tl-card-time">A few hours after check-in</div>
-              <div class="tl-card-name">Wellness Check</div>
-              <div class="tl-card-trigger">Via SpokePhone, thumbs-up/thumbs-down</div>
-              <div class="tl-card-channel">SMS</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tl-zone" style="flex:1.4;">
-          <div class="tl-above">
-            <div class="tl-card tl-new">
-              <div class="tl-card-time">Day of checkout, 8am</div>
-              <div class="tl-card-name">Checkout Reminder</div>
-              <div class="tl-card-trigger">Trigger: same-day turnover</div>
-              <div class="tl-card-channel">SMS</div>
-            </div>
-          </div>
-          <div class="tl-divider"><span>Checkout</span></div>
-          <div class="tl-below">
-            <div class="tl-card tl-upsell tl-new">
-              <div class="tl-card-time">Day before checkout, 11am</div>
-              <div class="tl-card-name">LCO Offer</div>
-              <div class="tl-card-trigger">Trigger: not VIP, late checkout available</div>
-              <div class="tl-card-channel">SMS</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tl-zone" style="flex:1;">
-          <div class="tl-above"></div>
-          <div class="tl-divider"><span>Post-stay</span></div>
-          <div class="tl-below">
-            <div class="tl-card">
-              <div class="tl-card-time">Day of checkout</div>
-              <div class="tl-card-name">Post-Stay Survey</div>
-              <div class="tl-card-trigger">NPS + review ask</div>
-              <div class="tl-card-channel">SMS</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <ul class="tl-legend" aria-hidden="true">
-      <li><span class="sw" style="background:var(--p2)"></span>Fixed / informational</li>
-      <li><span class="sw" style="background:var(--p1)"></span>Conditional upsell offer</li>
-      <li><span class="sw" style="background:var(--p4)"></span>Human / local-team touch</li>
-      <li><span class="sw" style="background:var(--flag);border-radius:1px;transform:rotate(45deg);"></span>New or unconfirmed detail, dashed border</li>
-    </ul>
-    <p style="font-weight:700;color:var(--ink);font-size:15px;margin:32px 0 12px;">Where channels actually diverge</p>
-    <p style="font-size:13.5px;color:var(--text);max-width:74ch;">Based on everything documented across this site, only two things in this timeline actually change by channel:</p>
-    <ul style="font-size:13.5px;color:var(--text);max-width:74ch;padding-left:20px;">
-      <li>Airbnb replaces the IDV/agreement reminder cascade with its own at-booking confirmation message, since Airbnb handles identity verification inside its own flow—every other card above still applies to an Airbnb guest the same way.</li>
-      <li>At checkout, every OTA except Direct also sends its own separate review request outside AvantStay's control (see the table above)—the Post-Stay Survey card here is the AvantStay-side ask only.</li>
-    </ul>
-    <p class="note-inline">New or unconfirmed in this diagram, marked with a dashed border above: the second "morning of check-in" send of Check-In Instructions, and the "same-day turnover" trigger on the Checkout Reminder—this page previously documented the Checkout Reminder as going to "all guests," not just same-day-turnover stays. The local-team welcome now sends 24 hours before check-in, per the latest GX update (Sep 23, 2026). Worth confirming which version is current.</p>
-  </div>
-</section>
-
-<section class="databar" aria-labelledby="prearrival-h">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag">Before arrival</div>
-      <h2 id="prearrival-h">Two paths to the Booking Hub</h2>
-      <p>Every guest eventually gets access to the Booking Hub—check-in info, entry codes, the house manual, upgrades. When they first get there depends on channel; the check-in instructions message three days out goes to everyone the same way, once identity verification and the guest agreement are done.</p>
-    </div>
-    <ul class="path-grid">
-      <li class="path">
-        <div class="bar" style="background:var(--p2)" aria-hidden="true"></div>
-        <div class="trigger" style="color:var(--p2)">Direct, VRBO, Expedia, other OTAs</div>
-        <h3>Gated on IDV + signed guest agreement</h3>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">These channels don't verify identity or collect a signed agreement at booking, so AvantStay does—and there's no early Booking Hub link the way Airbnb guests get one. First contact is the same check-in instructions message every guest gets, three days out.</p>
-        <ul>
-          <li>Guest books, then completes ID verification and signs the guest agreement</li>
-          <li>Once both clear and it's within a few days of check-in, the check-in instructions message sends with a link into the Booking Hub</li>
-          <li>From there: the house manual, upgrades &amp; experiences, and entry codes are all self-serve in the Hub</li>
-        </ul>
-      </li>
-      <li class="path">
-        <div class="bar" style="background:var(--p4)" aria-hidden="true"></div>
-        <div class="trigger" style="color:var(--p4)">Airbnb</div>
-        <h3>ID + agreement happen inside Airbnb's own flow</h3>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">Airbnb verifies identity and collects agreement as part of its own booking flow, so there's no separate AvantStay gate to wait on—an automated confirmation sends right at booking with an early Booking Hub link, then the same check-in instructions message every guest gets follows three days out.</p>
-        <ul>
-          <li>An automated confirmation sends right at booking, not gated on a separate verification step</li>
-          <li>It asks the guest to confirm contact info and points them into the Booking Hub for check-in instructions, upgrades, and the house manual</li>
-          <li>Guest Experience's contact info is included for anything before check-in day</li>
-        </ul>
-      </li>
-    </ul>
-
-    <div class="msg-card">
-      <div class="msg-meta"><span>Airbnb</span><span>Sent at booking</span></div>
-      <div class="msg-body">Hi <i>[Guest Name]</i>,
-
-Thank you so much for choosing AvantStay to host your upcoming visit! To ensure seamless communication, please confirm your best contact email and phone number.
-
-You can also access the AvantStay Booking Hub to easily view your check-in instructions, upgrades &amp; experiences, parking details, wifi access, and house manual: <i>[Booking Hub link]</i>
-
-We're here to make your stay unforgettable and look forward to hosting you! Please reach out if you have any questions about your upcoming stay!
-
-Best,
-AvantStay Customer Experience Team</div>
-    </div>
-
-    <div class="msg-card">
-      <div class="msg-meta"><span>All guests, every channel</span><span>Sent 3 days before check-in, once IDV + agreement are complete</span></div>
-      <div class="msg-body">Hi <i>[Guest Name]</i> - Your stay with us is just around the corner. Here's what you need to know:
-
-Check-In Instructions: <i>[link]</i>
-
-Pro tip: Share these with your group so everyone has access!
-
-Our local team will reach out on check-in day. Need help before then? Our Guest Experience team is available 24/7: +1 (833) 442-8268
-
-- AvantStay</div>
-    </div>
-    <p class="note-inline">The Booking Hub itself (not shown) covers: Things to Know, Upgrades &amp; Experiences, Arrival &amp; Departure (home address with map/directions, per-unit entry codes and instructions), Technology &amp; Amenities, Manage Booking, and Get Help—plus an option to invite other guests on the reservation.</p>
-    <p class="note-inline" style="color:var(--flag);">Copy to check: this message tells guests the local team "will reach out on check-in day," but the welcome text now sends 24 hours before check-in. If the live template hasn't been updated, it should be.</p>
-    <p class="note-inline">This 3-days-out timing matches the "Check-In Instructions" row in the <a href="index.html#comms-h">vacation rental report's current comms map</a> exactly ("3 days before check-in, if paid/IDV/contract complete")—same touchpoint, just with the real message copy and Booking Hub detail attached here.</p>
   </div>
 </section>
 
