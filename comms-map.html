@@ -152,6 +152,8 @@
   .dj-card-name{font-size:14.5px;font-weight:700;color:var(--ink);margin-right:auto;}
   .dj-chip{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:2px 8px;white-space:nowrap;}
   .dj-card.gate .dj-chip{background:var(--surface);}
+  .dj-chip.spoke{color:var(--p4);border-color:var(--p4);}
+  .dj-numbers{font-size:13px;color:var(--text);max-width:74ch;margin:-14px 0 28px;}
   .dj-card-trigger{font-size:12.5px;color:var(--muted);margin:0 0 3px;}
   .dj-card-trigger b{color:var(--text);}
   .dj-card-desc{font-size:13.5px;color:var(--text);margin:0;}
@@ -257,6 +259,7 @@
       <li><span class="sw" style="background:var(--p4)"></span>Human / local-team touch</li>
       <li><span class="sw" style="background:var(--gate)"></span>Verification step, not a message</li>
     </ul>
+    <p class="dj-numbers"><b>Texts come from two different numbers.</b> Automated AvantStay messages come from the <b>main line</b> (marked "SMS – Main line"). The local team texts from its own <b>SpokePhone</b> number (marked "SpokePhone SMS"), so the guest ends up with two separate text threads.</p>
 
     <ol class="dj">
 
@@ -304,7 +307,7 @@
           <div class="dj-when"><b>Day after booking</b><span>Noon</span></div>
           <div class="dj-stack">
             <div class="dj-card concierge">
-              <div class="dj-card-top"><span class="dj-card-name">Concierge 1</span><span class="dj-chip">Email</span><span class="dj-chip">SMS</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Concierge 1</span><span class="dj-chip">Email</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-trigger"><b>Trigger:</b> standard booking</p>
               <p class="dj-card-desc">Introduces concierge services and offers to help plan the trip.</p>
               <p class="dj-branch"><b>Estates bookings:</b> get the Estates concierge email and a personal intro SMS instead (sample below).</p>
@@ -316,7 +319,7 @@
           <div class="dj-when"><b>14 days before check-in</b></div>
           <div class="dj-stack">
             <div class="dj-card concierge">
-              <div class="dj-card-top"><span class="dj-card-name">Concierge 1 reminder</span><span class="dj-chip">Email</span><span class="dj-chip">SMS</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Concierge 1 reminder</span><span class="dj-chip">Email</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-trigger"><b>Trigger:</b> standard booking</p>
               <p class="dj-card-desc">A second nudge about concierge services.</p>
               <p class="dj-flag">Unconfirmed: what happens for bookings made less than 2 weeks out, and whether the reminder uses both channels.</p>
@@ -328,7 +331,7 @@
           <div class="dj-when"><b>7 days before check-in</b></div>
           <div class="dj-stack">
             <div class="dj-card concierge">
-              <div class="dj-card-top"><span class="dj-card-name">Concierge 2</span><span class="dj-chip">Email</span><span class="dj-chip">SMS</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Concierge 2</span><span class="dj-chip">Email</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-trigger"><b>Trigger:</b> guest hasn't replied to Concierge 1</p>
               <p class="dj-card-desc">Last concierge message before arrival prep begins.</p>
             </div>
@@ -343,7 +346,7 @@
               <p class="dj-card-desc">The check-in form becomes available to the guest.</p>
             </div>
             <div class="dj-card upsell">
-              <div class="dj-card-top"><span class="dj-card-name">Mid-stay clean offer</span><span class="dj-chip">SMS</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Mid-stay clean offer</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-trigger"><b>Trigger:</b> 3+ nights, not VIP, housekeeping available</p>
             </div>
           </div>
@@ -353,7 +356,7 @@
           <div class="dj-when"><b>3 days before check-in</b></div>
           <div class="dj-stack">
             <div class="dj-card">
-              <div class="dj-card-top"><span class="dj-card-name">Check-in instructions</span><span class="dj-chip">Email</span><span class="dj-chip">SMS</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Check-in instructions</span><span class="dj-chip">Email</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-trigger"><b>Trigger:</b> paid, IDV and guest agreement complete</p>
               <p class="dj-card-desc">Links to the Booking Hub for entry codes, directions, the house manual and upgrades. For a direct guest this is the first link into the Hub (copy in "Two paths to the Booking Hub" below).</p>
             </div>
@@ -365,25 +368,26 @@
         <div class="dj-phase-head"><span class="dj-phase-num">Phase 3</span><h3>Check-in &amp; in-stay</h3><p>Handoff to the local team</p></div>
 
         <div class="dj-row">
-          <div class="dj-when"><b>Morning of check-in</b></div>
+          <div class="dj-when"><b>24 hours before check-in</b></div>
           <div class="dj-stack">
-            <div class="dj-card">
-              <div class="dj-card-top"><span class="dj-card-name">Detailed check-in instructions</span><span class="dj-chip">SMS</span></div>
-              <p class="dj-card-desc">The instructions again, on arrival day.</p>
-            </div>
-            <div class="dj-card upsell">
-              <div class="dj-card-top"><span class="dj-card-name">GoPuff offer</span><span class="dj-chip">SMS</span></div>
-              <p class="dj-card-trigger"><b>Trigger:</b> property is in a GoPuff market</p>
+            <div class="dj-card human">
+              <div class="dj-card-top"><span class="dj-card-name">Local-team welcome</span><span class="dj-chip spoke">SpokePhone SMS</span></div>
+              <p class="dj-card-desc">Automated welcome from the local team's SpokePhone number. It shows up as a new text thread, and it's the number the guest uses for the rest of the stay.</p>
             </div>
           </div>
         </div>
 
         <div class="dj-row">
-          <div class="dj-when"><b>2 hours before check-in</b></div>
+          <div class="dj-when"><b>Morning of check-in</b></div>
           <div class="dj-stack">
-            <div class="dj-card human">
-              <div class="dj-card-top"><span class="dj-card-name">Local-team welcome</span><span class="dj-chip">SMS</span></div>
-              <p class="dj-card-desc">Automated welcome sent from the local team's number via SpokePhone (or RingCentral). It shows up as a new text thread, and it's the number the guest uses for the rest of the stay.</p>
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Detailed check-in instructions</span><span class="dj-chip">SMS – Main line</span></div>
+              <p class="dj-card-desc">The instructions again, on arrival day.</p>
+            </div>
+            <div class="dj-card upsell">
+              <div class="dj-card-top"><span class="dj-card-name">GoPuff offer</span><span class="dj-chip">SMS – Main line</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> property is in a GoPuff market</p>
+              <p class="dj-flag">Unconfirmed: this timing comes from the older Feb 2023 comms map in the vacation rental report. It isn't in the current concierge timeline deck.</p>
             </div>
           </div>
         </div>
@@ -392,8 +396,8 @@
           <div class="dj-when"><b>A few hours after check-in</b></div>
           <div class="dj-stack">
             <div class="dj-card human">
-              <div class="dj-card-top"><span class="dj-card-name">Wellness check</span><span class="dj-chip">SMS</span></div>
-              <p class="dj-card-desc">"How's everything going?" with a thumbs-up / thumbs-down reply, via SpokePhone.</p>
+              <div class="dj-card-top"><span class="dj-card-name">Wellness check</span><span class="dj-chip spoke">SpokePhone SMS</span></div>
+              <p class="dj-card-desc">"How's everything going?" with a thumbs-up / thumbs-down reply.</p>
             </div>
           </div>
         </div>
@@ -401,12 +405,8 @@
         <div class="dj-row">
           <div class="dj-when"><b>Anytime during the stay</b></div>
           <div class="dj-stack">
-            <div class="dj-card upsell">
-              <div class="dj-card-top"><span class="dj-card-name">Service payment link</span><span class="dj-chip">SMS</span></div>
-              <p class="dj-card-trigger"><b>Trigger:</b> a value-added service or concierge booking is added to the stay</p>
-            </div>
             <div class="dj-card human">
-              <div class="dj-card-top"><span class="dj-card-name">Guest-initiated contact</span><span class="dj-chip">SMS</span><span class="dj-chip">Email</span><span class="dj-chip">Phone</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Guest-initiated contact</span><span class="dj-chip spoke">SpokePhone SMS</span><span class="dj-chip">Phone</span></div>
               <p class="dj-card-desc">Direct guests have no OTA portal, so they reach AvantStay directly: the local team on SpokePhone, or GX 24/7 at (833) 442-8268.</p>
             </div>
           </div>
@@ -420,7 +420,7 @@
           <div class="dj-when"><b>Day before checkout</b><span>11:00 AM</span></div>
           <div class="dj-stack">
             <div class="dj-card upsell">
-              <div class="dj-card-top"><span class="dj-card-name">Late checkout offer</span><span class="dj-chip">SMS</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Late checkout offer</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-trigger"><b>Trigger:</b> not VIP, late checkout available</p>
             </div>
           </div>
@@ -430,7 +430,7 @@
           <div class="dj-when"><b>Checkout day</b><span>8:00 AM</span></div>
           <div class="dj-stack">
             <div class="dj-card">
-              <div class="dj-card-top"><span class="dj-card-name">Checkout reminder</span><span class="dj-chip">SMS</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Checkout reminder</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-trigger"><b>Trigger:</b> same-day turnover scheduled</p>
             </div>
           </div>
@@ -440,7 +440,7 @@
           <div class="dj-when"><b>After checkout</b></div>
           <div class="dj-stack">
             <div class="dj-card">
-              <div class="dj-card-top"><span class="dj-card-name">Post-stay survey</span><span class="dj-chip">SMS</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Post-stay survey</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-desc">NPS plus a review ask. If the stay had no negative sentiment, it counts as neutral-to-good and further review follow-ups go out. Direct guests don't get an OTA review request, so this is the only one they see.</p>
             </div>
           </div>
@@ -555,17 +555,17 @@ I look forward to connecting!
 
         <div class="tl-zone" style="flex:1.6;">
           <div class="tl-above">
+            <div class="tl-card tl-human">
+              <div class="tl-card-time">24 hrs before check-in</div>
+              <div class="tl-card-name">Local-Team Welcome</div>
+              <div class="tl-card-trigger">From the local team's number</div>
+              <div class="tl-card-channel">SpokePhone SMS</div>
+            </div>
             <div class="tl-card tl-new">
               <div class="tl-card-time">Morning of check-in</div>
               <div class="tl-card-name">Check-In Instructions (reminder)</div>
               <div class="tl-card-trigger">Second send of the same instructions</div>
               <div class="tl-card-channel">SMS</div>
-            </div>
-            <div class="tl-card tl-human tl-new">
-              <div class="tl-card-time">Check-in day, ~2 hrs before</div>
-              <div class="tl-card-name">Local-Team Welcome</div>
-              <div class="tl-card-trigger">Via SpokePhone (or RingCentral)</div>
-              <div class="tl-card-channel">Call / SMS</div>
             </div>
           </div>
           <div class="tl-divider"><span>Check-in</span></div>
@@ -639,7 +639,7 @@ I look forward to connecting!
       <li>Airbnb replaces the IDV/agreement reminder cascade with its own at-booking confirmation message, since Airbnb handles identity verification inside its own flow—every other card above still applies to an Airbnb guest the same way.</li>
       <li>At checkout, every OTA except Direct also sends its own separate review request outside AvantStay's control (see the table above)—the Post-Stay Survey card here is the AvantStay-side ask only.</li>
     </ul>
-    <p class="note-inline">New or unconfirmed in this diagram, marked with a dashed border above: the second "morning of check-in" send of Check-In Instructions, the specific 2-hour-before-check-in timing and RingCentral fallback on the local-team welcome, and the "same-day turnover" trigger on the Checkout Reminder—this page previously documented the welcome text as sent generally "check-in day" via SpokePhone only, and the Checkout Reminder as going to "all guests," not just same-day-turnover stays. Worth confirming which version is current.</p>
+    <p class="note-inline">New or unconfirmed in this diagram, marked with a dashed border above: the second "morning of check-in" send of Check-In Instructions, and the "same-day turnover" trigger on the Checkout Reminder—this page previously documented the Checkout Reminder as going to "all guests," not just same-day-turnover stays. The local-team welcome now sends 24 hours before check-in, per the latest GX update (Sep 23, 2026). Worth confirming which version is current.</p>
   </div>
 </section>
 
