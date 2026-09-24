@@ -384,11 +384,6 @@
               <div class="dj-card-top"><span class="dj-card-name">Detailed check-in instructions</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-desc">The instructions again, on arrival day.</p>
             </div>
-            <div class="dj-card upsell">
-              <div class="dj-card-top"><span class="dj-card-name">GoPuff offer</span><span class="dj-chip">SMS – Main line</span></div>
-              <p class="dj-card-trigger"><b>Trigger:</b> property is in a GoPuff market</p>
-              <p class="dj-flag">Unconfirmed: this timing comes from the older Feb 2023 comms map in the vacation rental report. It isn't in the current concierge timeline deck.</p>
-            </div>
           </div>
         </div>
 
@@ -501,7 +496,7 @@ I look forward to connecting!
       <table>
         <caption>Check-in-instructions timing is confirmed against a real message example (see "Two paths to the Booking Hub" below). Other cells are directionally accurate but not independently re-verified per channel.</caption>
         <thead>
-          <tr><th scope="col">Channel</th><th scope="col">At booking</th><th scope="col">~3 days before check-in</th><th scope="col">Check-in day</th><th scope="col">A few hours after check-in</th><th scope="col">Checkout</th><th scope="col">In-stay contact channel</th></tr>
+          <tr><th scope="col">Channel</th><th scope="col">At booking</th><th scope="col">~3 days before check-in</th><th scope="col">24 hrs before check-in</th><th scope="col">A few hours after check-in</th><th scope="col">Checkout</th><th scope="col">In-stay contact channel</th></tr>
         </thead>
         <tbody>
           <tr><td>Airbnb</td><td>Airbnb-specific message: confirm contact info, early Booking Hub link (IDV/agreement handled inside Airbnb's own flow)</td><td>Check-in instructions—the same message every channel gets</td><td>SpokePhone welcome from the local team</td><td>Wellness check via SpokePhone, thumbs-up/thumbs-down</td><td>AvantStay's checkout &amp; review ask, plus Airbnb's own separate review request</td><td>Airbnb message thread—GX-only, the local team can't see it</td></tr>
@@ -512,7 +507,7 @@ I look forward to connecting!
         </tbody>
       </table>
     </div>
-    <p class="note-inline">Flag before treating this as final: one outline for this table described the local-team welcome text as sent the <i>day before</i> check-in, and the wellness check as sent <i>on</i> check-in day. The version documented further down this page—sourced from a real message example and the latest internal direction—has the welcome text sent <i>on</i> check-in day and the wellness check a few hours <i>after</i> check-in. Worth confirming which is current before this table is treated as settled.</p>
+    <p class="note-inline">Updated Sep 23, 2026: the local-team welcome text now sends 24 hours before check-in, and the wellness check a few hours after check-in.</p>
     <p class="note-inline">Booking.com and Expedia are grouped with VRBO and Direct throughout this page as "other OTA," following the same IDV/agreement gating—that grouping hasn't been independently verified against a Booking.com- or Expedia-specific real example the way Airbnb and the general OTA pattern have been.</p>
   </div>
 </section>
@@ -569,14 +564,7 @@ I look forward to connecting!
             </div>
           </div>
           <div class="tl-divider"><span>Check-in</span></div>
-          <div class="tl-below">
-            <div class="tl-card tl-upsell">
-              <div class="tl-card-time">Day of check-in</div>
-              <div class="tl-card-name">GoPuff Offer</div>
-              <div class="tl-card-trigger">Trigger: property in a GoPuff market</div>
-              <div class="tl-card-channel">SMS</div>
-            </div>
-          </div>
+          <div class="tl-below"></div>
         </div>
 
         <div class="tl-zone" style="flex:1.5;">
@@ -702,6 +690,7 @@ Our local team will reach out on check-in day. Need help before then? Our Guest 
 - AvantStay</div>
     </div>
     <p class="note-inline">The Booking Hub itself (not shown) covers: Things to Know, Upgrades &amp; Experiences, Arrival &amp; Departure (home address with map/directions, per-unit entry codes and instructions), Technology &amp; Amenities, Manage Booking, and Get Help—plus an option to invite other guests on the reservation.</p>
+    <p class="note-inline" style="color:var(--flag);">Copy to check: this message tells guests the local team "will reach out on check-in day," but the welcome text now sends 24 hours before check-in. If the live template hasn't been updated, it should be.</p>
     <p class="note-inline">This 3-days-out timing matches the "Check-In Instructions" row in the <a href="index.html#comms-h">vacation rental report's current comms map</a> exactly ("3 days before check-in, if paid/IDV/contract complete")—same touchpoint, just with the real message copy and Booking Hub detail attached here.</p>
   </div>
 </section>
@@ -709,12 +698,12 @@ Our local team will reach out on check-in day. Need help before then? Our Guest 
 <section class="databar alt" aria-labelledby="checkin-h">
   <div class="wrap">
     <div class="section-head">
-      <div class="tag">Check-in day</div>
+      <div class="tag">24 hours before check-in</div>
       <h2 id="checkin-h">A new thread appears</h2>
-      <p>On check-in day, the guest gets a welcome text sent via SpokePhone from "the local team"—a different number than anything they've seen so far, so it shows up as a brand-new text thread on their phone, separate from whatever OTA or booking-confirmation messages came before.</p>
+      <p>24 hours before check-in, the guest gets a welcome text sent via SpokePhone from "the local team"—a different number than anything they've seen so far, so it shows up as a brand-new text thread on their phone, separate from whatever OTA or booking-confirmation messages came before.</p>
     </div>
     <div class="msg-card">
-      <div class="msg-meta"><span>SMS, via SpokePhone</span><span>Sent by the local team, check-in day</span></div>
+      <div class="msg-meta"><span>SMS, via SpokePhone</span><span>Sent by the local team, 24 hours before check-in</span></div>
       <div class="msg-body">Hi <i>[Guest Name]</i>! Welcome to <i>[Property Name]</i>! We are the local AvantStay team and we're so excited to host you.
 
 Please don't hesitate to reach out with any questions! We'll be available from <i>[local team hours]</i> at this number. If you have an after-hours emergency please call our awesome customer experience team at (833) 442-8268.
@@ -763,7 +752,7 @@ We hope you have a wonderful stay!</div>
       </li>
       <li>
         <p class="flow-name">Field takes ownership</p>
-        <p class="flow-desc">Field acknowledges in the case comments and owns all guest communication via Spoke through resolution. "Field" is the internal name for the same team the check-in day welcome text calls "the local team."</p>
+        <p class="flow-desc">Field acknowledges in the case comments and owns all guest communication via Spoke through resolution. "Field" is the internal name for the same team the welcome text calls "the local team."</p>
       </li>
       <li>
         <p class="flow-name">GX closes the loop</p>
