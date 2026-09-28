@@ -78,7 +78,7 @@
 
   /* Compare grid */
   .grid-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--paper);}
-  .grid{display:grid;min-width:max-content;}
+  .grid{display:grid;width:max-content;--lane-w:170px;}
   .g-corner,.g-stage,.g-col,.g-lane,.g-cell{border-bottom:1px solid var(--line);}
   .g-corner{position:sticky;left:0;z-index:3;background:var(--paper);border-right:1px solid var(--line);}
   .g-stage{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#fff;background:var(--ink);padding:6px 10px;border-right:1px solid rgba(255,255,255,0.25);}
@@ -164,6 +164,9 @@
   @media (max-width:700px){
     .wrap,.controls .wrap,.topbar .wrap{padding-left:16px;padding-right:16px;}
     .hero h1{font-size:28px;}
+    .grid{--lane-w:112px;}
+    .g-lane{padding:8px;}
+    .g-lane button{font-size:14px;}
     .flow{flex-direction:column;min-width:0;}
     .f-stage{border-right:none;margin-bottom:18px;}
     .f-cols{flex-direction:column;border-left:2px solid var(--ink);margin:10px 0 0 6px;}
@@ -380,7 +383,7 @@ function renderLegend(){
 }
 
 function renderCompare(){
-  const colsTpl = `170px repeat(${COLS.length}, minmax(150px, 1fr))`;
+  const colsTpl = `var(--lane-w) repeat(${COLS.length}, 164px)`;
   let h = `<div class="grid-scroll" tabindex="0" role="region" aria-label="All channels compared, scrollable"><div class="grid" style="grid-template-columns:${colsTpl}">`;
   h += `<div class="g-corner" style="grid-row:span 2"></div>`;
   STAGES.forEach(s => { const n = COLS.filter(c => c.stage === s.id).length; h += `<div class="g-stage" style="grid-column:span ${n}">${s.name}</div>`; });
