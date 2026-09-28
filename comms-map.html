@@ -132,8 +132,31 @@
   .dj-chip{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:2px 8px;white-space:nowrap;}
   .dj-card.gate .dj-chip{background:var(--surface);}
   .section-head p.dj-scope{display:inline-block;margin:2px 0 14px;padding:5px 12px;font-size:13.5px;color:var(--ink);background:rgba(83,195,208,0.14);border-radius:14px;}
+  .dj-chip.upsell-tag{color:#fff;background:var(--p1);border-color:var(--p1);}
+  .dj-idea{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:600;color:#7A5A12;background:#FDF3D9;border:1px solid #EBD9A6;border-radius:12px;padding:3px 10px;text-decoration:none;}
+  .dj-idea:hover{background:#FAE9BC;}
+  .dj-senders{background:var(--surface);border-radius:4px;padding:14px 16px 6px;margin:-12px 0 30px;max-width:980px;}
+  .dj-senders-title{font-size:13px;font-weight:700;color:var(--ink);margin:0 0 10px;}
+  .dj-senders dl{margin:0;display:grid;gap:8px;}
+  .dj-senders dl div{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:baseline;}
+  .dj-senders dt{margin:0;}
+  .dj-senders dd{margin:0 0 8px;font-size:13px;color:var(--text);}
+  .dj-flag-inline{color:var(--flag);font-style:italic;}
+  @media (max-width:560px){.dj-senders dl div{grid-template-columns:1fr;gap:4px;}}
+  .ideas{background:#FFFBEF;border-top:1px solid #EBD9A6;border-bottom:1px solid #EBD9A6;}
+  .ideas .section-head .tag{color:#7A5A12;}
+  .idea-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;list-style:none;margin:0;padding:0;}
+  .idea-card{background:var(--paper);border:1px dashed #D9C48A;border-radius:6px;padding:16px 18px;scroll-margin-top:20px;}
+  .idea-card:target{outline:3px solid #F2C14E;outline-offset:2px;}
+  .idea-card h3{font-size:16.5px;margin:4px 0 6px;}
+  .idea-card p{font-size:13.5px;margin:0;}
+  .idea-card .idea-where{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted);margin-top:10px;}
+  .idea-status{display:inline-block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;border-radius:10px;padding:2px 9px;}
+  .idea-status.new{background:#E3F4F6;color:var(--p4);}
+  .idea-status.discussed{background:#E8EEF5;color:var(--p2);}
+  .idea-status.blocked{background:#F6E6E0;color:var(--p1);}
+  .idea-status.partial{background:#FDF3D9;color:#7A5A12;}
   .dj-chip.spoke{color:var(--p4);border-color:var(--p4);}
-  .dj-numbers{font-size:13px;color:var(--text);max-width:74ch;margin:-14px 0 28px;}
   .dj-card-trigger{font-size:12.5px;color:var(--muted);margin:0 0 3px;}
   .dj-card-trigger b{color:var(--text);}
   .dj-card-desc{font-size:13.5px;color:var(--text);margin:0;}
@@ -240,7 +263,16 @@
       <li><span class="sw" style="background:var(--p4)"></span>Human / local-team touch</li>
       <li><span class="sw" style="background:var(--gate)"></span>Verification step, not a message</li>
     </ul>
-    <p class="dj-numbers"><b>Texts come from two different numbers.</b> Automated AvantStay messages come from the <b>main line</b> (marked "SMS – Main line"). The local team texts from its own <b>SpokePhone</b> number (marked "SpokePhone SMS"), so the guest ends up with two separate text threads.</p>
+    <div class="dj-senders">
+      <p class="dj-senders-title">Who each message comes from</p>
+      <dl>
+        <div><dt><span class="dj-chip">SMS – Main line</span></dt><dd>AvantStay's main texting number. Sends all automated texts.</dd></div>
+        <div><dt><span class="dj-chip spoke">SpokePhone SMS</span></dt><dd>The local team's own number, one per market. It starts with the welcome text, so the guest ends up with a second, separate text thread.</dd></div>
+        <div><dt><span class="dj-chip">Email</span></dt><dd>Automated AvantStay emails: confirmation, check-in instructions and concierge marketing.</dd></div>
+        <div><dt><span class="dj-chip">Concierge</span></dt><dd>A concierge agent emailing or texting by hand. Used for the specialized tracks below the timeline.</dd></div>
+        <div><dt><span class="dj-chip">GX</span></dt><dd>Guest Experience, 24/7: (833) 442-8268 or experience@avantstay.com. <span class="dj-flag-inline">The email address is from the Feb 2023 deck; confirm it's current.</span></dd></div>
+      </dl>
+    </div>
 
     <ol class="dj">
 
@@ -277,6 +309,19 @@
 
       <li class="dj-phase">
         <div class="dj-phase-head"><span class="dj-phase-num">Phase 2</span><h3>Pre-stay</h3><p>Concierge outreach, then arrival prep</p></div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Anytime before check-in</b><span>When a gap opens</span></div>
+          <div class="dj-stack">
+            <div class="dj-card upsell">
+              <div class="dj-card-top"><span class="dj-card-name">Extend your stay (orphan night)</span><span class="dj-chip upsell-tag">Upsell</span><span class="dj-chip">Email</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> another booking leaves a single open night next to this stay</p>
+              <p class="dj-card-desc">Offers the guest that night so they can extend their stay, instead of it going unsold.</p>
+              <p class="dj-flag">From the Feb 2023 deck ("Opportunity to Extend Your Stay"). Confirm it still runs, and whether it's also sent during the stay.</p>
+              <a class="dj-idea" href="#idea-orphan">💡 Idea: better orphan-night deals</a>
+            </div>
+          </div>
+        </div>
 
         <div class="dj-row">
           <div class="dj-when"><b>Day after booking</b><span>Noon</span></div>
@@ -316,13 +361,15 @@
         <div class="dj-row">
           <div class="dj-when"><b>6 days before check-in</b></div>
           <div class="dj-stack">
-            <div class="dj-card">
-              <div class="dj-card-top"><span class="dj-card-name">Check-in form goes live</span></div>
-              <p class="dj-card-desc">Listed in the concierge timeline deck as "Live CI Form" at 6 days before check-in.</p>
-              <p class="dj-flag">Still being confirmed with the team: what this form is, where the guest sees it, and whether it only applies to Estates properties.</p>
+            <div class="dj-card gate">
+              <div class="dj-card-top"><span class="dj-card-name">Live check-in steps</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> the property requires live check-in</p>
+              <p class="dj-card-desc">A few properties need an extra step before the guest can check in.</p>
+              <p class="dj-branch"><b>Palm Springs:</b> a video call with the guest.<br><b>Big Bear:</b> the guest signs a Big Bear-specific waiver.</p>
+              <p class="dj-flag">To confirm: exact timing and channel. The concierge deck lists this at 6 days out; the Feb 2023 deck had Big Bear's steps at 3 days before check-in.</p>
             </div>
             <div class="dj-card upsell">
-              <div class="dj-card-top"><span class="dj-card-name">Mid-stay clean offer</span><span class="dj-chip">SMS – Main line</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Mid-stay clean offer</span><span class="dj-chip upsell-tag">Upsell</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-trigger"><b>Trigger:</b> 3+ nights, not VIP, housekeeping available</p>
             </div>
           </div>
@@ -350,6 +397,7 @@
             <div class="dj-card human">
               <div class="dj-card-top"><span class="dj-card-name">Local-team welcome</span><span class="dj-chip spoke">SpokePhone SMS</span></div>
               <p class="dj-card-desc">Automated welcome from the local team's SpokePhone number. It shows up as a new text thread, and it's the number the guest uses for the rest of the stay.</p>
+              <a class="dj-idea" href="#idea-welcome">💡 Idea: a personalized welcome with address and check-in steps</a>
             </div>
           </div>
         </div>
@@ -360,6 +408,7 @@
             <div class="dj-card">
               <div class="dj-card-top"><span class="dj-card-name">Detailed check-in instructions</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-desc">The instructions again, on arrival day.</p>
+              <a class="dj-idea" href="#idea-checkin">💡 Ideas: a check-in emergency line, and a "your home is ready early" text</a>
             </div>
           </div>
         </div>
@@ -370,6 +419,7 @@
             <div class="dj-card human">
               <div class="dj-card-top"><span class="dj-card-name">Wellness check</span><span class="dj-chip spoke">SpokePhone SMS</span></div>
               <p class="dj-card-desc">"How's everything going?" with a thumbs-up / thumbs-down reply.</p>
+              <a class="dj-idea" href="#idea-thumbsdown">💡 Idea: turn a thumbs-down into a short form</a>
             </div>
           </div>
         </div>
@@ -378,7 +428,7 @@
           <div class="dj-when"><b>Anytime during the stay</b></div>
           <div class="dj-stack">
             <div class="dj-card human">
-              <div class="dj-card-top"><span class="dj-card-name">Guest-initiated contact</span><span class="dj-chip spoke">SpokePhone SMS</span><span class="dj-chip">Phone</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Guest-initiated contact</span><span class="dj-chip spoke">SpokePhone SMS</span><span class="dj-chip">GX</span></div>
               <p class="dj-card-desc">Direct guests have no OTA portal, so they reach AvantStay directly: the local team on SpokePhone, or GX 24/7 at (833) 442-8268.</p>
             </div>
           </div>
@@ -392,8 +442,9 @@
           <div class="dj-when"><b>Day before checkout</b><span>11:00 AM</span></div>
           <div class="dj-stack">
             <div class="dj-card upsell">
-              <div class="dj-card-top"><span class="dj-card-name">Late checkout offer</span><span class="dj-chip">SMS – Main line</span></div>
+              <div class="dj-card-top"><span class="dj-card-name">Late checkout offer</span><span class="dj-chip upsell-tag">Upsell</span><span class="dj-chip">SMS – Main line</span></div>
               <p class="dj-card-trigger"><b>Trigger:</b> not VIP, late checkout available</p>
+              <a class="dj-idea" href="#idea-lco">💡 Idea: free late checkout when available</a>
             </div>
           </div>
         </div>
@@ -459,6 +510,54 @@ I look forward to connecting!
 - AvantStay Concierge</div>
     </div>
     <p class="note-inline">The Concierge 1 and Concierge 2 email and SMS templates, and the member introduction email, exist in the concierge team's timeline deck as screenshots. Their copy isn't reproduced here yet.</p>
+  </div>
+</section>
+
+<section class="ideas" aria-labelledby="ideas-h" id="ideas">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Not live yet</div>
+      <h2 id="ideas-h">Ideas &amp; opportunities</h2>
+      <p>Improvements the GX team has proposed or discussed. None of these reach guests today. They're kept separate so the timeline above only shows what actually happens. The 💡 links on timeline cards jump to the related idea here.</p>
+    </div>
+    <ul class="idea-grid">
+      <li class="idea-card" id="idea-thumbsdown">
+        <span class="idea-status new">New idea</span>
+        <p class="idea-where">Wellness check</p>
+        <h3>Turn a thumbs-down into a short form</h3>
+        <p>A thumbs-down opens a quick form: pick what's wrong from a dropdown, add notes, and flag how urgent it is. The team responds the same way every time and can tackle the most urgent issues first.</p>
+      </li>
+      <li class="idea-card" id="idea-welcome">
+        <span class="idea-status blocked">Discussed · blocked on product capacity</span>
+        <p class="idea-where">Local-team welcome</p>
+        <h3>A more personalized welcome text</h3>
+        <p>Include the guest's Booking Hub link and repeat the address and check-in instructions: the most time-sensitive and most-asked information. Seen as a big value add and a way to prevent a lot of incoming questions.</p>
+      </li>
+      <li class="idea-card" id="idea-checkin">
+        <span class="idea-status new">New idea</span>
+        <p class="idea-where">Check-in day</p>
+        <h3>A dedicated line for check-in problems</h3>
+        <p>Check-in issues are some of the worst guest experiences. A dedicated emergency line would route to IOT first, with GX as overflow, taking that load off the field team.</p>
+      </li>
+      <li class="idea-card">
+        <span class="idea-status discussed">Discussed before</span>
+        <p class="idea-where">Check-in day</p>
+        <h3>"Your home is ready early" text</h3>
+        <p>An automatic message when the home is ready before the scheduled check-in time.</p>
+      </li>
+      <li class="idea-card" id="idea-lco">
+        <span class="idea-status discussed">Discussed before</span>
+        <p class="idea-where">Late checkout offer</p>
+        <h3>Free late checkout when available</h3>
+        <p>Offer late checkout at no charge when the calendar allows, as a goodwill gesture instead of a paid upsell.</p>
+      </li>
+      <li class="idea-card" id="idea-orphan">
+        <span class="idea-status partial">Partly exists</span>
+        <p class="idea-where">Extend your stay</p>
+        <h3>Better orphan-night deals</h3>
+        <p>Spot gaps in the Tapechart and offer a deal to extend the stay, both before arrival and during the stay. Some version of this runs today, but it may not be fully built out.</p>
+      </li>
+    </ul>
   </div>
 </section>
 
@@ -630,6 +729,16 @@ We hope you have a wonderful stay!</div>
         <span class="gap-tag">Open question</span>
         <p class="gap-name">Response-time SLAs</p>
         <p class="gap-desc">How long before "the guest isn't answering back on SpokePhone" triggers the local-team-to-GX escalation? Not specified in the outline.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Coming next</span>
+        <p class="gap-name">A timeline for each booking channel</p>
+        <p class="gap-desc">The same timeline view as the direct booking, one per channel, so gaps and overlaps are easy to spot. Most OTAs share one flow; Airbnb is the main exception.</p>
+      </li>
+      <li class="gap-card">
+        <span class="gap-tag">Coming next</span>
+        <p class="gap-name">A full member journey</p>
+        <p class="gap-desc">Today members get a single introduction to a VIP concierge agent. The full member journey will get its own map.</p>
       </li>
     </ul>
   </div>
