@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AvantStay Journey Flow—By Channel</title>
+<meta name="description" content="A visual map of every guest message from booking to post-stay, split by booking channel, to spot gaps and overlaps at a glance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#022B54;
+    --accent:#53C3D0;
+    --link:#1C5D9F;
+    --paper:#FFFFFF;
+    --surface:#F4F7FA;
+    --line:#D9E1E8;
+    --text:#505051;
+    --muted:#6B6B6C;
+    --t-fixed:#2F5E8C;
+    --t-concierge:#7A5A12;
+    --t-upsell:#A34E34;
+    --t-human:#0C6270;
+    --t-gate:#8A95A0;
+    --t-ota:#6B4A8A;
+    --flag:#A34E34;
+    --focus:#0C6270;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--paper);color:var(--text);font-family:'Source Sans 3','Source Sans Pro',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.01em;color:var(--ink);}
+  p{margin:0 0 1em;}
+  a{color:var(--link);}
+  button{font:inherit;}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 32px;}
+
+  .skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--ink);color:#fff;padding:10px 16px;border-radius:2px;font-weight:600;font-size:14px;text-decoration:none;}
+  .skip-link:focus{top:12px;}
+  .topbar{background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.12);}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 32px;flex-wrap:wrap;}
+  .wordmark{font-family:'Fraunces',serif;font-weight:600;color:#fff;font-size:17px;}
+  .wordmark span{color:var(--accent);}
+  .topnav{display:flex;gap:4px;flex-wrap:wrap;}
+  .topnav a{font-size:12.5px;font-weight:600;color:#B9C6D1;text-decoration:none;padding:6px 12px;border-radius:12px;}
+  .topnav a:hover{color:#fff;}
+  .topnav a[aria-current="page"]{background:rgba(83,195,208,0.16);color:var(--accent);}
+  .topnav .wip{display:inline-block;margin-left:5px;padding:1px 6px;font-size:9.5px;font-weight:700;letter-spacing:0.05em;color:#022B54;background:#F2C14E;border-radius:8px;vertical-align:1px;}
+
+  .hero{background:var(--ink);color:#EAF0F4;padding:40px 0 36px;}
+  .hero .eyebrow{color:var(--accent);font-size:13px;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;}
+  .hero h1{font-size:36px;color:#fff;margin:0 0 12px;}
+  .hero p{max-width:74ch;font-size:16px;color:#C9D6E0;margin:0;}
+  .hero p + p{margin-top:10px;font-size:14px;color:#9FB0BD;}
+  .hero a{color:#fff;}
+
+  /* Controls */
+  .controls{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);}
+  .controls .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;padding:12px 32px;}
+  .tabs{display:flex;gap:4px;flex-wrap:wrap;}
+  .tab{border:1px solid var(--line);background:var(--paper);color:var(--ink);font-size:13.5px;font-weight:600;padding:7px 14px;border-radius:18px;cursor:pointer;}
+  .tab:hover{border-color:var(--ink);}
+  .tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .toggle{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;user-select:none;}
+  .toggle input{width:16px;height:16px;accent-color:var(--ink);}
+
+  main{padding:24px 0 48px;}
+  .view-intro{font-size:14.5px;color:var(--muted);max-width:90ch;margin:0 0 16px;}
+
+  /* Legend */
+  .legend{display:flex;flex-wrap:wrap;gap:6px 18px;list-style:none;margin:0 0 18px;padding:0;font-size:12.5px;color:var(--muted);}
+  .legend li{display:flex;align-items:center;gap:6px;}
+  .legend .sw{width:12px;height:12px;border-radius:3px;}
+  .legend .sw.dash{background:transparent;border:1.5px dashed var(--muted);}
+
+  /* Compare grid */
+  .grid-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--paper);}
+  .grid{display:grid;min-width:max-content;}
+  .g-corner,.g-stage,.g-col,.g-lane,.g-cell{border-bottom:1px solid var(--line);}
+  .g-corner{position:sticky;left:0;z-index:3;background:var(--paper);border-right:1px solid var(--line);}
+  .g-stage{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#fff;background:var(--ink);padding:6px 10px;border-right:1px solid rgba(255,255,255,0.25);}
+  .g-col{padding:8px 10px;background:var(--surface);border-right:1px solid var(--line);}
+  .g-col b{display:block;font-size:12.5px;color:var(--ink);line-height:1.2;}
+  .g-col span{display:block;font-size:11px;color:var(--muted);}
+  .g-lane{position:sticky;left:0;z-index:2;background:var(--paper);border-right:1px solid var(--line);padding:10px 12px;display:flex;flex-direction:column;justify-content:center;gap:4px;}
+  .g-lane button{all:unset;cursor:pointer;font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--ink);}
+  .g-lane button:hover{text-decoration:underline;}
+  .g-lane button:focus-visible{outline:3px solid var(--focus);outline-offset:2px;}
+  .g-lane small{font-size:11px;color:var(--muted);}
+  .g-cell{padding:8px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px;min-height:64px;}
+  .g-cell.empty{background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(2,43,84,0.025) 6px 12px);}
+
+  .node{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;background:var(--surface);border-left:4px solid var(--c);border-radius:4px;padding:6px 8px;font-size:12px;line-height:1.25;color:var(--ink);transition:opacity .15s,box-shadow .15s;}
+  .node:hover{box-shadow:0 1px 4px rgba(2,43,84,0.18);}
+  .node:focus-visible{outline:3px solid var(--focus);outline-offset:1px;}
+  .node b{display:block;font-weight:700;}
+  .node .snd{display:block;font-size:10.5px;color:var(--muted);margin-top:2px;}
+  .node.assumed{background:var(--paper);border:1.5px dashed var(--c);border-left-width:4px;}
+  .node.assumed b::after{content:" ?";color:var(--flag);}
+  .node.dim{opacity:0.22;}
+  .node.is-active{box-shadow:0 0 0 2px var(--ink);}
+
+  .insight{display:block;width:100%;box-sizing:border-box;border:0;text-align:left;font:inherit;font-size:11px;font-weight:700;border-radius:4px;padding:5px 7px;line-height:1.25;cursor:pointer;}
+  .insight:focus-visible{outline:3px solid var(--focus);}
+  .insight.overlap{background:#FDF3D9;color:#7A5A12;}
+  .insight.gap{background:#F6E6E0;color:var(--flag);}
+  .insight.split{background:#EEE8F4;color:var(--t-ota);}
+
+  /* Channel flow */
+  .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:0 0 22px;}
+  .sum-card{border:1px solid var(--line);border-radius:6px;padding:14px 16px;background:var(--paper);}
+  .sum-card h3{font-size:15px;margin:0 0 8px;}
+  .sum-card ul{margin:0;padding-left:18px;font-size:13.5px;}
+  .sum-card li{margin-bottom:4px;}
+  .sum-card li button{all:unset;cursor:pointer;color:var(--link);text-decoration:underline;text-underline-offset:2px;}
+  .sum-card li button:focus-visible{outline:3px solid var(--focus);}
+  .sum-card .none{font-size:13.5px;color:var(--muted);margin:0;}
+  .sum-card.warn{border-color:#EBD9A6;background:#FFFBEF;}
+
+  .flow-scroll{overflow-x:auto;padding-bottom:6px;}
+  .flow{display:flex;gap:0;min-width:max-content;}
+  .f-stage{display:flex;flex-direction:column;border-right:1px dashed var(--line);}
+  .f-stage:last-child{border-right:none;}
+  .f-stage-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#fff;background:var(--ink);padding:6px 12px;margin:0 6px;border-radius:4px;}
+  .f-cols{display:flex;}
+  .f-col{width:200px;padding:0 10px;}
+  .f-when{position:relative;padding:14px 0 12px;margin-bottom:10px;}
+  .f-when::before{content:"";position:absolute;left:-10px;right:-10px;bottom:0;border-top:2px solid var(--ink);}
+  .f-when::after{content:"";position:absolute;left:0;bottom:-6px;width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--ink);}
+  .f-when b{display:block;font-size:13.5px;color:var(--ink);}
+  .f-when span{display:block;font-size:11.5px;color:var(--muted);}
+  .f-col .node{font-size:13px;padding:9px 10px;margin-bottom:8px;}
+  .f-col .node .trg{display:block;font-size:11.5px;color:var(--text);margin-top:4px;font-weight:400;}
+  .f-col .insight{margin-bottom:8px;font-size:12px;padding:7px 9px;}
+
+  /* Detail drawer */
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:380px;max-width:100%;background:var(--paper);border-left:1px solid var(--line);box-shadow:-8px 0 24px rgba(2,43,84,0.12);z-index:50;transform:translateX(105%);transition:transform .2s ease;display:flex;flex-direction:column;}
+  .drawer.open{transform:none;}
+  .drawer-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:18px 20px 12px;border-bottom:1px solid var(--line);}
+  .drawer-head h2{font-size:20px;margin:4px 0 0;}
+  .drawer-type{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;}
+  .drawer-close{border:1px solid var(--line);background:var(--paper);border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px;line-height:1;color:var(--ink);flex-shrink:0;}
+  .drawer-body{padding:16px 20px 24px;overflow-y:auto;font-size:14px;}
+  .drawer-body dl{margin:0;}
+  .drawer-body dt{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted);margin-top:14px;}
+  .drawer-body dd{margin:3px 0 0;color:var(--text);}
+  .chip{display:inline-block;font-size:11px;font-weight:700;border:1px solid var(--line);border-radius:10px;padding:2px 8px;margin:0 4px 4px 0;color:var(--ink);}
+  .chk{list-style:none;margin:4px 0 0;padding:0;}
+  .chk li{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--line);font-size:13.5px;}
+  .chk .y{color:var(--t-human);font-weight:700;}
+  .chk .a{color:var(--flag);font-weight:700;}
+  .chk .n{color:var(--muted);}
+  .src{font-size:12.5px;color:var(--flag);font-style:italic;}
+  .scrim{position:fixed;inset:0;background:rgba(2,43,84,0.25);z-index:40;display:none;}
+  .scrim.open{display:block;}
+
+  .note{border-top:1px solid var(--line);padding:28px 0;font-size:13px;color:var(--muted);}
+  .note ul{margin:8px 0 0;padding-left:18px;}
+  footer.site-footer{background:var(--ink);color:#9FB0BD;font-size:12.5px;padding:24px 0;}
+
+  @media (max-width:700px){
+    .wrap,.controls .wrap,.topbar .wrap{padding-left:16px;padding-right:16px;}
+    .hero h1{font-size:28px;}
+    .flow{flex-direction:column;min-width:0;}
+    .f-stage{border-right:none;margin-bottom:18px;}
+    .f-cols{flex-direction:column;border-left:2px solid var(--ink);margin:10px 0 0 6px;}
+    .f-col{width:auto;padding:0 0 0 16px;}
+    .f-when{padding:0 0 6px;margin-bottom:6px;}
+    .f-when::before{display:none;}
+    .f-when::after{left:-23px;top:3px;bottom:auto;}
+    .drawer{top:auto;width:100%;max-height:75vh;border-left:none;border-top:1px solid var(--line);border-radius:12px 12px 0 0;transform:translateY(105%);}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="wordmark">Avant<span>Stay</span></div>
+    <nav class="topnav" aria-label="Reports">
+      <a href="index.html">Vacation Rentals</a>
+      <a href="hotels.html">Hotels</a>
+      <a href="comms-map.html">Comms Map</a>
+      <a href="journey-flow.html" aria-current="page">Journey Flow<span class="wip">DRAFT</span></a>
+      <a href="cx-routing.html">CX Routing<span class="wip" title="Work in progress">WIP</span></a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Draft · Visual view of the comms map</div>
+    <h1>Every guest message, by booking channel.</h1>
+    <p>The same touchpoints as the <a href="comms-map.html">Comms Map</a>, laid out as a flow so it's easier to spot gaps and overlaps between channels. Compare all channels side by side, or open one channel to see its full workflow. Click any message for details.</p>
+    <p>Applies to all properties except hotels with front desks. Dashed cards with a "?" haven't been confirmed for that channel yet.</p>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap">
+    <div class="tabs" role="tablist" aria-label="View" id="tabs"></div>
+    <label class="toggle" id="diff-toggle"><input type="checkbox" id="diff"> Highlight differences</label>
+  </div>
+</div>
+
+<main id="main">
+  <div class="wrap">
+    <p class="view-intro" id="view-intro"></p>
+    <ul class="legend" id="legend" aria-label="Legend"></ul>
+    <div id="view"></div>
+  </div>
+</main>
+
+<div class="note">
+  <div class="wrap">
+    Sources: the Comms Map page, the concierge team's timeline deck, and the Feb 2023 "Automated Communication to Guests" deck.
+    <ul>
+      <li>Direct-booking cards match the Comms Map timeline. OTA cards reuse the shared flow unless a difference has been documented.</li>
+      <li>Items marked "?" come from older material or are assumed to apply. Treat them as questions for the team, not facts.</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">AvantStay Guest Experience—internal planning artifact, published for team reference.</div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="false" aria-labelledby="drawer-title" aria-hidden="true">
+  <div class="drawer-head">
+    <div><div class="drawer-type" id="drawer-type"></div><h2 id="drawer-title"></h2></div>
+    <button class="drawer-close" id="drawer-close" aria-label="Close details">×</button>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+</aside>
+
+<script>
+const CHANNELS = [
+  {id:'direct',  name:'Direct',      note:'Booked on AvantStay'},
+  {id:'airbnb',  name:'Airbnb',      note:'ID + agreement inside Airbnb'},
+  {id:'vrbo',    name:'VRBO',        note:'Shared OTA flow'},
+  {id:'bdc',     name:'Booking.com', note:'Shared OTA flow'},
+  {id:'expedia', name:'Expedia',     note:'Shared OTA flow'},
+];
+const ALL = CHANNELS.map(c => c.id);
+
+const STAGES = [
+  {id:'booking', name:'Booking'},
+  {id:'pre',     name:'Pre-stay'},
+  {id:'stay',    name:'Check-in & stay'},
+  {id:'out',     name:'Checkout & after'},
+];
+
+const COLS = [
+  {id:'book',  stage:'booking', label:'At booking'},
+  {id:'after', stage:'booking', label:'After booking', sub:'Hours to days'},
+  {id:'d1',    stage:'pre',     label:'Day after booking', sub:'Noon'},
+  {id:'d14',   stage:'pre',     label:'14 days out'},
+  {id:'d7',    stage:'pre',     label:'7 days out'},
+  {id:'d6',    stage:'pre',     label:'6 days out'},
+  {id:'d3',    stage:'pre',     label:'3 days out'},
+  {id:'h24',   stage:'stay',    label:'24 hrs before', sub:'check-in'},
+  {id:'ci',    stage:'stay',    label:'Check-in day'},
+  {id:'stay',  stage:'stay',    label:'During the stay'},
+  {id:'co1',   stage:'out',     label:'Day before checkout', sub:'11 AM'},
+  {id:'co',    stage:'out',     label:'Checkout day', sub:'8 AM'},
+  {id:'post',  stage:'out',     label:'After checkout'},
+];
+
+const TYPES = {
+  fixed:     {name:'Fixed / informational', color:'var(--t-fixed)'},
+  concierge: {name:'Concierge marketing',   color:'var(--t-concierge)'},
+  upsell:    {name:'Upsell',                color:'var(--t-upsell)'},
+  human:     {name:'Local team / human',    color:'var(--t-human)'},
+  gate:      {name:'Verification step',     color:'var(--t-gate)'},
+  ota:       {name:'Handled by the OTA',    color:'var(--t-ota)'},
+};
+
+const SENDERS = {
+  main:'SMS – Main line', spoke:'SpokePhone SMS', email:'Email', gx:'GX',
+  airbnb:'Airbnb thread', ota:'OTA platform', concierge:'Concierge',
+};
+
+// on: y = confirmed for that channel, a = assumed / unconfirmed
+const every = v => Object.fromEntries(ALL.map(c => [c, v]));
+const TPS = [
+  {id:'airbnb-msg', col:'book', type:'fixed', name:'Airbnb welcome message', snd:['airbnb'], on:{airbnb:'y'},
+   trigger:'Every Airbnb booking', desc:'Asks the guest to confirm their email and phone, and links into the Booking Hub early. Airbnb handles ID and the agreement in its own flow, so there is no AvantStay gate.'},
+  {id:'idv', col:'book', type:'gate', name:'ID + guest agreement request', snd:['email','main'], on:{direct:'y', vrbo:'y', bdc:'y', expedia:'y'},
+   trigger:'Every non-Airbnb booking', desc:'AvantStay collects ID and a signed guest agreement. Check-in instructions can\'t send until both are done. High-risk bookings also get a risk review.',
+   src:'Booking.com and Expedia are grouped with VRBO here; not yet verified against a real example.'},
+  {id:'reminders', col:'after', type:'gate', name:'ID / agreement reminders', snd:['main'], on:{direct:'a', vrbo:'a', bdc:'a', expedia:'a'},
+   trigger:'ID or agreement still missing', desc:'A sequence of reminder texts until both are complete, with faster timing for last-minute bookings.', src:'From the Feb 2023 deck. Confirm it still runs.'},
+  {id:'confirm', col:'after', type:'fixed', name:'Booking confirmation', snd:['email'], on:{direct:'y'},
+   trigger:'Payment and ID complete', desc:'Confirms the stay and links to the house manual and experiences.'},
+  {id:'ota-welcome', col:'after', type:'fixed', name:'Welcome to AvantStay text', snd:['main'], on:{vrbo:'a', bdc:'a', expedia:'a'},
+   trigger:'OTA booking completes ID verification', desc:'Confirms the reservation and points the guest to their booking details.', src:'From the Feb 2023 deck. Confirm it still runs.'},
+  {id:'invites', col:'after', type:'fixed', name:'Guest invites', snd:['email'], on:{direct:'y', airbnb:'a', vrbo:'a', bdc:'a', expedia:'a'},
+   trigger:'Main booker adds guests', desc:'Invites the rest of the group into the booking.', src:'Confirmed for Direct; the Booking Hub offers invites for every channel, but the invite message itself is unconfirmed for OTAs.'},
+  {id:'orphan', col:'after', type:'upsell', name:'Extend your stay (orphan night)', snd:['email'], on:every('a'),
+   trigger:'Another booking leaves a single open night next to this stay', desc:'Offers the open night so the guest can extend their stay. Can arrive anytime before check-in.', src:'From the Feb 2023 deck. Confirm it still runs, for which channels, and whether it\'s also sent during the stay.'},
+  {id:'c1', col:'d1', type:'concierge', name:'Concierge 1', snd:['email','main'], on:{...every('a'), direct:'y'},
+   trigger:'Standard booking (Estates get a personal concierge intro instead)', desc:'Introduces concierge services and offers to help plan the trip.'},
+  {id:'c1r', col:'d14', type:'concierge', name:'Concierge 1 reminder', snd:['email','main'], on:{...every('a'), direct:'y'},
+   trigger:'Standard booking', desc:'A second nudge about concierge services.'},
+  {id:'c2', col:'d7', type:'concierge', name:'Concierge 2', snd:['email','main'], on:{...every('a'), direct:'y'},
+   trigger:'No reply to Concierge 1', desc:'Last concierge message before arrival prep begins.'},
+  {id:'msc', col:'d6', type:'upsell', name:'Mid-stay clean offer', snd:['main'], on:every('y'),
+   trigger:'3+ nights, not VIP, housekeeping available', desc:'Offers a paid clean partway through the stay.'},
+  {id:'live', col:'d6', type:'gate', name:'Live check-in steps', snd:[], on:every('y'),
+   trigger:'Property requires live check-in', desc:'Palm Springs: a video call with the guest. Big Bear: the guest signs a Big Bear-specific waiver.', src:'Timing and channel to confirm; the Feb 2023 deck had Big Bear at 3 days before check-in.'},
+  {id:'cii', col:'d3', type:'fixed', name:'Check-in instructions', snd:['email','main'], on:every('y'),
+   trigger:'Paid, ID and agreement complete (Airbnb: no gate)', desc:'Links to the Booking Hub for entry codes, directions, the house manual and upgrades.', src:'The live template still says the local team will reach out "on check-in day"; the welcome now sends 24 hours before.'},
+  {id:'welcome', col:'h24', type:'human', name:'Local-team welcome', snd:['spoke'], on:every('y'),
+   trigger:'24 hours before check-in', desc:'Automated welcome from the local team\'s SpokePhone number. Starts a second text thread the guest uses for the rest of the stay.'},
+  {id:'cim', col:'ci', type:'fixed', name:'Check-in instructions (again)', snd:['main'], on:every('y'), when:'Morning of check-in',
+   trigger:'Morning of check-in', desc:'The instructions again, on arrival day.'},
+  {id:'wellness', col:'ci', type:'human', name:'Wellness check', snd:['spoke'], on:every('y'), when:'A few hours after check-in',
+   trigger:'A few hours after check-in', desc:'"How\'s everything going?" with a thumbs-up / thumbs-down reply.'},
+  {id:'contact-direct', col:'stay', type:'human', name:'Guest messages AvantStay directly', snd:['spoke','gx'], on:{direct:'y'},
+   trigger:'Guest has a question or issue', desc:'No OTA portal: the guest texts the local team or contacts GX.'},
+  {id:'contact-airbnb', col:'stay', type:'ota', name:'Guest messages in the Airbnb thread', snd:['airbnb'], on:{airbnb:'y'},
+   trigger:'Guest has a question or issue', desc:'Only GX can see the Airbnb thread; the local team can\'t.'},
+  {id:'contact-vrbo', col:'stay', type:'ota', name:'Guest messages in the VRBO portal', snd:['ota'], on:{vrbo:'y'},
+   trigger:'Guest has a question or issue', desc:'Messages land in VRBO\'s own guest portal.'},
+  {id:'contact-bdc', col:'stay', type:'ota', name:'Guest messages in the Booking.com portal', snd:['ota'], on:{bdc:'a'},
+   trigger:'Guest has a question or issue', desc:'Presumed to use Booking.com\'s own portal.', src:'Not independently confirmed.'},
+  {id:'contact-expedia', col:'stay', type:'ota', name:'Guest messages in the Expedia portal', snd:['ota'], on:{expedia:'a'},
+   trigger:'Guest has a question or issue', desc:'Presumed to use Expedia\'s own portal.', src:'Not independently confirmed.'},
+  {id:'lco', col:'co1', type:'upsell', name:'Late checkout offer', snd:['main'], on:every('y'),
+   trigger:'Not VIP, late checkout available', desc:'Offers a paid later checkout.'},
+  {id:'cor', col:'co', type:'fixed', name:'Checkout reminder', snd:['main'], on:every('y'),
+   trigger:'Same-day turnover scheduled', desc:'Reminds the guest of checkout time.'},
+  {id:'survey', col:'post', type:'fixed', name:'Post-stay survey + review ask', snd:['main'], on:every('y'),
+   trigger:'After checkout', desc:'NPS plus a review ask. Stays with no negative sentiment get further review follow-ups.'},
+  {id:'ota-review', col:'post', type:'ota', name:'OTA\'s own review request', snd:['ota'], on:{airbnb:'y', vrbo:'y', bdc:'y', expedia:'y'},
+   trigger:'Sent by the platform', desc:'The OTA asks for a review on its own timing, outside AvantStay\'s control.'},
+];
+
+const INSIGHTS = [
+  {id:'i-first', col:'book', kind:'gap', ch:['vrbo','bdc','expedia'], title:'First message is a request, not a welcome',
+   text:'Unless the 2023 welcome text still runs, an OTA guest\'s first message from AvantStay asks for ID and a signed agreement.'},
+  {id:'i-thread', col:'stay', kind:'split', ch:['airbnb'], title:'Local team can\'t see this thread',
+   text:'In-stay messages on Airbnb only reach GX, so issues need a handoff before the local team can act.'},
+  {id:'i-review', col:'post', kind:'overlap', ch:['airbnb','vrbo','bdc','expedia'], title:'Two review requests',
+   text:'OTA guests get AvantStay\'s review ask and the platform\'s own, on different timing.'},
+  {id:'i-threads', col:'h24', kind:'overlap', ch:ALL, title:'Second text thread starts',
+   text:'The welcome comes from a different number than every earlier text, so guests now have two AvantStay threads.'},
+];
+
+const KIND_LABEL = {overlap:'Overlap', gap:'Gap', split:'Split channel'};
+const byId = Object.fromEntries(TPS.map(t => [t.id, t]));
+const colById = Object.fromEntries(COLS.map(c => [c.id, c]));
+const chById = Object.fromEntries(CHANNELS.map(c => [c.id, c]));
+
+const isShared = t => ALL.every(c => t.on[c] === 'y');
+const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+function nodeHtml(t, ch, big){
+  const st = t.on[ch];
+  const cls = ['node', st === 'a' ? 'assumed' : '', isShared(t) ? 'shared' : ''].join(' ');
+  const snd = t.snd.length ? t.snd.map(s => SENDERS[s]).join(' · ') : 'Channel to confirm';
+  return `<button class="${cls}" style="--c:${TYPES[t.type].color}" data-tp="${t.id}" data-ch="${ch}" aria-label="${esc(t.name)}${st==='a'?' (unconfirmed)':''}, details">
+    <b>${esc(t.name)}</b>${big ? `<span class="trg">${esc(t.trigger)}</span>` : ''}<span class="snd">${esc(snd)}</span></button>`;
+}
+function insightHtml(i){
+  return `<button class="insight ${i.kind}" data-insight="${i.id}">${KIND_LABEL[i.kind]}: ${esc(i.title)}</button>`;
+}
+const tpsFor = (ch, col) => TPS.filter(t => t.col === col && t.on[ch]);
+const insFor = (ch, col) => INSIGHTS.filter(i => i.col === col && i.ch.includes(ch));
+
+function renderLegend(){
+  const items = Object.values(TYPES).map(t => `<li><span class="sw" style="background:${t.color}"></span>${t.name}</li>`).join('');
+  document.getElementById('legend').innerHTML = items + `<li><span class="sw dash"></span>Unconfirmed for that channel ("?")</li>`;
+}
+
+function renderCompare(){
+  const colsTpl = `170px repeat(${COLS.length}, minmax(150px, 1fr))`;
+  let h = `<div class="grid-scroll" tabindex="0" role="region" aria-label="All channels compared, scrollable"><div class="grid" style="grid-template-columns:${colsTpl}">`;
+  h += `<div class="g-corner" style="grid-row:span 2"></div>`;
+  STAGES.forEach(s => { const n = COLS.filter(c => c.stage === s.id).length; h += `<div class="g-stage" style="grid-column:span ${n}">${s.name}</div>`; });
+  COLS.forEach(c => { h += `<div class="g-col"><b>${c.label}</b>${c.sub ? `<span>${c.sub}</span>` : ''}</div>`; });
+  CHANNELS.forEach(ch => {
+    const count = TPS.filter(t => t.on[ch.id]).length;
+    h += `<div class="g-lane"><button data-goto="${ch.id}">${ch.name}</button><small>${ch.note} · ${count} messages</small></div>`;
+    COLS.forEach(c => {
+      const tps = tpsFor(ch.id, c.id), ins = insFor(ch.id, c.id);
+      h += `<div class="g-cell${tps.length || ins.length ? '' : ' empty'}">${tps.map(t => nodeHtml(t, ch.id)).join('')}${ins.map(insightHtml).join('')}</div>`;
+    });
+  });
+  h += `</div></div>`;
+  return h;
+}
+
+function renderChannel(chId){
+  const ch = chById[chId];
+  const mine = TPS.filter(t => t.on[chId]);
+  const countOn = t => ALL.filter(c => t.on[c]).length;
+  const specific = mine.filter(t => countOn(t) <= 3);
+  const missing = TPS.filter(t => !t.on[chId] && countOn(t) >= 2 && !t.id.startsWith('contact-'));
+  const unconf = mine.filter(t => t.on[chId] === 'a');
+  const ins = INSIGHTS.filter(i => i.ch.includes(chId));
+  const li = arr => arr.length ? `<ul>${arr.map(t => `<li><button data-tp="${t.id}" data-ch="${chId}">${esc(t.name)}</button></li>`).join('')}</ul>` : `<p class="none">Nothing</p>`;
+
+  let h = `<div class="summary">
+    <div class="sum-card"><h3>Specific to ${ch.name}</h3>${li(specific)}</div>
+    <div class="sum-card"><h3>Other channels get, ${ch.name} doesn't</h3>${li(missing)}</div>
+    <div class="sum-card warn"><h3>Gaps, overlaps &amp; open items</h3>${ins.length || unconf.length ? `<ul>${ins.map(i => `<li><button data-insight="${i.id}">${KIND_LABEL[i.kind]}: ${esc(i.title)}</button></li>`).join('')}${unconf.length ? `<li>${unconf.length} message${unconf.length>1?'s':''} still unconfirmed for ${ch.name} (dashed below)</li>` : ''}</ul>` : `<p class="none">Nothing flagged</p>`}</div>
+  </div>`;
+
+  h += `<div class="flow-scroll" tabindex="0" role="region" aria-label="${ch.name} flow, scrollable"><div class="flow">`;
+  STAGES.forEach(s => {
+    const cols = COLS.filter(c => c.stage === s.id && (tpsFor(chId, c.id).length || insFor(chId, c.id).length));
+    if (!cols.length) return;
+    h += `<div class="f-stage"><div class="f-stage-name">${s.name}</div><div class="f-cols">`;
+    cols.forEach(c => {
+      h += `<div class="f-col"><div class="f-when"><b>${c.label}</b>${c.sub ? `<span>${c.sub}</span>` : ''}</div>`;
+      h += tpsFor(chId, c.id).map(t => nodeHtml(t, chId, true)).join('');
+      h += insFor(chId, c.id).map(insightHtml).join('');
+      h += `</div>`;
+    });
+    h += `</div></div>`;
+  });
+  h += `</div></div>`;
+  return h;
+}
+
+// Drawer
+const drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
+let lastFocus = null;
+function openDrawer(type, title, color, body){
+  lastFocus = document.activeElement;
+  const ty = document.getElementById('drawer-type');
+  ty.textContent = type; ty.style.color = color;
+  document.getElementById('drawer-title').textContent = title;
+  document.getElementById('drawer-body').innerHTML = body;
+  drawer.classList.add('open'); scrim.classList.add('open'); drawer.setAttribute('aria-hidden','false');
+  document.getElementById('drawer-close').focus();
+}
+function closeDrawer(){
+  if (!drawer.classList.contains('open')) return;
+  drawer.classList.remove('open'); scrim.classList.remove('open'); drawer.setAttribute('aria-hidden','true');
+  document.querySelectorAll('.node.is-active').forEach(n => n.classList.remove('is-active'));
+  if (lastFocus) lastFocus.focus();
+}
+function showTp(id){
+  const t = byId[id], c = colById[t.col];
+  const when = t.when || (c.label + (c.sub ? `, ${c.sub}` : ''));
+  const chk = CHANNELS.map(ch => {
+    const v = t.on[ch.id];
+    return `<li><span>${ch.name}</span>${v === 'y' ? '<span class="y">✓ Confirmed</span>' : v === 'a' ? '<span class="a">? Unconfirmed</span>' : '<span class="n">Not sent</span>'}</li>`;
+  }).join('');
+  const body = `<dl>
+    <dt>When</dt><dd>${esc(when)}</dd>
+    <dt>From</dt><dd>${t.snd.length ? t.snd.map(s => `<span class="chip">${SENDERS[s]}</span>`).join('') : '<span class="src">Channel to confirm</span>'}</dd>
+    <dt>Trigger</dt><dd>${esc(t.trigger)}</dd>
+    <dt>What it does</dt><dd>${esc(t.desc)}</dd>
+    ${t.src ? `<dt>Note</dt><dd class="src">${esc(t.src)}</dd>` : ''}
+    <dt>Channels</dt><dd><ul class="chk">${chk}</ul></dd></dl>`;
+  openDrawer(TYPES[t.type].name, t.name, TYPES[t.type].color, body);
+}
+function showInsight(id){
+  const i = INSIGHTS.find(x => x.id === id), c = colById[i.col];
+  const body = `<dl><dt>Where</dt><dd>${esc(c.label)}</dd><dt>What we noticed</dt><dd>${esc(i.text)}</dd>
+    <dt>Channels</dt><dd>${i.ch.map(x => `<span class="chip">${chById[x].name}</span>`).join('')}</dd></dl>`;
+  openDrawer(KIND_LABEL[i.kind], i.title, i.kind === 'gap' ? 'var(--flag)' : i.kind === 'split' ? 'var(--t-ota)' : 'var(--t-concierge)', body);
+}
+
+// Tabs + routing
+const VIEWS = [{id:'compare', name:'Compare all channels'}, ...CHANNELS.map(c => ({id:c.id, name:c.name}))];
+const INTRO = {
+  compare:'One row per booking channel, one column per point in time. Turn on "Highlight differences" to fade the messages every channel shares, so what\'s unique, missing or doubled up stands out. Click a channel name to open its flow.',
+};
+function current(){ const h = location.hash.slice(1); return VIEWS.some(v => v.id === h) ? h : 'compare'; }
+function render(){
+  const v = current();
+  document.getElementById('tabs').innerHTML = VIEWS.map(x => `<button class="tab" role="tab" aria-selected="${x.id === v}" data-view="${x.id}">${x.name}</button>`).join('');
+  document.getElementById('view-intro').textContent = INTRO[v] || `${chById[v].name}'s full workflow, from booking to after checkout. The cards above the timeline summarize what's different about this channel.`;
+  document.getElementById('view').innerHTML = v === 'compare' ? renderCompare() : renderChannel(v);
+  applyDiff();
+}
+function applyDiff(){
+  const on = document.getElementById('diff').checked;
+  document.querySelectorAll('.node').forEach(n => n.classList.toggle('dim', on && n.classList.contains('shared')));
+}
+
+document.addEventListener('click', e => {
+  const tab = e.target.closest('[data-view]'); if (tab) { location.hash = tab.dataset.view; return; }
+  const go = e.target.closest('[data-goto]'); if (go) { location.hash = go.dataset.goto; window.scrollTo({top:0}); return; }
+  const tp = e.target.closest('[data-tp]');
+  if (tp) { document.querySelectorAll('.node.is-active').forEach(n => n.classList.remove('is-active')); if (tp.classList.contains('node')) tp.classList.add('is-active'); showTp(tp.dataset.tp); return; }
+  const ins = e.target.closest('[data-insight]'); if (ins) { showInsight(ins.dataset.insight); return; }
+});
+document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+scrim.addEventListener('click', closeDrawer);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+  const tab = e.target.closest && e.target.closest('.tab');
+  if (tab && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+    const i = VIEWS.findIndex(v => v.id === tab.dataset.view), n = VIEWS.length;
+    location.hash = VIEWS[(i + (e.key === 'ArrowRight' ? 1 : n - 1)) % n].id;
+    setTimeout(() => document.querySelector('.tab[aria-selected="true"]').focus(), 0);
+  }
+});
+document.getElementById('diff').addEventListener('change', applyDiff);
+window.addEventListener('hashchange', () => { closeDrawer(); render(); });
+renderLegend();
+render();
+</script>
+</body>
+</html>
