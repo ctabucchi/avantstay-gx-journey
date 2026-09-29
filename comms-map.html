@@ -157,6 +157,9 @@
   .idea-status.blocked{background:#F6E6E0;color:var(--p1);}
   .idea-status.partial{background:#FDF3D9;color:#7A5A12;}
   .section-head p.dj-alt{margin:0 0 12px;font-size:14px;font-weight:600;}
+  .dj-diff{background:#E8EEF5;border-left:4px solid var(--p2);border-radius:4px;padding:14px 18px 8px;margin:-12px 0 30px;max-width:980px;}
+  .dj-diff ol{margin:0;padding-left:20px;font-size:14px;color:var(--text);}
+  .dj-diff li{margin-bottom:6px;}
   .dj-chip.spoke{color:var(--p4);border-color:var(--p4);}
   .dj-card-trigger{font-size:12.5px;color:var(--muted);margin:0 0 3px;}
   .dj-card-trigger b{color:var(--text);}
@@ -242,7 +245,7 @@
     <div class="eyebrow">In-Stay Communication—First Draft</div>
     <h1>What actually happens, message by message.</h1>
     <p>A first-draft map of the real guest communication flow, from booking confirmation through the post-stay review ask—which channel a guest is on, what message they get and when, and who's actually on the other end. Built from real examples, with guest names, phone numbers, and addresses replaced by placeholders since this is a public page.</p>
-    <p style="font-size:14px;color:#9FB0BD;margin-top:16px;">Applies to vacation rentals and front-desk hotels alike—wherever "the local team" appears below, read it as front desk staff at a front-desk hotel. No-front-desk hotels don't have that on-site equivalent, so that half of the hotel picture is still unmapped.</p>
+    <p style="font-size:14px;color:#9FB0BD;margin-top:16px;">Covers vacation rentals and front-desk hotels. Front-desk hotels (The Gilmore, Sense28 and The Code) have their own journey below the main one, and their front desk plays the role of "the local team." Hotels without a front desk aren't mapped yet.</p>
   </div>
 </header>
 
@@ -253,7 +256,7 @@
     <div class="section-head">
       <div class="tag">Direct booking, start to finish</div>
       <h2 id="direct-h">The full guest journey for a direct booking</h2>
-      <p class="dj-scope"><b>Applies to:</b> all properties except hotels with front desks</p>
+      <p class="dj-scope"><b>Applies to:</b> all properties except hotels with front desks (<a href="#hotel-journey">see their journey</a>)</p>
       <p class="dj-alt">Prefer a visual? <a href="journey-flow.html">See every channel side by side in the Journey Flow view (draft) →</a></p>
       <p>Every message a guest who books directly with AvantStay can receive, in order, from the moment they book to the post-stay survey. It combines the operational touchpoints documented on this page with the concierge marketing track. Conditional messages show their trigger, so not every guest gets every card.</p>
     </div>
@@ -515,6 +518,195 @@ I look forward to connecting!
   </div>
 </section>
 
+<section class="databar alt" aria-labelledby="hotel-h" id="hotel-journey">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Front-desk hotels</div>
+      <h2 id="hotel-h">The guest journey at a front-desk hotel</h2>
+      <p class="dj-scope"><b>Applies to:</b> The Gilmore, Sense28 and The Code, across every booking channel</p>
+      <p>Mostly the same as the journey above. The main difference is that the front desk hands over the room at check-in, so nothing before arrival shares a room number or entry details. Same color key and senders as above, plus in-person contact at the front desk.</p>
+    </div>
+
+    <div class="dj-diff">
+      <p class="dj-senders-title">How this differs from the main journey</p>
+      <ol>
+        <li><b>No ID or agreement reminder texts.</b></li>
+        <li><b>3 days out, a hotel-specific email</b> ("Your upcoming stay at [Hotel], with AvantStay") replaces the check-in instructions.</li>
+        <li><b>No room number or entry details before check-in.</b> The guest gets them at the front desk at check-in time.</li>
+        <li><b>Early check-in isn't offered as a paid option</b>, because of operational constraints.</li>
+      </ol>
+    </div>
+
+    <ol class="dj">
+
+      <li class="dj-phase">
+        <div class="dj-phase-head"><span class="dj-phase-num">Phase 1</span><h3>Booking &amp; confirmation</h3><p>Confirmed, with no reminder chasing</p></div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>At booking</b><span>Immediately</span></div>
+          <div class="dj-stack">
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Booking confirmation</span><span class="dj-chip">Email</span></div>
+              <p class="dj-card-desc">Confirms the stay.</p>
+              <p class="dj-branch"><b>Different from the main journey:</b> no ID or guest agreement reminder texts follow if either is incomplete.</p>
+            </div>
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Guest invites</span><span class="dj-chip">Email</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> main booker adds guests to the reservation</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="dj-phase">
+        <div class="dj-phase-head"><span class="dj-phase-num">Phase 2</span><h3>Pre-stay</h3><p>Concierge outreach, then arrival prep</p></div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Anytime before check-in</b><span>When a gap opens</span></div>
+          <div class="dj-stack">
+            <div class="dj-card upsell">
+              <div class="dj-card-top"><span class="dj-card-name">Extend your stay (orphan night)</span><span class="dj-chip upsell-tag">Upsell</span><span class="dj-chip">Email</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> another booking leaves a single open night next to this stay</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Day after booking</b><span>Noon</span></div>
+          <div class="dj-stack">
+            <div class="dj-card concierge">
+              <div class="dj-card-top"><span class="dj-card-name">Concierge 1</span><span class="dj-chip">Email</span><span class="dj-chip">SMS – Main line</span></div>
+              <p class="dj-card-desc">Introduces concierge services and offers to help plan the trip.</p>
+              <p class="dj-flag">To confirm for hotels: the Feb 2023 deck said concierge marketing excluded individual hotel rooms.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>14 days before check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card concierge">
+              <div class="dj-card-top"><span class="dj-card-name">Concierge 1 reminder</span><span class="dj-chip">Email</span><span class="dj-chip">SMS – Main line</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>7 days before check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card concierge">
+              <div class="dj-card-top"><span class="dj-card-name">Concierge 2</span><span class="dj-chip">Email</span><span class="dj-chip">SMS – Main line</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> guest hasn't replied to Concierge 1</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>6 days before check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card upsell">
+              <div class="dj-card-top"><span class="dj-card-name">Mid-stay clean offer</span><span class="dj-chip upsell-tag">Upsell</span><span class="dj-chip">SMS – Main line</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> 3+ nights, not VIP, housekeeping available</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>3 days before check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">"Your upcoming stay at [Hotel], with AvantStay"</span><span class="dj-chip">Email</span></div>
+              <p class="dj-card-desc">Confirms the stay dates and tells the guest to stop by the front desk to check in and get their room details. Links to the Booking Hub for parking, food, the pool and everything else.</p>
+              <p class="dj-branch"><b>Replaces the check-in instructions</b> in the main journey. No room number or entry details are included.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="dj-phase">
+        <div class="dj-phase-head"><span class="dj-phase-num">Phase 3</span><h3>Check-in &amp; in-stay</h3><p>The front desk takes over</p></div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>24 hours before check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card human">
+              <div class="dj-card-top"><span class="dj-card-name">Hotel team welcome</span><span class="dj-chip spoke">SpokePhone SMS</span></div>
+              <p class="dj-card-desc">Welcome from the hotel's own number, the same way the local team welcomes rental guests.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>At check-in time</b></div>
+          <div class="dj-stack">
+            <div class="dj-card human">
+              <div class="dj-card-top"><span class="dj-card-name">Front desk check-in</span><span class="dj-chip">In person</span></div>
+              <p class="dj-card-desc">The guest gets their room number and key at the front desk. This is the first time room or entry details are shared.</p>
+              <p class="dj-branch"><b>No paid early check-in offer</b> at front-desk hotels, because of operational constraints.</p>
+              <p class="dj-flag">To confirm: whether the morning-of check-in text still goes out at hotels, and what it says.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>A few hours after check-in</b></div>
+          <div class="dj-stack">
+            <div class="dj-card human">
+              <div class="dj-card-top"><span class="dj-card-name">Wellness check</span><span class="dj-chip spoke">SpokePhone SMS</span></div>
+              <p class="dj-card-desc">"How's everything going?" with a thumbs-up / thumbs-down reply.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Anytime during the stay</b></div>
+          <div class="dj-stack">
+            <div class="dj-card human">
+              <div class="dj-card-top"><span class="dj-card-name">Guest-initiated contact</span><span class="dj-chip">In person</span><span class="dj-chip spoke">SpokePhone SMS</span><span class="dj-chip">GX</span></div>
+              <p class="dj-card-desc">The front desk is the first stop. Guests can also text the hotel's SpokePhone number or contact GX 24/7. OTA guests may also message through the platform.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="dj-phase">
+        <div class="dj-phase-head"><span class="dj-phase-num">Phase 4</span><h3>Checkout &amp; post-stay</h3><p>Departure, then feedback</p></div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Day before checkout</b><span>11:00 AM</span></div>
+          <div class="dj-stack">
+            <div class="dj-card upsell">
+              <div class="dj-card-top"><span class="dj-card-name">Late checkout offer</span><span class="dj-chip upsell-tag">Upsell</span><span class="dj-chip">SMS – Main line</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> not VIP, late checkout available</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>Checkout day</b><span>8:00 AM</span></div>
+          <div class="dj-stack">
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Checkout reminder</span><span class="dj-chip">SMS – Main line</span></div>
+              <p class="dj-card-trigger"><b>Trigger:</b> same-day turnover scheduled</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dj-row">
+          <div class="dj-when"><b>After checkout</b></div>
+          <div class="dj-stack">
+            <div class="dj-card">
+              <div class="dj-card-top"><span class="dj-card-name">Post-stay survey</span><span class="dj-chip">SMS – Main line</span></div>
+              <p class="dj-card-desc">NPS plus a review ask. OTA guests also get the platform's own review request.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
 <section class="ideas" aria-labelledby="ideas-h" id="ideas">
   <div class="wrap">
     <div class="section-head">
@@ -725,7 +917,7 @@ We hope you have a wonderful stay!</div>
       <li class="gap-card">
         <span class="gap-tag">Open question</span>
         <p class="gap-name">No-front-desk hotels</p>
-        <p class="gap-desc">Confirmed: front-desk hotels follow this same flow, with front desk staff playing the "local team" role. No-front-desk hotels don't have an on-site equivalent, so their version of this map is still open.</p>
+        <p class="gap-desc">Front-desk hotels now have their own journey on this page. Hotels without a front desk don't have an on-site team, so their version of this map is still open.</p>
       </li>
       <li class="gap-card">
         <span class="gap-tag">Open question</span>
